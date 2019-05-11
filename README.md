@@ -19,4 +19,4 @@ Suporte:
 * É perfeitamente possível rodar em outros navegadores, porém não foram testados ainda, procure manter o seu navegador atualizado.
  
 Execução:
-* Simplesmente descompacte os arquivos em uma pasta de sua preferência, e execute o arquivo `index.html` com o seu navegador preferido.
+* Simplesmente descompacte os arquivos em uma pasta de sua preferência, execute o arquivo `index.html` com o seu navegador preferido e aproveite.
