@@ -10,7 +10,7 @@ Linguagens Usadas:
 * HTML - 12,5%
 
 Frameworks/Bibliotecas Usadas:
-* jQuery v3.3.1
+* jQuery v3.3.1 (Já vem incluso) 
  
 Suporte:
 * Mozilla Firefox = 100%;
