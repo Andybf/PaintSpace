@@ -1,0 +1,116 @@
+<!--
+ * Autor: Anderson Bucchianico
+ * Data Criação: 24/out/2018
+ * Ultima modificação: 15/jan/2019
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paint Space - Libere sua Criatividade</title>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="jquery.js"></script>
+    <script src="main.js"></script>
+    <script src="funcoes.js"></script>
+    <script src="controle.js"></script>
+    <script src="criar-formas.js"></script> 
+    <script src="selecao-formas.js"></script> 
+</head>
+<body onload="
+        iniciarCanvas();
+        iniciarPrevisu();
+        corFundo();
+    " id="body">
+
+    <!-- previsualização da forma -->
+    <canvas id="formaativa" width="80" height="80"></canvas>
+
+    <!-- painel superior -->
+    <div id="painelsuperior">
+        <div id="titulo">
+            Paint Space
+        </div>
+        <!-- foram necessários alguns ajustes finos de CSS nos itens do painel superior-->
+        <button style="bottom: 8px;" onclick="limparTela()">Limpar Tela</button>
+        <!-- Tamanho -->
+        <div class="display">
+            <button id="tamanhomenos" onclick="diminuirTamanho()">-</button>
+            <button id="tamanhomais" onclick="aumentarTamanho()">+</button>
+            Tamanho<br>
+            <div name="tamanho" ></div>
+        </div>
+        <!-- Rotação -->
+        <div class="display">
+            <button id="tamanhomenos" onclick="menosRotacao()">-</button>
+            <button id="tamanhomais" onclick="maisRotacao()">+</button>
+            Rotação<br>
+            <div name="rotacao" ></div>
+        </div>
+        <!-- Bordas -->
+        <div class="display">
+            <button id="tamanhomenos" onclick="menosBorda()">-</button>
+            <button id="tamanhomais" onclick="maisBorda()">+</button>
+            Bordas<br>
+            <div name="borda" ></div>
+        </div>
+        <!-- Resolução -->
+        <div class="display" style="position:relative; bottom: 8px; width: 290px;">
+                X:
+                <input type="text" id="caixares" value="teste" name="pixelsX">
+                Y:
+                <input type="text" id="caixares" value="teste" name="pixelsY">
+                <button style="height: 26px; margin-top: 2px; margin-bottom: 0px;" onclick="resolucao()">Resolução</button>
+        </div>
+        <button style="bottom: 8px;" onclick="selectSelCor()">Copiar Cor</button>
+        <!-- botão para abrir o painel de configurações -->
+        <button id="config" onclick="ativarPainelConfig()"><img src="cog.png"></img></button>
+        <div id="displayposicao" name="displayposicao"></div>
+    </div>
+
+    <!-- painel de configurações -->
+    <div id="painelblur" >a</div>
+    <div id="painelconfig">
+        <div id="titulo-menu">Painel de Configurações</div>
+        <button id="fechar" onclick="desativarPainelConfig()">X</button>
+        <br>
+        <br>
+        <input id="previsu" type="checkbox" >
+        <label for="previsu">Habilitar pré-visualização da forma.</label>
+        <br>
+        <br>
+        <input id="efeitos" type="checkbox" onclick=" if (EfeitosGraficos) {EfeitosGraficos = false} else{EfeitosGraficos = true;corFundo();}">
+        <label for="efeitos">Habilitar efeitos gráficos de fundo.</label>
+        <br>
+        <br>
+        <div id="config-velocidade">
+            Velocidade na transição de cores:
+            <br>
+            Mais Veloz
+            <input id="slide" type="range" min="17" max="2000">
+            Mais Lento
+        </div>
+    </div>
+
+    <!-- painel lateral -->
+    <div id="painellateral">
+        <br>
+        <button onclick="selectCirculo()">Circulo</button>
+        <button onclick="selectQuadrado()">Quadrado</button>
+        <button onclick="selectPixel()">Pixel</button>
+        <button onclick="selectTriangulo()">Triângulo</button>
+        <button onclick="selectBorracha()">Borracha</button>
+        <br><br>
+        Cor Interna:
+        <input onchange="mudarCor()" type="color" name="cor" id="colorSelector">
+        <div id="displaycorinterna" name="cor"></div>
+        <br>
+        Cor da Borda:
+        <input onchange="mudarCorBorda()" type="color" name="corborda" id="colorSelector">
+        <div id="displaycorborda" name="corborda"></div>
+    </div>
+
+    <!-- tela do canvas -->
+    <canvas id="tela"></canvas>
+</body>
+</html>

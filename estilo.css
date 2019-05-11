@@ -1,0 +1,232 @@
+/*
+ * Autor: Anderson Bucchianico
+ * Data Criação: 12/jan/2019
+ * Ultima modificação: 15/jan/2019
+*/
+
+:root {
+    --cor-ui: rgba(0,0,0,0.5);
+    --cor-itens: rgba(0,0,0,0.25);
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, 'Segoe UI', Sans-Serif;
+    color: #ffffff;
+    font-size: 10pt;
+    font-weight: 500;
+}
+html{
+    height: 100%;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+body{
+    background-image: linear-gradient(#9abfd6,#b6ebec);
+    width: auto;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+div#titulo{
+    text-align: center;
+    font-size: 30pt;
+    font-family: SignPainter;
+    font-weight: 400;
+    width: 175px;
+    height: 40px;
+    float: left;
+    position: relative;
+    bottom: 2px;
+}
+div#painelsuperior{
+    width: 100%;
+    height: 40px;
+    text-align:center;
+    position: relative;
+    background-color: var(--cor-ui);
+    overflow: hidden;
+    z-index: 1;
+}
+div.display{
+    text-align: center;
+    height: 30px;
+    width: 128px;
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 9pt;
+    border-radius: 5px;
+    background-color: var(--cor-itens);
+}
+input#caixares{
+    width: 64px;
+    height: 16px;
+    border-style: none;
+    background-color: var(--cor-itens);
+    border-radius: 5px;
+    padding: 4px;
+}
+div#displayposicao{
+    float: right;
+    position: relative;
+    bottom: 0px;
+    margin-top: 12px;
+    margin-right: 5px;;
+    height: 15px;
+    width: 175px;
+}
+canvas#formaativa{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    z-index: 2;
+}
+div#painelconfig{
+    display: none;
+    position: absolute;
+    background-color: var(--cor-ui);
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 10px;
+    width: 360px;
+    height: 138px;
+    z-index: 4;
+}
+div#painelblur{
+    display: none;
+    position: absolute;
+    background-color: var(--cor-ui);
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 10px;
+    width: 360px;
+    height: 138px;
+    filter: blur(4px);
+    z-index: 3;
+}
+div#titulo-menu {
+    font-weight: 800;
+    top: 6px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left:auto;
+    margin-right:auto;
+    width: 192px;
+    height: 15px;
+    position: absolute;
+    text-align: center;
+}
+div#painellateral{
+    position: absolute;
+    overflow: hidden;
+    top: 40px;
+    bottom: 40px;
+    float: left;
+    text-align: center;
+    width: 128px;
+    margin-top: 40px;
+    padding-top: auto;
+    padding-bottom: auto;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; 
+    background-color: var(--cor-ui);
+}
+div#config-velocidade{
+    text-align: center;
+}
+@-moz-document url-prefix() {
+    input#slide {
+        position: relative;
+        top: 8px;
+    }
+}
+input#slide{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 192px;
+}
+input#colorSelector{
+    border: none;
+    width: 100px;
+    height: 36px;
+    margin-top: 5px;
+}
+canvas#tela{
+    position: absolute;
+    top: 40px;
+    bottom: 0px;
+    left: 128px;
+    right: 0;
+    width: auto;
+    height: auto;
+    margin: auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #555555;
+}
+button{
+    border-style: none;
+    background-color: var(--cor-itens);
+    position: relative;
+    width: 100px;
+    height: 28px;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    padding: 5px;
+}
+button:hover {
+    background-color: rgba(0,0,0,0.12);
+}
+button:active{
+    background-color: rgba(0,0,0,0.6);
+}
+button#config {
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 4px;
+    bottom: 1px;
+}
+button#fechar {
+    background-color: #d65252;
+    width: 28px;
+    float: right;
+    margin: 0;
+    position: relative;
+    bottom: 10px;
+    left: 10px;
+}
+button#tamanhomenos{
+    width: 30px;
+    height: 26px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    float: left;
+}
+button#tamanhomais{
+    width: 30px;
+    height: 26px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 0px;
+    float: right;
+}
