@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<!--
+    PaintSpace3
+
+    Created By: Anderson Bucchianico
+          Date: 30/jan/2021
+          Type: Experimental Software (Image Editor)
+-->
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css"/>
+        <title>PaintSpace3</title>
+    </head>
+    <body>
+        <header class="container top">
+            <h1 class="title">PaintSpace</h1>               
+            <nav class="menubar">
+                <div class="tool-options">
+                    <button id="load-image"   class="menu-item">
+                        Load Image
+                    </button>
+                    <button id="load-image"   class="menu-item">
+                        Save Image
+                    </button>
+                    <button id="clear-canvas" class="menu-item">
+                        Clear Canvas
+                    </button>
+                    <button id="resolution"   class="menu-item">
+                        Change Resolution
+                    </button>
+                    <button id="zoom"         class="menu-item">
+                        Zoom
+                    </button>
+                    <button id="settings"     class="menu-item">
+                        Settings
+                    </button>
+                </div>
+                <hr size="1" class="separator"/>
+                <div class="tool-options">
+
+                </div>
+            </nav>
+            
+        </header>
+
+        <section name="toolbox" class="container left">
+            <h1 class="panel-title">Tools</h1>
+            <button id="pointer"  class="tool-item">Pointer</button>
+            <button id="brush"    class="tool-item">Brush</button>
+            <button id="line"     class="tool-item">Line</button>
+            <button id="square"   class="tool-item">Square</button>
+            <button id="circle"   class="tool-item">Circle</button>
+            <button id="triangle" class="tool-item">Traingle</button>
+            <button id="text"     class="tool-item">Text</button>
+            <button id="eraser"   class="tool-item">Eraser</button>
+        </section>
+
+        <comp-canvascontainer> </comp-canvascontainer>
+        
+
+        <!-- <section class="container bottom">
+            <section>
+                Mouse Position:&nbsp;<span class="detail-item" id="mouse-position">0</span>
+            </section>
+            <section>
+                Resolution:&nbsp;<span class="detail-item" id="screen-resolution">0</span>
+            </section>
+        </section> -->
+
+    </body>
+    <script type="module" src="main.js"></script>
+</html>

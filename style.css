@@ -1,0 +1,126 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    color: #fff;
+}
+
+@font-face {
+    font-family: Lily; src: url('media/font/LilyScriptOne-Regular.ttf');
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #111;
+    height: inherit;
+    overflow: hidden;
+}
+
+header.container {
+    display: flex;
+    height: 60px;
+    background-image: linear-gradient(0deg, #1d1d1d, #2d2d2d, #1d1d1d);
+    flex-wrap: wrap;
+}
+
+/* START Tool Selection Panel =============================================== */
+
+section.container.left {
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: calc(100% - 60px);
+    padding: 0px 5px;
+    background-image: linear-gradient(90deg, #1d1d1d80, #2d2d2d80);
+}
+
+h1.panel-title {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+}
+
+.tool-item {
+    width: 50px;
+    height: 50px;
+    background-image: linear-gradient(-45deg,#1c1c1c,#373737);
+    cursor: pointer;
+    overflow: hidden;
+    border: solid 2px #111;
+    border-radius: 7px;
+    margin: 5px 0px;
+}
+
+/* END Tool Selection Panel ================================================= */
+
+nav.menubar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 20px;
+    height: 50px;
+    flex-wrap: wrap;
+}
+
+h1.title {
+    width: fit-content;
+    font-size: 20px;
+    font-family: Lily;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    user-select: none;
+}
+
+hr.separator {
+    width: 100%;
+}
+
+div.tool-options {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
+button.menu-item {
+    height: 22px;
+    width: max-content;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    margin: 6px 3px 0px 3px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 800;
+    background: none;
+}
+
+.screen-container {
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+/* START Canvas ============================================================= */
+
+comp-canvascontainer {
+    height: calc(100% - 60px);
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
