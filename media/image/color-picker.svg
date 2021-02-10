@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" fill="white">
+  <ellipse
+    cx="50" cy="50" rx="90" ry="40"
+    style="transform: rotate(45deg) translate(65px, -50px)"
+  />
+  <rect
+  	width="220" height="60"
+  	style="transform: rotate(45deg) translate(115px, -30px)"
+  />
+  <rect
+  	width="140" height="40"
+    style="transform: rotate(-45deg) translate(-68px, 137px)"
+  />
+  <polygon
+  	points="258,215 215,258 270,270"
+  />
+</svg>
