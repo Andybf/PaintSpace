@@ -1,9 +1,12 @@
+:root {
+}
+
 * {
     margin: 0px;
     padding: 0px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10pt;
-    color: #fff;
+    color: var(--global-font-color);
     user-select: none;
 }
 
@@ -16,7 +19,7 @@ html {
 }
 
 body {
-    background-color: #111;
+    background-color: var(--global-background-color);
     height: inherit;
     overflow: hidden;
 }
@@ -27,7 +30,8 @@ body {
 header.container {
     display: flex;
     height: 80px;
-    background-image: linear-gradient(0deg, #1d1d1d, #2d2d2d, #1d1d1d);
+    background-image: var(--header-background);
+    box-shadow: var(--global-shadow);
     flex-wrap: wrap;
 }
 
@@ -49,6 +53,9 @@ h1.title {
     align-items: center;
     padding: 0px 20px;
     font-weight: normal;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: var(--title);
 }
 
 hr.separator {
@@ -64,7 +71,7 @@ hr.separator {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 16px;
     padding: 0px 10px;
 }
 
@@ -76,7 +83,6 @@ button.menu-item {
     align-items: center;
     justify-content: center;
     float: right;
-    margin: 0px 6px;
     padding: 0px 12px;
     border: none;
     border-radius: 5px;
@@ -99,26 +105,39 @@ button.menu-item {
     font-weight: bold;
 }
 
+.tooloption-container > label {
+    font-size: 9pt;
+}
+
 .tooloption {
     width: 72px;
     height: 20px;
     margin: 5px 5px;
     color: white;
-    background-color: #111;
+    background-color: var(--tool-option-background);
     border: none;
     display: flex;
     text-align: end;
 }
 
+/* END Header ============================================================= */
 /* START Tool Selection Panel =============================================== */
 
 section.container.left {
     position: absolute;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 50px;
-    height: calc(100% - 60px);
-    padding: 0px 5px;
-    background-image: linear-gradient(90deg, #1d1d1d80, #2d2d2d80);
+    height: calc(100% - 80px);
+}
+
+div.subcontainer {
+    padding: 5px 5px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: var(--global-shadow);
+    background-image: var(--left-toolbox);
 }
 
 h1.panel-title {
@@ -133,11 +152,11 @@ h1.panel-title {
 button.tool-item {
     width: 40px;
     height: 40px;
-    background-image: linear-gradient(45deg,#1c1c1c,#373737);
+    background-image: var(--tool-item-background);
     cursor: pointer;
     overflow: hidden;
     border-radius: 7px;
-    margin: 5px 6px;
+    margin: 5px 0px;
     border: none;
 }
 button.tool-item:hover {
@@ -164,4 +183,67 @@ comp-canvascontainer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* END Canvas =============================================================== */
+/* START Float Window ======================================================= */
+
+section.float-window {
+    position: absolute;
+    top:  calc(50% - 300px);
+    left: calc(50% - 500px);
+    margin-left: auto;
+    margin-right: auto;
+    width:  500px;
+    height: 300px;
+    display: none; 
+
+    background-color: var(--window-background-color);
+    border-radius: 7px;
+    box-shadow: var(--global-shadow);
+}
+
+div.header {
+    background-image: var(--window-header-background);
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+span.window-title {
+    margin-left: 10px;
+}
+
+button.window-close {
+    height: 18px;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    line-height: 15px;
+    font-weight: bold;
+}
+
+.content {
+    padding: 10px;
+    color: #ddd;
+}
+
+/* Float window dynamic content === */
+
+.config-container {
+    padding: 5px;
+}
+
+.config-row {
+    padding: 5px;
+    display: flex;
+    column-gap: 10px;
 }

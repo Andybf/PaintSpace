@@ -17,6 +17,8 @@ export default class Canvas extends HTMLElement {
         rotation : 0,
         size     : 0
     };
+    drag = false;
+    mousedown = false;
 
     /* Constructors ========================================================= */
     
@@ -33,9 +35,10 @@ export default class Canvas extends HTMLElement {
         this.width = 600;
         this.height = 480;
         this.resizeDrawScreen();
-        this.element.addEventListener('click',(event) => {
-            this.draw(event);
-        });
+        // this.element.addEventListener('click',(event) => {
+        //     this.draw(event);
+        // });
+        this.createActions();
         console.log("[INFO] Canvas Initialized.");
     }
 
@@ -63,6 +66,36 @@ export default class Canvas extends HTMLElement {
         this.context.scale(2,2)
     }
 
+    /* Action Methods ======================================================= */
+
+    createActions() {
+        this.element.addEventListener('mousemove', (event) => {
+            if (this.drag) {
+                this.draw(event);
+            }
+        });
+        this.element.addEventListener('mousedown', (event) => {
+            this.drag = true;
+            this.draw(event);
+            this.mousedown = true;
+        });
+        this.element.addEventListener('mouseup', (event) => {
+            this.drag = false;
+            this.mousedown = false;
+        });
+        this.element.addEventListener('mouseout', (event) => {
+            if (this.mousedown) {
+                this.drag = true;
+            } else {
+                this.drag = false;
+            }
+        });
+        this.addEventListener('mouseup', (event) => {
+            this.mousedown = false;
+            this.drag = false;
+        });
+    }
+
     /* Draw Things Methods ================================================== */
 
     draw(event) {
@@ -72,7 +105,7 @@ export default class Canvas extends HTMLElement {
                 this.context.beginPath();
                 this.context.arc(
                     event.layerX, event.layerY,
-                    this.selectedTool.size, 0, 2*Math.PI
+                    this.selectedTool.size/2, 0, 2*Math.PI
                 );
                 break;
             case 'square' :
