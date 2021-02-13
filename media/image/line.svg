@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="white">
+<svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="white" viewBox="0 0 30 30">
   <rect
-    	width="30" height="5"
+    	width="30" height="3"
     	style="transform: rotate(45deg) translate(6px, -2px)"
     />
 </svg> 

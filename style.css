@@ -13,6 +13,9 @@
 @font-face {
     font-family: Lily; src: url('media/font/LilyScriptOne-Regular.ttf');
 }
+@font-face {
+    font-family: OpenSans; src: url('media/font/OpenSans-Semibold.ttf');
+}
 
 html {
     height: 100%;
@@ -22,6 +25,10 @@ body {
     background-color: var(--global-background-color);
     height: inherit;
     overflow: hidden;
+}
+
+object {
+    pointer-events: none;
 }
 
 /* END Global Config ======================================================== */
@@ -168,10 +175,9 @@ button.tool-item:active {
     background-image: linear-gradient(-45deg,#393939,#1e1e1e);
     border-color: #333;
 }
-button.tool-item > img {
-    width: 30px;
-    height: 30px;
-    object-fit: scale-down;
+button.tool-item > * {
+    width: 20px;
+    height: 20px;
 }
 
 /* END Tool Selection Panel ================================================= */
@@ -210,12 +216,17 @@ div.header {
     justify-content: space-between;
     align-items: center;
     border-radius: 5px 5px 0 0;
-    cursor: pointer;
+    cursor: move;
     user-select: none;
 }
 
 span.window-title {
     margin-left: 10px;
+    font-family: system-ui;
+    font-size: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 button.window-close {
@@ -229,6 +240,7 @@ button.window-close {
     margin-right: 5px;
     line-height: 15px;
     font-weight: bold;
+    cursor : pointer;
 }
 
 .content {

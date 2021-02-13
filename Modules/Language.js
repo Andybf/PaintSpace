@@ -11,24 +11,50 @@ export default class Language {
 
     languages =
     {
-    'en-US' : [
-        { key : 'load-image',   value : 'Load Image' },
-        { key : 'save-image',   value : 'Save Image' },
-        { key : 'clear-canvas', value : 'Clear Canvas'},
-        { key : 'resolution',   value : 'Change Resolution'},
-        { key : 'zoom',         value : 'Zoom'},
-        { key : 'settings',     value : 'Settings'},
-        { key : 'about',        value : 'About'},
-    ],
-    'pt-BR' : [
-        { key : 'load-image',   value : 'Carregar Imagem' },
-        { key : 'save-image',   value : 'Salvar Imagem' },
-        { key : 'clear-canvas', value : 'Limpar Canvas'},
-        { key : 'resolution',   value : 'Mudar Resolução'},
-        { key : 'zoom',         value : 'Zoom'},
-        { key : 'settings',     value : 'Configurações'},
-        { key : 'about',        value : 'Sobre'},
-    ]
+    'en-US' : {
+        innerText : [
+            { key : 'load-image',   value : 'Load Image' },
+            { key : 'save-image',   value : 'Save Image' },
+            { key : 'clear-canvas', value : 'Clear Canvas'},
+            { key : 'resolution',   value : 'Change Resolution'},
+            { key : 'zoom',         value : 'Zoom'},
+            { key : 'settings',     value : 'Settings'},
+            { key : 'about',        value : 'About'},
+        ],
+        titles : [
+            { key : 'pointer', value : 'Pointer' },
+            { key : 'free-draw', value : 'Free Draw' },
+            { key : 'line', value : 'Line' },
+            { key : 'square', value : 'Rect' },
+            { key : 'circle', value : 'Elipses' },
+            { key : 'triangle', value : 'Triangles' },
+            { key : 'text', value : 'Text' },
+            { key : 'color-picker', value : 'Color Picker' },
+            { key : 'eraser', value : 'Eraser' },
+        ]
+    },
+    'pt-BR' : {
+        innerText : [
+            { key : 'load-image',   value : 'Carregar Imagem' },
+            { key : 'save-image',   value : 'Salvar Imagem' },
+            { key : 'clear-canvas', value : 'Limpar Canvas'},
+            { key : 'resolution',   value : 'Mudar Resolução'},
+            { key : 'zoom',         value : 'Zoom'},
+            { key : 'settings',     value : 'Configurações'},
+            { key : 'about',        value : 'Sobre'},
+        ],
+        titles : [
+            { key : 'pointer', value : 'Ponteiro' },
+            { key : 'free-draw', value : 'Desenho Livre' },
+            { key : 'line', value : 'Linha' },
+            { key : 'square', value : 'Retângulos' },
+            { key : 'circle', value : 'Elipses' },
+            { key : 'triangle', value : 'Triângulos' },
+            { key : 'text', value : 'Texto' },
+            { key : 'color-picker', value : 'Seletor de Cor' },
+            { key : 'eraser', value : 'Borracha' },
+        ]
+    }
     };
     selectedLanguage;
 
@@ -42,8 +68,14 @@ export default class Language {
     /* Class Methods ======================================================== */
 
     switchLanguage() {
-        this.languages[this.selectedLanguage].forEach( (item,index) => {
+        this.languages[this.selectedLanguage]['innerText'].forEach(
+        (item,index) => {
             document.querySelector("#"+item['key']).innerText = item['value'];
+        });
+
+        this.languages[this.selectedLanguage]['titles'].forEach(
+        (item,index) => {
+            document.querySelector("#"+item['key']).title = item['value'];
         });
     }
 

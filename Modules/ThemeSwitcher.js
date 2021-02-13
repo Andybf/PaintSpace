@@ -37,7 +37,7 @@ export default class ThemeSwitcher {
             );
             cssProperties.setProperty(
                 "--tool-item-background",
-                "linear-gradient(45deg,#1c1c1c,#373737)"
+                "linear-gradient(45deg,#121212,#393939)"
             );
             cssProperties.setProperty(
                 "--window-header-background",

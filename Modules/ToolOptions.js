@@ -49,11 +49,11 @@ export default class ToolOptions extends HTMLElement {
         name.innerText = object.name;
         this.appendChild(name);
 
+        this.appendChild(createInput("Size","number",'size'));
+        this.appendChild(createInput("Rotation","number",'rotation'));
         this.appendChild(createInput("border","number","border"));
         this.appendChild(createInput("Border Color","color",'brdColor'));
-        this.appendChild(createInput("bkg Color","color",'bkgColor'));
-        this.appendChild(createInput("Rotation","number",'rotation'));
-        this.appendChild(createInput("Size","number",'size'));
+        this.appendChild(createInput("bkg Color","color",'bkgColor'));        
     }
 
     clear() {

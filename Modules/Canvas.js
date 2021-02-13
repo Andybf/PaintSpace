@@ -2,7 +2,7 @@
  * PaintSpace3
  * Created By: Anderson Bucchianico
  * Date: 30/jan/2021
- * Type: Experimental Software
+ * Type: Illustrator - Image Editor
 */
 
 export default class Canvas extends HTMLElement {
@@ -17,29 +17,26 @@ export default class Canvas extends HTMLElement {
         rotation : 0,
         size     : 0
     };
+    positionBuffer = {  x : 0 , y : 0 };
     drag = false;
     mousedown = false;
 
     /* Constructors ========================================================= */
     
-    constructor() { // When Comp Is Created;
+    constructor() {
         super();
         this.self = this;
         this.innerHTML = `<canvas class="canvas" id="canvas"></canvas>`;
     }
 
-    connectedCallback() { // After Comp Load
+    connectedCallback() {
         this.element = this.querySelector("canvas");
         this.element.style['cursor'] = 'crosshair';
         this.context = this.element.getContext("2d");
         this.width = 600;
         this.height = 480;
         this.resizeDrawScreen();
-        // this.element.addEventListener('click',(event) => {
-        //     this.draw(event);
-        // });
         this.createActions();
-        console.log("[INFO] Canvas Initialized.");
     }
 
     /* Class Methods ======================================================== */
@@ -71,12 +68,12 @@ export default class Canvas extends HTMLElement {
     createActions() {
         this.element.addEventListener('mousemove', (event) => {
             if (this.drag) {
-                this.draw(event);
+                this.drawMove(event);
             }
         });
         this.element.addEventListener('mousedown', (event) => {
             this.drag = true;
-            this.draw(event);
+            this.drawDown(event);
             this.mousedown = true;
         });
         this.element.addEventListener('mouseup', (event) => {
@@ -93,26 +90,71 @@ export default class Canvas extends HTMLElement {
         this.addEventListener('mouseup', (event) => {
             this.mousedown = false;
             this.drag = false;
+            this.drawUp(event);
         });
     }
 
     /* Draw Things Methods ================================================== */
 
-    draw(event) {
+    drawDown(event) {
         this.context.beginPath();
         switch (this.selectedTool.name) {
+            case 'line' :
+                this.context.moveTo(event.layerX, event.layerY);
+                break;
             case 'circle' :
-                this.context.beginPath();
-                this.context.arc(
-                    event.layerX, event.layerY,
-                    this.selectedTool.size/2, 0, 2*Math.PI
+                this.positionBuffer.x = event.layerX;
+                this.positionBuffer.y = event.layerY;
+                break;
+            case 'square' :
+                this.positionBuffer.x = event.layerX;
+                this.positionBuffer.y = event.layerY;
+                break;
+            case 'text' :
+                return false;
+        }
+    }
+
+    drawMove(event) {
+        switch (this.selectedTool.name) {
+            case 'line' :
+                this.context.lineTo(event.layerX, event.layerY);
+                break;
+            case 'circle' :
+                return false;
+            case 'square' :
+                return false;
+            case 'text' :
+                return false;
+        }
+        this.drawBorder();
+    }
+
+    drawUp(event) {
+        console.log('drawup',this.selectedTool.name);
+        console.log('buffer',this.positionBuffer.x, this.positionBuffer.y);
+        console.log('newpos',event.layerX, event.layerY);
+        switch (this.selectedTool.name) {
+            case 'free-draw' :
+                return false;
+            case 'line' :
+                return false;
+            case 'circle' :
+                this.context.ellipse(
+                    this.positionBuffer.x,
+                    this.positionBuffer.y,
+                    event.layerX-this.positionBuffer.x,
+                    event.layerY-this.positionBuffer.y,
+                    Math.PI, 0, 2*Math.PI
                 );
                 break;
             case 'square' :
                 this.context.rect(
-                    event.layerX - this.selectedTool.size/2,
-                    event.layerY - this.selectedTool.size/2,
-                    this.selectedTool.size, this.selectedTool.size);
+                    this.positionBuffer.x,
+                    this.positionBuffer.y,
+                    event.layerX-this.positionBuffer.x,
+                    event.layerY-this.positionBuffer.y,
+                );
                 break;
             case 'text' :
                 this.context.font = '30px Comic Sans MS';
@@ -123,15 +165,18 @@ export default class Canvas extends HTMLElement {
                     event.layerY + 10
                 );
                 break;
-            default :
-                console.warn("[INFO] No tool was selected");
         }
+        this.drawBorder();
         this.context.fillStyle = this.selectedTool.bkgColor;
         this.context.fill();
+        this.context.closePath();
+    }
+
+    drawBorder(){
         if (this.selectedTool.border > 0) {
             this.context.lineWidth = this.selectedTool.border;
+            this.context.strokeStyle = this.selectedTool.brdColor;
             this.context.stroke();
         }
-        this.context.closePath();
     }
 }

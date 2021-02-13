@@ -2,7 +2,7 @@
  * PaintSpace3
  * Created By: Anderson Bucchianico
  * Date: 30/jan/2021
- * Type: Image Editor
+ * Type: Illustrator - Image Editor
 */
 
 import Canvas        from './Modules/Canvas.js';
@@ -70,7 +70,23 @@ document.querySelector("button[id*='settings']").addEventListener('click',
 );
 
 document.querySelector("button[id*='about']").addEventListener('click',
-    (event) => { console.log(event); }
+    (event) => { 
+        floatWindow.changeTitle('About');
+        floatWindow.fillContent([
+            {
+                name : 'About',
+                reference : undefined,
+                settings : [
+                    {
+                        label : 'PaintSpace ver. 3.0',
+                        apiName : '',
+                        func    : '',
+                        type    : ''
+                    }
+                ]
+            }
+        ]);
+    }
 );
 
 /* tool panel =============================================================== */
@@ -89,6 +105,20 @@ function activate(obj) {
     canvas.activateObject(obj);
 }
 
+document.querySelector("button[id*='free-draw']").addEventListener('click',
+    (event) => {
+        defaultObject.name = 'Free Draw';
+        activate(defaultObject);
+    }
+);
+document.querySelector("button[id*='line']").addEventListener('click',
+    (event) => {
+        
+        defaultObject.border = 1;
+        defaultObject.name = 'line';
+        activate(defaultObject);
+    }
+);
 document.querySelector("button[id*='square']").addEventListener('click',
     (event) => {
         defaultObject.name = 'square';
@@ -116,11 +146,15 @@ document.querySelector("button[id*='text']").addEventListener('click',
 
 /* === */
 let hue = 0;
-let transitionSpeed = 1000; //ms
+let transitionSpeed = 999; //ms
 let isActive = true;
 let timeoutId;
 function changeBackgroundColor() {
-    hue = hue < 360 ? hue+8 : hue;
+    if(hue < 360 && hue >= 0) {
+        hue += 4;
+    } else {
+        hue = 0;
+    }
     document.querySelector('.title').style.backgroundImage = 
         `linear-gradient(45deg, hsl(`+ hue +`, 80% , 70%),
                                 hsl(`+ (hue+100) +`, 80%, 70%))`;
