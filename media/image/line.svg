@@ -2,6 +2,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="white" viewBox="0 0 30 30">
   <rect
     	width="30" height="3"
-    	style="transform: rotate(45deg) translate(6px, -2px)"
+    	style="transform: rotate(-45deg) translate(-18px, 20px)"
     />
 </svg> 

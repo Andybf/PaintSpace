@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-
 <!--
-    PaintSpace3
-
+    PaintSpace ver. 3.0
     Created By: Anderson Bucchianico
           Date: 30/jan/2021
-          Type: Experimental Software (Image Editor)
+          Type: Illustrator - Image Editor
 -->
-
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css"/>
-        <title>PaintSpace3</title>
+        <title>PaintSpace 3.0</title>
     </head>
     <body>
         <header class="container top">
-            <h1 class="title">PaintSpace</h1>               
+            <h1 id="title" class="title">PaintSpace</h1>               
             <nav class="menubar">
                 <div class="tool-options">
                     <button class="menu-item" id="load-image" ></button>
@@ -40,9 +37,14 @@
                             data="./media/image/pointer.svg"
                     ></object>
                 </button>
-                <button class="tool-item" id="free-draw" title="">
+                <button class="tool-item" id="brush" title="">
                     <object id="free-draw-img"
-                            data="./media/image/free-draw.svg"
+                            data="./media/image/brush.svg"
+                    ></object>
+                </button>
+                <button class="tool-item" id="pencil" title="">
+                    <object id="free-draw-img"
+                            data="./media/image/pencil.svg"
                     ></object>
                 </button>
                 <button class="tool-item" id="line" title="" >

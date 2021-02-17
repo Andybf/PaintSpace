@@ -23,21 +23,22 @@ export default class ToolOptions extends HTMLElement {
     /* Class Methods ======================================================== */
 
     show(object) {
-        function createInput(label, type, value) {
+        function createInput(object) {
 
             let container = document.createElement("div");
             container.classList.add("tooloption-container");
 
             let labelNode = document.createElement("label");
-            labelNode.innerText = label;
+            labelNode.innerText = object['label'];
             container.appendChild(labelNode);
 
             let input = document.createElement("input");
-            input.setAttribute("type",type);
+            input.setAttribute("type",object['type']);
             input.classList.add("tooloption");
-            input.value = object[value];
+            input.value = object['value'];
             input.addEventListener('change', (event) => {
-                object[value] = event.target.value;
+                object['value'] = event.target.value;
+                console.log(object);
             });
             container.appendChild(input);
 
@@ -46,14 +47,12 @@ export default class ToolOptions extends HTMLElement {
 
         let name = document.createElement("span");
         name.classList.add("tooloption-container");
-        name.innerText = object.name;
+        name.innerText = object.label;
         this.appendChild(name);
 
-        this.appendChild(createInput("Size","number",'size'));
-        this.appendChild(createInput("Rotation","number",'rotation'));
-        this.appendChild(createInput("border","number","border"));
-        this.appendChild(createInput("Border Color","color",'brdColor'));
-        this.appendChild(createInput("bkg Color","color",'bkgColor'));        
+        object.options.forEach( (option) => {
+            this.appendChild(createInput(option));
+        });     
     }
 
     clear() {

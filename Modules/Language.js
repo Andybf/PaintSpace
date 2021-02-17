@@ -23,7 +23,8 @@ export default class Language {
         ],
         titles : [
             { key : 'pointer', value : 'Pointer' },
-            { key : 'free-draw', value : 'Free Draw' },
+            { key : 'brush', value : 'Brush' },
+            { key : 'pencil', value : 'Pencil' },
             { key : 'line', value : 'Line' },
             { key : 'square', value : 'Rect' },
             { key : 'circle', value : 'Elipses' },
@@ -45,7 +46,8 @@ export default class Language {
         ],
         titles : [
             { key : 'pointer', value : 'Ponteiro' },
-            { key : 'free-draw', value : 'Desenho Livre' },
+            { key : 'brush', value : 'Pincel' },
+            { key : 'pencil', value : 'Lápis' },
             { key : 'line', value : 'Linha' },
             { key : 'square', value : 'Retângulos' },
             { key : 'circle', value : 'Elipses' },

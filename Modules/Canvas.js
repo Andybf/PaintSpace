@@ -9,14 +9,7 @@ export default class Canvas extends HTMLElement {
 
     /* Attributes =========================================================== */
 
-    selectedTool = {
-        name     : '',
-        bkgColor : '#',
-        border   : 0,
-        brdColor : '#',
-        rotation : 0,
-        size     : 0
-    };
+    selectedTool;
     positionBuffer = {  x : 0 , y : 0 };
     drag = false;
     mousedown = false;
@@ -31,7 +24,6 @@ export default class Canvas extends HTMLElement {
 
     connectedCallback() {
         this.element = this.querySelector("canvas");
-        this.element.style['cursor'] = 'crosshair';
         this.context = this.element.getContext("2d");
         this.width = 600;
         this.height = 480;
@@ -55,7 +47,6 @@ export default class Canvas extends HTMLElement {
     }
 
     activateObject(tool) {
-        console.log(tool);
         this.selectedTool = tool;
     }
     
@@ -99,6 +90,18 @@ export default class Canvas extends HTMLElement {
     drawDown(event) {
         this.context.beginPath();
         switch (this.selectedTool.name) {
+            case 'brush' :
+                this.context.arc(
+                    event.layerX, event.layerY,
+                    this.selectedTool.options[0].value/2, 0, 2 * Math.PI
+                );
+                this.context.fillStyle = this.selectedTool.options[1].value;
+                this.context.fill();
+                this.context.closePath();
+                this.context.beginPath();
+                break;
+            case 'pencil' :
+                return false;
             case 'line' :
                 this.context.moveTo(event.layerX, event.layerY);
                 break;
@@ -117,28 +120,48 @@ export default class Canvas extends HTMLElement {
 
     drawMove(event) {
         switch (this.selectedTool.name) {
-            case 'line' :
+            case 'brush' :
                 this.context.lineTo(event.layerX, event.layerY);
                 break;
+            case 'pencil' :
+                this.context.lineTo(event.layerX, event.layerY);
+                break;
+            case 'line' :
+                return false;
             case 'circle' :
                 return false;
             case 'square' :
                 return false;
             case 'text' :
                 return false;
+            default:
+                return false;
         }
         this.drawBorder();
     }
 
     drawUp(event) {
-        console.log('drawup',this.selectedTool.name);
-        console.log('buffer',this.positionBuffer.x, this.positionBuffer.y);
-        console.log('newpos',event.layerX, event.layerY);
         switch (this.selectedTool.name) {
-            case 'free-draw' :
+            case 'brush' :
+                console.log(this.selectedTool)
+                this.context.closePath();
+                this.context.beginPath();
+                this.context.arc(
+                    event.layerX, event.layerY,
+                    this.selectedTool.options[0].value/2, 0, 2 * Math.PI
+                );
+                this.context.fillStyle = this.selectedTool.options[1].value;
+                this.context.fill();
+                this.context.closePath();
+                this.context.beginPath();
+                this.context.lineTo(event.layerX, event.layerY);
+                
+                return false;
+            case 'pencil' :
                 return false;
             case 'line' :
-                return false;
+                this.context.lineTo(event.layerX, event.layerY);
+                break;
             case 'circle' :
                 this.context.ellipse(
                     this.positionBuffer.x,
@@ -165,17 +188,19 @@ export default class Canvas extends HTMLElement {
                     event.layerY + 10
                 );
                 break;
+            default:
+                return false;
         }
         this.drawBorder();
-        this.context.fillStyle = this.selectedTool.bkgColor;
+        this.context.fillStyle = this.selectedTool.options[3].value;
         this.context.fill();
         this.context.closePath();
     }
 
-    drawBorder(){
-        if (this.selectedTool.border > 0) {
-            this.context.lineWidth = this.selectedTool.border;
-            this.context.strokeStyle = this.selectedTool.brdColor;
+    drawBorder() {
+        if (this.selectedTool.options[0].value > 0) {
+            this.context.lineWidth = this.selectedTool.options[0].value;
+            this.context.strokeStyle = this.selectedTool.options[1].value;
             this.context.stroke();
         }
     }

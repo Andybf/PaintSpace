@@ -9,6 +9,106 @@ export default class ThemeSwitcher {
 
     /* Attributes =========================================================== */
 
+    lightTheme = [
+        {
+            key : '--global-background-color',
+            value : '#eee'
+        },
+        {
+            key : '--global-font-color',
+            value : '#333'
+        },
+        {
+            key : '--header-background',
+            value : 'linear-gradient(#fff,#fff)'
+        },
+        {
+            key : '--left-toolbox',
+            value : 'linear-gradient(#fff,#fff)'
+        },
+        {
+            key : '--tool-item-background',
+            value : 'linear-gradient(45deg,#bbbbbb,#f2f2f2)'
+        },
+        {
+            key : '--window-header-background',
+            value : 'linear-gradient(#eee,#ccc)'
+        },
+        {
+            key : '--tool-option-background',
+            value : '#f1f1f1'
+        },
+        {
+            key : '--tool-option-color',
+            value : '#111'
+        },
+        {
+            key : '--window-border-color',
+            value : '#ccc'
+        },
+        {
+            key : '--window-background-color',
+            value : '#eee'
+        },
+        {
+            key : '--red-button-close',
+            value : '#f19999'
+        },
+        {
+            key : '--global-shadow',
+            value : '0 0 5px 0px #797979'
+        },
+    ];
+    darkTheme = [
+        {
+            key : '--global-background-color',
+            value : '#111'
+        },
+        {
+            key : '--global-font-color',
+            value : '#fff'
+        },
+        {
+            key : '--header-background',
+            value : 'linear-gradient(0deg, #202020, #2b2b2b, #202020)'
+        },
+        {
+            key : '--left-toolbox',
+            value : 'linear-gradient(90deg, #1d1d1d, #2d2d2d)'
+        },
+        {
+            key : '--tool-item-background',
+            value : 'linear-gradient(45deg,#121212,#393939)'
+        },
+        {
+            key : '--window-header-background',
+            value : 'linear-gradient(#555,#333)'
+        },
+        {
+            key : '--tool-option-background',
+            value : '#333'
+        },
+        {
+            key : '--tool-option-color',
+            value : '#eee'
+        },
+        {
+            key : '--window-border-color',
+            value : '#222'
+        },
+        {
+            key : '--window-background-color',
+            value : '#222'
+        },
+        {
+            key : '--red-button-close',
+            value : '#b65959'
+        },
+        {
+            key : '--global-shadow',
+            value : '0 0 5px 0px #000'
+        },
+    ];
     isDarkMode;
 
     /* Constructors ========================================================= */
@@ -22,91 +122,18 @@ export default class ThemeSwitcher {
     /* Class Methods ======================================================== */
 
     updateThemeState() {
-        function switchDarkMode() {
-            let cssProperties = document.documentElement.style;
-            cssProperties.setProperty("--global-background-color","#111");
-            cssProperties.setProperty("--global-font-color","#fff");
-            cssProperties.setProperty(
-                "--header-background",
-                "linear-gradient(0deg, #202020, #2b2b2b, #202020)"
-            );
-            cssProperties.setProperty( "--tool-option-background", "#111" );
-            cssProperties.setProperty(
-                "--left-toolbox",
-                "linear-gradient(90deg, #1d1d1d, #2d2d2d)"
-            );
-            cssProperties.setProperty(
-                "--tool-item-background",
-                "linear-gradient(45deg,#121212,#393939)"
-            );
-            cssProperties.setProperty(
-                "--window-header-background",
-                "linear-gradient(#555,#333)"
-            );
-            cssProperties.setProperty(
-                "--window-border-color",
-                "#333"
-            );
-            cssProperties.setProperty(
-                "--window-background-color",
-                "#222"
-            );
-            cssProperties.setProperty(
-                "--red-button-close",
-                "#b65959"
-            );
-            cssProperties.setProperty(
-                "--global-shadow",
-                "0 0 5px 0px #000"
-            );
-        }
-    
-        function switchLightMode() {
-            let cssProperties = document.documentElement.style;
-            cssProperties.setProperty("--global-background-color","#eee");
-            cssProperties.setProperty("--global-font-color","#333");
-            cssProperties.setProperty(
-                "--header-background",
-                "linear-gradient(#fff,#fff)"
-                );
-            cssProperties.setProperty(
-                "--left-toolbox",
-                "linear-gradient(#fff,#fff)"
-            );
-            cssProperties.setProperty(
-                "--tool-item-background",
-                "linear-gradient(45deg,#ddd,#fff)"
-            );
-            cssProperties.setProperty(
-                "--window-header-background",
-                "linear-gradient(#eee,#ccc)"
-            );
-            cssProperties.setProperty( "--tool-option-background", "#f1f1f1" );
-            cssProperties.setProperty(
-                "--window-border-color",
-                "#ccc"
-            );
-            cssProperties.setProperty(
-                "--window-background-color",
-                "#eee"
-            );
-            cssProperties.setProperty(
-                "--red-button-close",
-                "#f19999"
-            );
-            cssProperties.setProperty(
-                "--global-shadow",
-                "0 0 5px 0px #797979"
-            );
-        }
-
         if (this.isDarkMode) {
-            switchDarkMode()
-            this.isDarkMode = false;
+            this.darkTheme.forEach( (prop) => {
+                document.documentElement.style.setProperty(
+                    prop['key'], prop['value']
+                );
+            });
         } else {
-            switchLightMode();
-            this.isDarkMode = true;
+            this.lightTheme.forEach( (prop) => {
+                document.documentElement.style.setProperty(
+                    prop['key'], prop['value']
+                );
+            });
         }
     }
-
 }

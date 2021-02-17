@@ -93,64 +93,119 @@ document.querySelector("button[id*='about']").addEventListener('click',
 
 let defaultObject = {
     name     : '',
-    bkgColor : '#dddddd',
-    border   : 0,
-    brdColor : '#222222',
-    rotation : 0,
-    size     : 20
-};
+    label    : '',
+    options  : [
+        {
+            key: 'border',
+            label : 'Border',
+            value : 0,
+            type : 'number'
+        },
+        {
+            key: 'brdColor',
+            label : 'Border Color',
+            value : '#222222',
+            type : 'color'
+        },
+        {
+            key: 'size',
+            label : 'Size',
+            value : 0,
+            type : 'number'
+        },
+        {
+            key: 'bkgColor',
+            label : 'Bkg Color',
+            value : '#dddddd',
+            type : 'color'
+        },
+        {
+            key: 'rotation',
+            label : 'Rotation',
+            value : 0,
+            type : 'number'
+        },
+    ]
+}
 function activate(obj) {
+    canvas.querySelector('canvas').style['cursor'] = 'crosshair';
     toolOptions.clear();
     toolOptions.show(obj);
     canvas.activateObject(obj);
 }
 
-document.querySelector("button[id*='free-draw']").addEventListener('click',
+function deactivate() {
+    canvas.querySelector('canvas').style['cursor'] = 'default';
+    toolOptions.clear();
+    canvas.activateObject([]);
+}
+
+document.querySelector("button[id*='pointer']").addEventListener('click',
     (event) => {
-        defaultObject.name = 'Free Draw';
+        deactivate();
+    }
+);
+document.querySelector("button[id*='brush']").addEventListener('click',
+    (event) => {
+        defaultObject.options[0].value = 10;
+        defaultObject.name = 'brush';
+        defaultObject.label = 'Brush';
+        activate(defaultObject);
+    }
+);
+document.querySelector("button[id*='pencil']").addEventListener('click',
+    (event) => {
+        defaultObject.border = 1;
+        defaultObject.label = 'Pencil';
+        defaultObject.name = 'pencil';
         activate(defaultObject);
     }
 );
 document.querySelector("button[id*='line']").addEventListener('click',
     (event) => {
-        
         defaultObject.border = 1;
+        defaultObject.label = 'Line';
         defaultObject.name = 'line';
         activate(defaultObject);
     }
 );
 document.querySelector("button[id*='square']").addEventListener('click',
     (event) => {
+        defaultObject.label = 'Square';
         defaultObject.name = 'square';
         activate(defaultObject);
     }
 );
 document.querySelector("button[id*='circle']").addEventListener('click',
     (event) => {
+        defaultObject.label = 'Circle';
         defaultObject.name = 'circle';
         activate(defaultObject);
     }
 );
 document.querySelector("button[id*='triangle']").addEventListener('click',
     (event) => {
+        defaultObject.label = 'Triangle';
         defaultObject.name = 'triangle';
         activate(defaultObject);
     }
 );
 document.querySelector("button[id*='text']").addEventListener('click',
     (event) => {
+        defaultObject.label = 'Text';
         defaultObject.name = 'text';
         activate(defaultObject);
     }
 );
 
-/* === */
+/* Title Color Change ======================================================= */
+
 let hue = 0;
 let transitionSpeed = 999; //ms
 let isActive = true;
 let timeoutId;
 function changeBackgroundColor() {
-    if(hue < 360 && hue >= 0) {
+    if (hue < 360 && hue >= 0) {
         hue += 4;
     } else {
         hue = 0;
