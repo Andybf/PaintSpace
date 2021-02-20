@@ -1,0 +1,27 @@
+/*
+ * PaintSpace ver. 3.0
+ * Created By: Anderson Bucchianico
+ *       Date: 20/feb/2021
+*/
+
+comp-canvascontainer {
+    height: calc(100% - 60px);
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-wrapper {
+    display: flex;
+}
+
+#resize {
+    width: 2px;
+    height: 480px;
+    cursor: col-resize;
+    background-color: #f00;
+    position: absolute;
+    top: 283px;
+    left: 902px;
+}

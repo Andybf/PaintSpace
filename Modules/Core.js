@@ -2,14 +2,13 @@
  * PaintSpace3
  * Created By: Anderson Bucchianico
  * Date: 30/jan/2021
- * Type: Illustrator - Image Editor
 */
 
-import Canvas        from './Modules/Canvas.js';
-import ToolOptions   from './Modules/ToolOptions.js';
-import ThemeSwitcher from './Modules/ThemeSwitcher.js';
-import Language      from './Modules/Language.js';
-import FloatWindow   from './Modules/FloatWindow.js';
+import Canvas        from './Canvas.js';
+import ToolOptions   from './ToolOptions.js';
+import ThemeSwitcher from './ThemeSwitcher.js';
+import Language      from './Language.js';
+import FloatWindow   from './FloatWindow.js';
 
 customElements.define("comp-tooloptions",ToolOptions);
 let toolOptions = document.querySelector("comp-tooloptions");
@@ -30,7 +29,9 @@ document.querySelector("button[id*='clear-canvas']").addEventListener('click',
 );
 
 document.querySelector("button[id*='zoom']").addEventListener('click',
-    (event) => { canvas.zoom(); }
+    (event) => { 
+        canvas.zoom();
+    }
 );
 
 document.querySelector("button[id*='settings']").addEventListener('click',

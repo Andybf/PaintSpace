@@ -1,0 +1,71 @@
+/*
+ * PaintSpace ver. 3.0
+ * Created By: Anderson Bucchianico
+ *       Date: 20/feb/2021
+*/
+
+section.float-window {
+    position: absolute;
+    top:  calc(50% - 300px);
+    left: calc(50% - 500px);
+    margin-left: auto;
+    margin-right: auto;
+    width:  500px;
+    height: 300px;
+    display: none; 
+
+    background-color: var(--window-background-color);
+    border-radius: 7px;
+    box-shadow: var(--global-shadow);
+}
+
+div.header {
+    background-image: var(--window-header-background);
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    cursor: move;
+    user-select: none;
+}
+
+span.window-title {
+    margin-left: 10px;
+    font-family: system-ui;
+    font-size: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+button.window-close {
+    height: 18px;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    line-height: 15px;
+    font-weight: bold;
+    cursor : pointer;
+}
+
+.content {
+    padding: 10px;
+    color: #ddd;
+}
+
+/* Float window dynamic content === */
+
+.config-container {
+    padding: 5px;
+}
+
+.config-row {
+    padding: 5px;
+    display: flex;
+    column-gap: 10px;
+}

@@ -10,25 +10,35 @@ export default class Canvas extends HTMLElement {
     /* Attributes =========================================================== */
 
     selectedTool;
+    element;
     positionBuffer = {  x : 0 , y : 0 };
     drag = false;
     mousedown = false;
+    defaultWidth = 600;
+    defaultHeight = 480;
 
     /* Constructors ========================================================= */
     
     constructor() {
         super();
         this.self = this;
-        this.innerHTML = `<canvas class="canvas" id="canvas"></canvas>`;
+        this.innerHTML = `
+        <section class="canvas-wrapper">
+            <canvas class="canvas" id="canvas"></canvas>
+            <div id='resize'></div>
+        </section>
+        `;
     }
 
     connectedCallback() {
         this.element = this.querySelector("canvas");
+        this.resize = this.querySelector('#resize');
         this.context = this.element.getContext("2d");
-        this.width = 600;
-        this.height = 480;
+        this.width = this.defaultWidth;
+        this.height = this.defaultHeight;
         this.resizeDrawScreen();
         this.createActions();
+        this.resizeX = self.resize.getBoundingClientRect().left;
     }
 
     /* Class Methods ======================================================== */
@@ -57,6 +67,28 @@ export default class Canvas extends HTMLElement {
     /* Action Methods ======================================================= */
 
     createActions() {
+        
+        this.resize.addEventListener('mousedown', (event) => {
+            let self = this;
+            function mouseMove(event) {
+                setTimeout( () => {
+                    self.resize.style['left'] = event.clientX + 'px';
+                },17); // 60 FPS
+            }
+            function mouseUp (event) {
+                if (confirm("Confirm resize of the screen? All the modifications will be erased after resizing.")) {
+                    self.width=self.defaultWidth+(event.clientX-self.resizeX)*2;
+                    self.resizeDrawScreen();
+                }
+                window.removeEventListener('mousemove', mouseMove);
+                window.removeEventListener('mouseup',   mouseUp);
+            }
+            window.addEventListener('mousemove', mouseMove);
+            window.addEventListener('mouseup',   mouseUp);
+        });
+        
+
+        // For Canvas ==========================================================
         this.element.addEventListener('mousemove', (event) => {
             if (this.drag) {
                 this.drawMove(event);
@@ -141,6 +173,9 @@ export default class Canvas extends HTMLElement {
     }
 
     drawUp(event) {
+        if (!this.selectedTool) {
+            return false;
+        }
         switch (this.selectedTool.name) {
             case 'brush' :
                 console.log(this.selectedTool)
