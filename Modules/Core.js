@@ -5,6 +5,7 @@
 */
 
 import Canvas        from './Canvas.js';
+import Resize        from './Resize.js';
 import ToolOptions   from './ToolOptions.js';
 import ThemeSwitcher from './ThemeSwitcher.js';
 import Language      from './Language.js';
@@ -15,6 +16,10 @@ let toolOptions = document.querySelector("comp-tooloptions");
 
 customElements.define("comp-canvascontainer", Canvas);
 let canvas = document.querySelector("comp-canvascontainer");
+
+customElements.define("comp-resize", Resize);
+let resize = document.querySelector("comp-resize");
+resize.init(canvas);
 
 customElements.define("comp-floatwindow", FloatWindow);
 let floatWindow = document.querySelector("comp-floatwindow");
@@ -201,7 +206,7 @@ document.querySelector("button[id*='text']").addEventListener('click',
 
 /* Title Color Change ======================================================= */
 
-let hue = 0;
+let hue = 160;
 let transitionSpeed = 999; //ms
 let isActive = true;
 let timeoutId;

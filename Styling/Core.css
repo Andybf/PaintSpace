@@ -5,11 +5,15 @@
 */
 
 :root {
-    --global-background-color : ;
-    --global-font-color: ;
-    --header-background: ;
-    --global-shadow: ;
-    --title: ;
+    /* Default theme */
+    --global-background-color : #eee;
+    --global-font-color: transparent;
+    --header-background: linear-gradient(#fff,#fff);
+    --global-shadow: #999;
+    --title: linear-gradient(45deg,#383838,#414141);
+    --left-toolbox: linear-gradient(#fff,#fff);
+    --tool-item-background: linear-gradient(45deg,#cfcfcf,#f2f2f2);
+    --program-button-item: #eee;
 }
 
 * {
@@ -112,12 +116,22 @@ button.menu-item {
     border-radius: 5px;
     font-size: 12px;
     font-weight: 800;
-    background: none;
+    min-width: 100px;
+    background-color: var(--program-button-item);
+}
+
+button.menu-item#zoom {
+    display: none;
 }
 
 .screen-container {
     width: 100%;
     height: calc(100% - 60px);
+}
+
+.global-tool-container {
+    display: flex;
+    column-gap: 20px;
 }
 
 .tooloption-container {

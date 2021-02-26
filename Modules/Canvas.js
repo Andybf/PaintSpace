@@ -1,8 +1,8 @@
 /*
  * PaintSpace3
- * Created By: Anderson Bucchianico
- * Date: 30/jan/2021
- * Type: Illustrator - Image Editor
+ *  Created By: Anderson Bucchianico
+ *        Date: 30/jan/2021
+ * Description: Canvas module, the core of the graphics logic.
 */
 
 export default class Canvas extends HTMLElement {
@@ -10,50 +10,51 @@ export default class Canvas extends HTMLElement {
     /* Attributes =========================================================== */
 
     selectedTool;
-    element;
+    canvasNode;
     positionBuffer = {  x : 0 , y : 0 };
     drag = false;
     mousedown = false;
-    defaultWidth = 600;
-    defaultHeight = 480;
+    default = {
+        width : 600,
+        height: 480,
+        background: '#ccc'
+    }
 
     /* Constructors ========================================================= */
     
     constructor() {
         super();
-        this.self = this;
         this.innerHTML = `
         <section class="canvas-wrapper">
             <canvas class="canvas" id="canvas"></canvas>
-            <div id='resize'></div>
+            <comp-resize></comp-resize>
         </section>
         `;
     }
 
     connectedCallback() {
-        this.element = this.querySelector("canvas");
-        this.resize = this.querySelector('#resize');
-        this.context = this.element.getContext("2d");
-        this.width = this.defaultWidth;
-        this.height = this.defaultHeight;
-        this.resizeDrawScreen();
+        this.canvasNode = this.querySelector("canvas");
+        this.context = this.canvasNode.getContext("2d");
+        this.width = this.default.width;
+        this.height = this.default.height;
+        this.constructDrawScreen();
         this.createActions();
-        this.resizeX = self.resize.getBoundingClientRect().left;
     }
 
     /* Class Methods ======================================================== */
 
-    resizeDrawScreen() {
+    constructDrawScreen() {
+        console.log('canvas:',this.width,this.height)
         this.context.canvas.width = this.width;
         this.context.canvas.height = this.height;
-        this.context.fillStyle = "#333";
+        this.context.fillStyle = this.default.background;
         this.context.fillRect(0,0, this.width, this.height);
     }
 
     clearScreen() {
-        this.context.clearRect(0,0, this.element.width, this.element.height);
-        this.context.fillStyle = "white";
-        this.context.fillRect(0,0, this.element.width, this.element.height);
+        this.context.clearRect(0,0, this.canvasNode.width, this.canvasNode.height);
+        this.context.fillStyle = this.default.background;
+        this.context.fillRect(0,0, this.canvasNode.width, this.canvasNode.height);
     }
 
     activateObject(tool) {
@@ -64,46 +65,22 @@ export default class Canvas extends HTMLElement {
         this.context.scale(2,2)
     }
 
-    /* Action Methods ======================================================= */
-
     createActions() {
-        
-        this.resize.addEventListener('mousedown', (event) => {
-            let self = this;
-            function mouseMove(event) {
-                setTimeout( () => {
-                    self.resize.style['left'] = event.clientX + 'px';
-                },17); // 60 FPS
-            }
-            function mouseUp (event) {
-                if (confirm("Confirm resize of the screen? All the modifications will be erased after resizing.")) {
-                    self.width=self.defaultWidth+(event.clientX-self.resizeX)*2;
-                    self.resizeDrawScreen();
-                }
-                window.removeEventListener('mousemove', mouseMove);
-                window.removeEventListener('mouseup',   mouseUp);
-            }
-            window.addEventListener('mousemove', mouseMove);
-            window.addEventListener('mouseup',   mouseUp);
-        });
-        
-
-        // For Canvas ==========================================================
-        this.element.addEventListener('mousemove', (event) => {
+        this.canvasNode.addEventListener('mousemove', (event) => {
             if (this.drag) {
                 this.drawMove(event);
             }
         });
-        this.element.addEventListener('mousedown', (event) => {
+        this.canvasNode.addEventListener('mousedown', (event) => {
             this.drag = true;
             this.drawDown(event);
             this.mousedown = true;
         });
-        this.element.addEventListener('mouseup', (event) => {
+        this.canvasNode.addEventListener('mouseup', (event) => {
             this.drag = false;
             this.mousedown = false;
         });
-        this.element.addEventListener('mouseout', (event) => {
+        this.canvasNode.addEventListener('mouseout', (event) => {
             if (this.mousedown) {
                 this.drag = true;
             } else {
@@ -120,6 +97,9 @@ export default class Canvas extends HTMLElement {
     /* Draw Things Methods ================================================== */
 
     drawDown(event) {
+        if (!this.selectedTool) {
+            return false;
+        }
         this.context.beginPath();
         switch (this.selectedTool.name) {
             case 'brush' :
@@ -151,6 +131,9 @@ export default class Canvas extends HTMLElement {
     }
 
     drawMove(event) {
+        if (!this.selectedTool) {
+            return false;
+        }
         switch (this.selectedTool.name) {
             case 'brush' :
                 this.context.lineTo(event.layerX, event.layerY);

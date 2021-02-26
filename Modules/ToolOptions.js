@@ -50,9 +50,12 @@ export default class ToolOptions extends HTMLElement {
         name.innerText = object.label;
         this.appendChild(name);
 
+        let elementContainer = document.createElement('div');
+        elementContainer.classList.add('global-tool-container');
         object.options.forEach( (option) => {
-            this.appendChild(createInput(option));
-        });     
+            elementContainer.appendChild(createInput(option));
+        });
+        this.appendChild(elementContainer);
     }
 
     clear() {

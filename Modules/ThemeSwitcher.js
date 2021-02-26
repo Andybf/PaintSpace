@@ -23,6 +23,10 @@ export default class ThemeSwitcher {
             value : 'linear-gradient(#fff,#fff)'
         },
         {
+            key : '--program-button-item',
+            value : 'transparent'
+        },
+        {
             key : '--left-toolbox',
             value : 'linear-gradient(#fff,#fff)'
         },
@@ -71,6 +75,10 @@ export default class ThemeSwitcher {
         {
             key : '--header-background',
             value : 'linear-gradient(0deg, #202020, #2b2b2b, #202020)'
+        },
+        {
+            key : '--program-button-item',
+            value : 'transparent'
         },
         {
             key : '--left-toolbox',
