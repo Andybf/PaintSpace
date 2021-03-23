@@ -27,6 +27,9 @@ export default class Resize extends HTMLElement {
     }
 
     connectedCallback() {
+        window.addEventListener('resize', (event) => {
+            this.updateResizeBarPositions();
+        })
     }
 
     init (canvasModuleReference) {

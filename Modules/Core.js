@@ -97,110 +97,184 @@ document.querySelector("button[id*='about']").addEventListener('click',
 
 /* tool panel =============================================================== */
 
-let defaultObject = {
+let drawToolModel = {
     name     : '',
     label    : '',
-    options  : [
-        {
-            key: 'border',
-            label : 'Border',
-            value : 0,
-            type : 'number'
-        },
-        {
-            key: 'brdColor',
-            label : 'Border Color',
-            value : '#222222',
-            type : 'color'
-        },
-        {
-            key: 'size',
-            label : 'Size',
-            value : 0,
-            type : 'number'
-        },
-        {
-            key: 'bkgColor',
-            label : 'Bkg Color',
-            value : '#dddddd',
-            type : 'color'
-        },
-        {
-            key: 'rotation',
-            label : 'Rotation',
-            value : 0,
-            type : 'number'
-        },
-    ]
+    cursor   : 'default',
+    options  : {}
 }
-function activate(obj) {
-    canvas.querySelector('canvas').style['cursor'] = 'crosshair';
-    toolOptions.clear();
-    toolOptions.show(obj);
-    canvas.activateObject(obj);
-}
-
-function deactivate() {
-    canvas.querySelector('canvas').style['cursor'] = 'default';
-    toolOptions.clear();
-    canvas.activateObject([]);
+function selectTool(tool) {
+    toolOptions.deactivateCurrentTool();
+    toolOptions.show(tool);
+    canvas.activateObject(tool);
 }
 
 document.querySelector("button[id*='pointer']").addEventListener('click',
     (event) => {
-        deactivate();
+        drawToolModel.label = 'Pointer';
+        drawToolModel.name = 'pointer';
+        drawToolModel.cursor = 'default';
+        drawToolModel.options = {};
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='brush']").addEventListener('click',
     (event) => {
-        defaultObject.options[0].value = 10;
-        defaultObject.name = 'brush';
-        defaultObject.label = 'Brush';
-        activate(defaultObject);
+        drawToolModel.label = 'Brush';
+        drawToolModel.name = 'brush';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+            border : {
+                label : 'Size',
+                value : 10,
+                type : 'number'
+            },
+            brdColor : {
+                label : 'Brush Color',
+                value : '#222222',
+                type : 'color'
+            }
+        }
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='pencil']").addEventListener('click',
     (event) => {
-        defaultObject.border = 1;
-        defaultObject.label = 'Pencil';
-        defaultObject.name = 'pencil';
-        activate(defaultObject);
+        drawToolModel.label = 'Pencil';
+        drawToolModel.name = 'pencil';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+            border : {
+                label : 'Size',
+                value : 1,
+                type : 'number'
+            },
+            brdColor : {
+                label : 'Pencil Color',
+                value : '#222222',
+                type : 'color'
+            }
+        }
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='line']").addEventListener('click',
     (event) => {
-        defaultObject.border = 1;
-        defaultObject.label = 'Line';
-        defaultObject.name = 'line';
-        activate(defaultObject);
+        drawToolModel.label = 'Line';
+        drawToolModel.name = 'line';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+            border : {
+                label : 'Size',
+                value : 1,
+                type : 'number'
+            },
+            brdColor : {
+                label : 'Pencil Color',
+                value : '#222222',
+                type : 'color'
+            }
+        }
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='square']").addEventListener('click',
     (event) => {
-        defaultObject.label = 'Square';
-        defaultObject.name = 'square';
-        activate(defaultObject);
+        drawToolModel.label = 'Square';
+        drawToolModel.name = 'square';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+            border : {
+                label : 'Border',
+                value : 1,
+                type : 'number'
+            },
+            brdColor : {
+                label : 'Border Color',
+                value : '#222222',
+                type : 'color'
+            },
+            bkgColor : {
+                label : 'Bkg Color',
+                value : '#dddddd',
+                type : 'color'
+            },
+            rotation : {
+                label : 'Rotation',
+                value : 0,
+                type : 'number'
+            },
+        }
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='circle']").addEventListener('click',
     (event) => {
-        defaultObject.label = 'Circle';
-        defaultObject.name = 'circle';
-        activate(defaultObject);
+        drawToolModel.label = 'Circle';
+        drawToolModel.name = 'circle';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+            border : {
+                label : 'Border',
+                value : 1,
+                type : 'number'
+            },
+            brdColor : {
+                label : 'Border Color',
+                value : '#222222',
+                type : 'color'
+            },
+            bkgColor : {
+                label : 'Bkg Color',
+                value : '#dddddd',
+                type : 'color'
+            },
+        }
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='triangle']").addEventListener('click',
     (event) => {
-        defaultObject.label = 'Triangle';
-        defaultObject.name = 'triangle';
-        activate(defaultObject);
+        drawToolModel.label = 'Triangle';
+        drawToolModel.name = 'triangle';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+
+        }
+        selectTool(drawToolModel);
     }
 );
 document.querySelector("button[id*='text']").addEventListener('click',
     (event) => {
-        defaultObject.label = 'Text';
-        defaultObject.name = 'text';
-        activate(defaultObject);
+        drawToolModel.label = 'Text';
+        drawToolModel.name = 'text';
+        drawToolModel.cursor = 'text';
+        drawToolModel.options = {
+            
+        }
+        selectTool(drawToolModel);
+    }
+);
+document.querySelector("button[id*='color-picker']").addEventListener('click',
+    (event) => {
+        drawToolModel.label = 'Color Picker';
+        drawToolModel.name = 'color-picker';
+        drawToolModel.cursor = 'default';
+        drawToolModel.options = {
+            
+        }
+        selectTool(drawToolModel);
+    }
+);
+document.querySelector("button[id*='eraser']").addEventListener('click',
+    (event) => {
+        drawToolModel.label = 'Eraser';
+        drawToolModel.name = 'eraser';
+        drawToolModel.cursor = 'crosshair';
+        drawToolModel.options = {
+            
+        }
+        selectTool(drawToolModel);
     }
 );
 
@@ -226,3 +300,41 @@ function changeBackgroundColor() {
     }
 }
 changeBackgroundColor();
+
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").then( (registration) => {
+        console.log("SW registred.",registration)
+    }).catch( (error) => {
+        console.log(error);
+    });
+}
+
+/*
+defaultDrawTool.options = {
+            border : {
+                label : 'Border',
+                value : 10,
+                type : 'number'
+            },
+            brdColor : {
+                label : 'Border Color',
+                value : '#222222',
+                type : 'color'
+            },
+            size : {
+                label : 'Size',
+                value : 0,
+                type : 'number'
+            },
+            bkgColor : {
+                label : 'Bkg Color',
+                value : '#dddddd',
+                type : 'color'
+            },
+            rotation : {
+                label : 'Rotation',
+                value : 0,
+                type : 'number'
+            },
+        }
+*/

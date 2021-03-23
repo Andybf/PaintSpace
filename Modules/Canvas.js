@@ -105,9 +105,9 @@ export default class Canvas extends HTMLElement {
             case 'brush' :
                 this.context.arc(
                     event.layerX, event.layerY,
-                    this.selectedTool.options[0].value/2, 0, 2 * Math.PI
+                    this.selectedTool.options['border'].value/2, 0, 2 * Math.PI
                 );
-                this.context.fillStyle = this.selectedTool.options[1].value;
+                this.context.fillStyle = this.selectedTool.options['brdColor'].value;
                 this.context.fill();
                 this.context.closePath();
                 this.context.beginPath();
@@ -166,9 +166,9 @@ export default class Canvas extends HTMLElement {
                 this.context.beginPath();
                 this.context.arc(
                     event.layerX, event.layerY,
-                    this.selectedTool.options[0].value/2, 0, 2 * Math.PI
+                    this.selectedTool.options['border'].value/2, 0, 2 * Math.PI
                 );
-                this.context.fillStyle = this.selectedTool.options[1].value;
+                this.context.fillStyle = this.selectedTool.options['brdColor'].value;
                 this.context.fill();
                 this.context.closePath();
                 this.context.beginPath();
@@ -210,15 +210,15 @@ export default class Canvas extends HTMLElement {
                 return false;
         }
         this.drawBorder();
-        this.context.fillStyle = this.selectedTool.options[3].value;
+        this.context.fillStyle = this.selectedTool.options['bkgColor'].value;
         this.context.fill();
         this.context.closePath();
     }
 
     drawBorder() {
-        if (this.selectedTool.options[0].value > 0) {
-            this.context.lineWidth = this.selectedTool.options[0].value;
-            this.context.strokeStyle = this.selectedTool.options[1].value;
+        if (this.selectedTool.options['border'].value > 0) {
+            this.context.lineWidth = this.selectedTool.options['border'].value;
+            this.context.strokeStyle = this.selectedTool.options['brdColor'].value;
             this.context.stroke();
         }
     }

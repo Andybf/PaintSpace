@@ -22,6 +22,17 @@ export default class ToolOptions extends HTMLElement {
 
     /* Class Methods ======================================================== */
 
+    changeCanvasCursor(newCursor){
+        document.querySelector('canvas').style['cursor'] = newCursor;
+    }
+
+    addToolLabel(objectLabel) {
+        let name = document.createElement("span");
+        name.classList.add("tooloption-container");
+        name.innerText = objectLabel;
+        this.appendChild(name);
+    }
+
     show(object) {
         function createInput(object) {
 
@@ -45,20 +56,18 @@ export default class ToolOptions extends HTMLElement {
             return container;
         }
 
-        let name = document.createElement("span");
-        name.classList.add("tooloption-container");
-        name.innerText = object.label;
-        this.appendChild(name);
+        this.addToolLabel(object.label);
+        this.changeCanvasCursor(object.cursor);
 
         let elementContainer = document.createElement('div');
         elementContainer.classList.add('global-tool-container');
-        object.options.forEach( (option) => {
-            elementContainer.appendChild(createInput(option));
-        });
+        for (let key in object.options) {
+            elementContainer.appendChild(createInput(object.options[key]));
+        };
         this.appendChild(elementContainer);
     }
 
-    clear() {
+    deactivateCurrentTool() {
         while (this.firstChild) {
             this.removeChild(this.firstChild);
         };
