@@ -12,8 +12,6 @@ import ToolOptions
     from './ToolOptions.js';
 import ThemeSwitcher
     from './ThemeSwitcher.js';
-import Language
-    from './Language.js';
 import FloatWindow 
     from './FloatWindow.js';
 import LoadImage
@@ -22,6 +20,8 @@ import About
     from './FloatWindowSubModules/About.js';
 import Settings
     from './FloatWindowSubModules/Settings.js';
+import Language
+    from './Language.js';
 
 customElements.define("comp-tooloptions",ToolOptions);
 let toolOptions = document.querySelector("comp-tooloptions");
@@ -37,6 +37,8 @@ customElements.define("comp-floatwindow", FloatWindow);
 let floatWindow = document.querySelector("comp-floatwindow");
 
 customElements.define("comp-loadimage",LoadImage);
+let LoadImageClass = customElements.get('comp-loadimage');
+let limg = new LoadImageClass();
 customElements.define("comp-settings",Settings);
 customElements.define("comp-about",About);
 
@@ -47,8 +49,6 @@ let lang = new Language();
 
 document.querySelector("button[id*='load-image']").addEventListener('click',
     (event) => {
-        let LoadImageClass = customElements.get('comp-loadimage');
-        let limg = new LoadImageClass();
         limg.init(canvas,resize);
         floatWindow.fillContent(limg);
         floatWindow.makeVisible();
@@ -57,7 +57,8 @@ document.querySelector("button[id*='load-image']").addEventListener('click',
 
 document.querySelector("button[id*='save-image']").addEventListener('click',
     (event) => {
-        var image = canvas.querySelector('canvas').toDataURL("image/png").replace("image/png", "image/octet-stream");
+        var image = canvas.querySelector('canvas').toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
         window.location.href=image;
     }
 );

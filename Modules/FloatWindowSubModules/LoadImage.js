@@ -26,7 +26,7 @@ export default class Settings extends HTMLElement {
                 <button class="loadimage-button" id="loadimage-input-button">Choose File</button>
                 <label id="loadimage-label-imgname">Select an File</label>
             </div>
-            <button id="loadimage-done-button" class="loadimage-button disabled">Done</button>
+            <button id="loadimage-done-button" class="loadimage-button disabled">Apply</button>
             <img id="preview-image"/>
             <ul class="loadimage-img-m-container">
                 <li class="radio-item">
@@ -40,7 +40,7 @@ export default class Settings extends HTMLElement {
                 </li>
                 <li class="radio-item">
                     <input type="radio" name="position" id="fill" value="0">
-                    <label for="Fill">Fill Canvas with Image</label>
+                    <label for="fill">Fill Canvas with Image</label>
                 </li>
             </ul>
         `;
@@ -113,8 +113,15 @@ export default class Settings extends HTMLElement {
                     );
                 break;
             }
+            this.updateBackground();
         });
     }
 
     /* Class Methods ======================================================== */
+
+    updateBackground() {
+        document.querySelector('body').style.backgroundImage =
+            `url(${this.canvasReference.canvasNode.toDataURL("image/png")}`
+        ;
+    }
 }

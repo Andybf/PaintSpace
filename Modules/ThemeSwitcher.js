@@ -15,24 +15,24 @@ export default class ThemeSwitcher {
             value : '#eee'
         },
         {
+            key : '--global-background-brightness',
+            value : 'blur(30px) brightness(1.4)'
+        },
+        {
             key : '--global-font-color',
             value : '#333'
         },
         {
             key : '--header-background',
-            value : 'linear-gradient(#fff,#fff)'
+            value : '#FFFFFFC0'
         },
         {
             key : '--program-button-item',
             value : 'transparent'
         },
         {
-            key : '--left-toolbox',
-            value : 'linear-gradient(#fff,#fff)'
-        },
-        {
             key : '--tool-item-background',
-            value : 'linear-gradient(45deg,#bbbbbb,#f2f2f2)'
+            value : '#8888884a'
         },
         {
             key : '--window-header-background',
@@ -40,7 +40,7 @@ export default class ThemeSwitcher {
         },
         {
             key : '--tool-option-background',
-            value : '#f1f1f1'
+            value : '#8888884a'
         },
         {
             key : '--tool-option-color',
@@ -66,7 +66,11 @@ export default class ThemeSwitcher {
     darkTheme = [
         {
             key : '--global-background-color',
-            value : '#111'
+            value : '#333'
+        },
+        {
+            key : '--global-background-brightness',
+            value : 'blur(30px) brightness(0.4)'
         },
         {
             key : '--global-font-color',
@@ -74,19 +78,15 @@ export default class ThemeSwitcher {
         },
         {
             key : '--header-background',
-            value : 'linear-gradient(0deg, #202020, #2b2b2b, #202020)'
+            value : '#2d2d2dC0'
         },
         {
             key : '--program-button-item',
             value : 'transparent'
         },
         {
-            key : '--left-toolbox',
-            value : 'linear-gradient(90deg, #1d1d1d, #2d2d2d)'
-        },
-        {
             key : '--tool-item-background',
-            value : 'linear-gradient(45deg,#121212,#393939)'
+            value : '#0000004a'
         },
         {
             key : '--window-header-background',

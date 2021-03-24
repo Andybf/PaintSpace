@@ -20,6 +20,7 @@ export default class Language {
             { key : 'zoom',         value : 'Zoom'},
             { key : 'settings',     value : 'Settings'},
             { key : 'about',        value : 'About'},
+            //{ key : 'fill',         value : 'Fill Canvas with Image'},
         ],
         titles : [
             { key : 'pointer', value : 'Pointer' },
@@ -55,6 +56,8 @@ export default class Language {
             { key : 'text', value : 'Texto' },
             { key : 'color-picker', value : 'Seletor de Cor' },
             { key : 'eraser', value : 'Borracha' },
+
+            //{ key : 'fill',         value : 'Preencher tela com a imagem'},
         ]
     }
     };

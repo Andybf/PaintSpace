@@ -23,6 +23,7 @@
     font-size: 10pt;
     color: var(--global-font-color);
     user-select: none;
+    outline: none;
 }
 
 @font-face {
@@ -40,6 +41,9 @@ body {
     background-color: var(--global-background-color);
     height: inherit;
     overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: var(--global-background-brightness);
 }
 
 object {
@@ -56,7 +60,7 @@ svg {
 header.container {
     display: flex;
     height: 80px;
-    background-image: var(--header-background);
+    background-color: var(--header-background);
     box-shadow: var(--global-shadow);
     flex-wrap: wrap;
 }

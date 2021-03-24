@@ -10,7 +10,7 @@ label.setting-item-label {
 }
 
 input.setting-item-input {
-    background-color: #333;
+    background-color: var(--tool-option-background);
     border: none;
     padding: 0px 10px;
     height: 20px;

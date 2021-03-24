@@ -93,6 +93,10 @@ export default class Canvas extends HTMLElement {
         });
     }
 
+    updateBackground() {
+        document.querySelector('body').style.backgroundImage = `url(${this.canvasNode.toDataURL("image/png")}`;
+    }
+
     /* Draw Things Methods ================================================== */
 
     drawDown(event) {
@@ -152,6 +156,7 @@ export default class Canvas extends HTMLElement {
                 return false;
         }
         this.drawBorder();
+        this.updateBackground();
     }
 
     drawUp(event) {
@@ -160,9 +165,9 @@ export default class Canvas extends HTMLElement {
         }
         switch (this.selectedTool.name) {
             case 'brush' :
-                console.log(this.selectedTool)
                 this.context.closePath();
                 this.context.beginPath();
+
                 this.context.arc(
                     event.layerX, event.layerY,
                     this.selectedTool.options['border'].value/2, 0, 2 * Math.PI
