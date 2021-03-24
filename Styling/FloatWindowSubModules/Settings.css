@@ -1,0 +1,18 @@
+li.option-contianer {
+    display: flex;
+    margin: 10px 0;
+    height: 20px;
+    align-items: center;
+}
+
+label.setting-item-label {
+    width: 200px;
+}
+
+input.setting-item-input {
+    background-color: #333;
+    border: none;
+    padding: 0px 10px;
+    height: 20px;
+    border-radius: 3px;
+}

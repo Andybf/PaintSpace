@@ -39,6 +39,7 @@ button.tool-item {
     border-radius: 7px;
     margin: 5px 0px;
     border: none;
+    outline: none;
 }
 button.tool-item:hover {
     border-color: #222;

@@ -44,7 +44,6 @@ export default class Canvas extends HTMLElement {
     /* Class Methods ======================================================== */
 
     constructDrawScreen() {
-        console.log('canvas:',this.width,this.height)
         this.context.canvas.width = this.width;
         this.context.canvas.height = this.height;
         this.context.fillStyle = this.default.background;
@@ -179,7 +178,9 @@ export default class Canvas extends HTMLElement {
                 return false;
             case 'line' :
                 this.context.lineTo(event.layerX, event.layerY);
-                break;
+                this.context.closePath();
+                this.drawBorder();
+                return false;
             case 'circle' :
                 this.context.ellipse(
                     this.positionBuffer.x,
@@ -198,14 +199,20 @@ export default class Canvas extends HTMLElement {
                 );
                 break;
             case 'text' :
-                this.context.font = '30px Comic Sans MS';
+                this.context.font = `
+                    ${this.selectedTool.options['fontSize'].value}px 
+                    ${this.selectedTool.options['fontFamily'].value}
+                `;
                 this.context.textAlign = 'center';
                 this.context.fillText(
-                    "text",
+                    this.selectedTool.options['contentText'].value,
                     event.layerX,
                     event.layerY + 10
                 );
-                break;
+                this.context.fillStyle = this.selectedTool.options['bkgColor'].value;
+                this.context.fill();
+                this.context.closePath();
+                return false;
             default:
                 return false;
         }

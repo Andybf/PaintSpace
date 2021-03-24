@@ -16,6 +16,7 @@ export default class floatWindow extends HTMLElement {
     constructor() { // When Comp Is Created;
         super();
         this.self = this;
+        this.style.display = 'none'
         this.innerHTML = `
         <section class="float-window" id="window">
             <div class="header">
@@ -35,53 +36,35 @@ export default class floatWindow extends HTMLElement {
 
     /* Class Methods ======================================================== */
 
-    changeTitle(newTitle) {
-        this.querySelector("#window-title").innerText = newTitle;
+    makeVisible() {
+        this.style['display'] = 'inherit';
+    }
+    makeInvisible() {
+        this.style['display'] = 'none';
+    }
+
+    cleanContent() {
+        while (document.querySelector("#content").firstChild) {
+            document.querySelector("#content").removeChild(
+                document.querySelector("#content").firstChild
+            );
+        };
     }
 
     fillContent(object) {
-
-        function createConfigSection(item) {
-            function createConfig(config,ref) {
-                let configElement = document.createElement("div");
-                configElement.classList.add("config-row");
-                let configLabel = document.createElement("label");
-                configLabel.innerText = config.label;
-                configElement.appendChild(configLabel);
-                let configInput = document.createElement("input");
-                configInput.setAttribute("type",config['type']);
-                configInput.addEventListener('click',
-                    ref.reference[config.func]
-                );
-                configInput.value = ref.reference[config.apiName];
-                configElement.appendChild(configInput);
-                return configElement;
-            }
-            let container = document.createElement("div");
-            container.classList.add("config-container");
-            let title = document.createElement("h5");
-            title.classList.add("config-title");
-            title.innerText = item.name;
-            container.appendChild(title);
-            item.settings.forEach( (config) => {
-                container.appendChild(createConfig(config,item))
-            });
-            return container;
+        this.cleanContent();
+        function changeTitle(self, newTitle) {
+            self.querySelector("#window-title").innerText = newTitle;
         }
-        object.forEach( (item) => {
-            this.windowContent.appendChild(createConfigSection(item));
-        });
+        changeTitle(this,object.title)
+        this.windowContent.appendChild(object);
     }
 
     enableCloseWindow() {
         document.querySelector('#window-close').addEventListener('click',
         () => {
-            document.querySelector('#window').style.display = 'none';
-            while (document.querySelector("#content").firstChild) {
-                document.querySelector("#content").removeChild(
-                    document.querySelector("#content").firstChild
-                );
-            };
+            this.makeInvisible();
+            this.cleanContent();
         });
     }
 

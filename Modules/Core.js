@@ -1,15 +1,27 @@
 /*
- * PaintSpace3
+ * PaintSpace ver. 3.0
  * Created By: Anderson Bucchianico
- * Date: 30/jan/2021
+ *       Date: 30/jan/2021
 */
 
-import Canvas        from './Canvas.js';
-import Resize        from './Resize.js';
-import ToolOptions   from './ToolOptions.js';
-import ThemeSwitcher from './ThemeSwitcher.js';
-import Language      from './Language.js';
-import FloatWindow   from './FloatWindow.js';
+import Canvas
+    from './Canvas.js';
+import Resize
+    from './Resize.js';
+import ToolOptions
+    from './ToolOptions.js';
+import ThemeSwitcher
+    from './ThemeSwitcher.js';
+import Language
+    from './Language.js';
+import FloatWindow 
+    from './FloatWindow.js';
+import LoadImage
+    from './FloatWindowSubModules/LoadImage.js';
+import About
+    from './FloatWindowSubModules/About.js';
+import Settings
+    from './FloatWindowSubModules/Settings.js';
 
 customElements.define("comp-tooloptions",ToolOptions);
 let toolOptions = document.querySelector("comp-tooloptions");
@@ -24,10 +36,31 @@ resize.init(canvas);
 customElements.define("comp-floatwindow", FloatWindow);
 let floatWindow = document.querySelector("comp-floatwindow");
 
+customElements.define("comp-loadimage",LoadImage);
+customElements.define("comp-settings",Settings);
+customElements.define("comp-about",About);
+
 let theme = new ThemeSwitcher();
 let lang = new Language();
 
 /* Navigation Panel ========================================================= */
+
+document.querySelector("button[id*='load-image']").addEventListener('click',
+    (event) => {
+        let LoadImageClass = customElements.get('comp-loadimage');
+        let limg = new LoadImageClass();
+        limg.init(canvas,resize);
+        floatWindow.fillContent(limg);
+        floatWindow.makeVisible();
+    }
+);
+
+document.querySelector("button[id*='save-image']").addEventListener('click',
+    (event) => {
+        var image = canvas.querySelector('canvas').toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.location.href=image;
+    }
+);
 
 document.querySelector("button[id*='clear-canvas']").addEventListener('click',
     (event) => { canvas.clearScreen(); }
@@ -39,59 +72,28 @@ document.querySelector("button[id*='zoom']").addEventListener('click',
     }
 );
 
+document.querySelector("button[id*='resolution']").addEventListener('click',
+    (event) => {
+        floatWindow.makeVisible();
+    }
+);
+
 document.querySelector("button[id*='settings']").addEventListener('click',
-    () => {
-        if (floatWindow.querySelector('section').style['display'] == 'inherit') {
-            return false;
-        }
-        floatWindow.changeTitle('Settings');
-        floatWindow.fillContent( [
-            {
-                name : 'Theme',
-                reference : theme,
-                settings : [
-                    {
-                        label   : 'Dark Mode',
-                        apiName : 'isDarkMode',
-                        func    : 'updateThemeState',
-                        type    : 'checkbox'
-                    }
-                ]
-            },
-            {
-                name : 'Language',
-                reference : lang,
-                settings : [
-                    {
-                        label   : 'Selected Language',
-                        apiName : 'selectedLanguage',
-                        func    : theme.updateThemeState,
-                        type    : 'text',//['en-US','pt-BR']
-                    }
-                ]
-            }
-        ]);
-        floatWindow.querySelector('section').style['display'] = 'inherit'
+    (event) => {
+        let Setting = customElements.get('comp-settings');
+        let st = new Setting();
+        st.init(theme,lang);
+        floatWindow.fillContent(st);
+        floatWindow.makeVisible();
     }
 );
 
 document.querySelector("button[id*='about']").addEventListener('click',
     (event) => { 
-        floatWindow.changeTitle('About');
-        floatWindow.fillContent([
-            {
-                name : 'About',
-                reference : undefined,
-                settings : [
-                    {
-                        label : 'PaintSpace ver. 3.0',
-                        apiName : '',
-                        func    : '',
-                        type    : ''
-                    }
-                ]
-            }
-        ]);
+        let Ab = customElements.get('comp-about');
+        let ab = new Ab();
+        floatWindow.fillContent(ab);
+        floatWindow.makeVisible();
     }
 );
 
@@ -228,7 +230,7 @@ document.querySelector("button[id*='circle']").addEventListener('click',
                 label : 'Bkg Color',
                 value : '#dddddd',
                 type : 'color'
-            },
+            }
         }
         selectTool(drawToolModel);
     }
@@ -250,7 +252,26 @@ document.querySelector("button[id*='text']").addEventListener('click',
         drawToolModel.name = 'text';
         drawToolModel.cursor = 'text';
         drawToolModel.options = {
-            
+            contentText : {
+                label : 'Content',
+                value : 'test',
+                type : 'text'
+            },
+            bkgColor : {
+                label : 'Bkg Color',
+                value : '#dddddd',
+                type : 'color'
+            },
+            fontSize : {
+                label : 'Font Size',
+                value : 30,
+                type : 'number'
+            },
+            fontFamily : {
+                label : 'Font Family',
+                value : 'Comic Sans MS',
+                type : 'text'
+            }
         }
         selectTool(drawToolModel);
     }
@@ -308,33 +329,3 @@ if ("serviceWorker" in navigator) {
         console.log(error);
     });
 }
-
-/*
-defaultDrawTool.options = {
-            border : {
-                label : 'Border',
-                value : 10,
-                type : 'number'
-            },
-            brdColor : {
-                label : 'Border Color',
-                value : '#222222',
-                type : 'color'
-            },
-            size : {
-                label : 'Size',
-                value : 0,
-                type : 'number'
-            },
-            bkgColor : {
-                label : 'Bkg Color',
-                value : '#dddddd',
-                type : 'color'
-            },
-            rotation : {
-                label : 'Rotation',
-                value : 0,
-                type : 'number'
-            },
-        }
-*/

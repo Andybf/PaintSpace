@@ -11,8 +11,7 @@ section.float-window {
     margin-left: auto;
     margin-right: auto;
     width:  500px;
-    height: 300px;
-    display: none; 
+    height: 300px; 
 
     background-color: var(--window-background-color);
     border-radius: 7px;

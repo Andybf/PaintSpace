@@ -94,7 +94,7 @@ export default class ThemeSwitcher {
         },
         {
             key : '--tool-option-background',
-            value : '#333'
+            value : '#444'
         },
         {
             key : '--tool-option-color',
