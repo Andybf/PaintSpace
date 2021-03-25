@@ -18,9 +18,8 @@ comp-canvascontainer {
 
 .resize {
     display: unset;
-    background-image: var(--header-background);
+    background-color: var(--header-background);
     position: absolute;
-    border-radius: 0px 0px 5px 0px;
 }
 
 #resize-width {

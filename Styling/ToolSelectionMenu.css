@@ -39,6 +39,7 @@ button.tool-item {
     border-radius: 7px;
     margin: 5px 0px;
     border: none;
+    transition: 100ms linear; 
 }
 button.tool-item:hover {
     border-color: #222;
@@ -52,4 +53,5 @@ button.tool-item:active {
 button.tool-item > * {
     width: 20px;
     height: 20px;
+    margin: 10px;
 }

@@ -12,6 +12,7 @@ export default class Canvas extends HTMLElement {
     selectedTool;
     canvasNode;
     positionBuffer = {  x : 0 , y : 0 };
+    imageBuffer;
     drag = false;
     mousedown = false;
     default = {
@@ -48,12 +49,14 @@ export default class Canvas extends HTMLElement {
         this.context.canvas.height = this.height;
         this.context.fillStyle = this.default.background;
         this.context.fillRect(0,0, this.width, this.height);
+        this.updateBackground();
     }
 
     clearScreen() {
         this.context.clearRect(0,0, this.canvasNode.width, this.canvasNode.height);
         this.context.fillStyle = this.default.background;
         this.context.fillRect(0,0, this.canvasNode.width, this.canvasNode.height);
+        this.updateBackground();
     }
 
     activateObject(tool) {
@@ -95,6 +98,21 @@ export default class Canvas extends HTMLElement {
 
     updateBackground() {
         document.querySelector('body').style.backgroundImage = `url(${this.canvasNode.toDataURL("image/png")}`;
+    }
+
+    saveImageBuffer() {
+        let img = new Image();
+        img.src = this.canvasNode.toDataURL();
+        this.imageBuffer = img;
+        
+    }
+    loadImageBuffer() {
+        this.context.drawImage(
+            this.imageBuffer,
+            0, 0,
+            this.imageBuffer.width, this.imageBuffer.height
+        );
+        this.updateBackground();
     }
 
     /* Draw Things Methods ================================================== */

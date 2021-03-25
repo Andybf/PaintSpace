@@ -90,17 +90,12 @@ export default class Resize extends HTMLElement {
                     'x' + self.cvsModRef.canvasNode.height;
             }
             function mouseUp (event) {
-                if (confirm(self.confirmMessage)) {
-                    self.cvsModRef.width =
-                        self.cvsModRef.width + calcAddedPixelsToCanvas(event);
-                    self.cvsModRef.constructDrawScreen();
-                    self.updateResizeBarDimensions();
-                } else {
-                    self.verticalResizeNode.style['left'] =
-                        Number(self.cvsModRef.width +
-                            self.cvsModRef.canvasNode.getBoundingClientRect().left) +
-                            'px';
-                }
+                self.cvsModRef.saveImageBuffer();
+                self.cvsModRef.width =
+                    self.cvsModRef.width + calcAddedPixelsToCanvas(event);
+                self.cvsModRef.constructDrawScreen();
+                self.updateResizeBarDimensions();
+                self.cvsModRef.loadImageBuffer();
                 self.resolutionViewer.style.display = 'none';
                 window.removeEventListener('mousemove', mouseMove);
                 window.removeEventListener('mouseup',   mouseUp);
@@ -128,14 +123,12 @@ export default class Resize extends HTMLElement {
                     Number(self.cvsModRef.height + calcAddedPixelsToCanvas(event));
             }
             function mouseUp (event) {
-                if (confirm(self.confirmMessage)) {
-                    self.cvsModRef.height =
-                        self.cvsModRef.height + calcAddedPixelsToCanvas(event);
-                    self.cvsModRef.constructDrawScreen();
-                    self.updateResizeBarDimensions();
-                } else {
-                    self.horizontalResizeNode.style['top'] = self.oldResizeHeight;
-                }
+                self.cvsModRef.saveImageBuffer();
+                self.cvsModRef.height =
+                    self.cvsModRef.height + calcAddedPixelsToCanvas(event);
+                self.cvsModRef.constructDrawScreen();
+                self.updateResizeBarDimensions();
+                self.cvsModRef.loadImageBuffer();
                 self.resolutionViewer.style.display = 'none';
                 window.removeEventListener('mousemove', mouseMove);
                 window.removeEventListener('mouseup',   mouseUp);
