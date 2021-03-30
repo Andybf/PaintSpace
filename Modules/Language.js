@@ -28,18 +28,16 @@ export default class Language {
             { key : 'pencil', value : 'Pencil' },
             { key : 'line', value : 'Line' },
             { key : 'square', value : 'Rect' },
-            { key : 'circle', value : 'Elipses' },
-            { key : 'triangle', value : 'Triangles' },
+            { key : 'elipse', value : 'Elipses' },
+            { key : 'polygon', value : 'Triangles' },
             { key : 'text', value : 'Text' },
-            { key : 'color-picker', value : 'Color Picker' },
-            { key : 'eraser', value : 'Eraser' },
         ]
     },
     'pt-BR' : {
         innerText : [
             { key : 'load-image',   value : 'Carregar Imagem' },
             { key : 'save-image',   value : 'Salvar Imagem' },
-            { key : 'clear-canvas', value : 'Limpar Canvas'},
+            { key : 'clear-canvas', value : 'Limpar Tela'},
             { key : 'resolution',   value : 'Mudar Resolução'},
             { key : 'zoom',         value : 'Zoom'},
             { key : 'settings',     value : 'Configurações'},
@@ -51,11 +49,9 @@ export default class Language {
             { key : 'pencil', value : 'Lápis' },
             { key : 'line', value : 'Linha' },
             { key : 'square', value : 'Retângulos' },
-            { key : 'circle', value : 'Elipses' },
-            { key : 'triangle', value : 'Triângulos' },
+            { key : 'elipse', value : 'Elipses' },
+            { key : 'polygon', value : 'Triângulos' },
             { key : 'text', value : 'Texto' },
-            { key : 'color-picker', value : 'Seletor de Cor' },
-            { key : 'eraser', value : 'Borracha' },
 
             //{ key : 'fill',         value : 'Preencher tela com a imagem'},
         ]

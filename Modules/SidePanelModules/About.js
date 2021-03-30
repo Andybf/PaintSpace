@@ -16,12 +16,20 @@ export default class About extends HTMLElement{
     constructor() {
         super();
         this.title = 'About';
-        this.innerHTML = `<span style="
-            display: flex;
-            width: fit-content;
-            margin: 20px auto;
-            height: 20px;
-        " >PaintSpace @2021 - by Anderson Bucchianico</span>`;
+        this.innerHTML = `
+        <span class="line">
+            PaintSpace ver. 3.0.2
+        </span>
+        <span class="line">
+            Created by Anderson Bucchianico
+        </span>
+        <span class="line">
+            Licensed under General Public License v3
+        </span>
+        <span class="line">
+            march, 2021
+        </span>
+        `;
     }
 
     connectedCallback() { // After Comp Load

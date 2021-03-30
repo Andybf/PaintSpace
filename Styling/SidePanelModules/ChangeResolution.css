@@ -1,0 +1,37 @@
+/*
+ * PaintSpace ver. 3.0
+ * Created By: Anderson Bucchianico
+ *       Date: 29/mar/2021
+*/
+
+li.line {
+    display: flex;
+    margin: 10px 0;
+    height: 20px;
+    align-items: center;
+}
+
+label.cr-item-label {
+    width: 200px;
+}
+
+input.cr-item-input {
+    background-color: var(--tool-option-background);
+    border: none;
+    padding: 0px 10px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+button.cr-button {
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--tool-item-background);
+    transition: all 100ms linear 0s;
+}
+
+button.cr-button:hover {
+    background-color: rgba(136, 136, 136, 0.333);
+}

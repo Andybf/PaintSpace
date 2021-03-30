@@ -10,12 +10,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="Styling/Core.css"/>
         <link rel="stylesheet" href="Styling/Canvas.css"/>
-        <link rel="stylesheet" href="Styling/FloatWindow.css"/>
+        <link rel="stylesheet" href="Styling/SidePanel.css"/>
         <link rel="stylesheet" href="Styling/ToolSelectionMenu.css"/>
-        <link rel="stylesheet" href="Styling/FloatWindowSubModules/Settings.css"/>
-        <link rel="stylesheet" href="Styling/FloatWindowSubModules/LoadImage.css"/>
+        <link rel="stylesheet" href="Styling/SidePanelModules/About.css"/>
+        <link rel="stylesheet" href="Styling/SidePanelModules/Settings.css"/>
+        <link rel="stylesheet" href="Styling/SidePanelModules/LoadImage.css"/>
+        <link rel="stylesheet" href="Styling/SidePanelModules/ChangeResolution.css"/>
         <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
-        <title>PaintSpace 3.0.1</title>
+        <title>PaintSpace</title>
     </head>
     <body>
         <header class="container top">
@@ -58,34 +60,24 @@
                             src="/Media/image/line.svg"
                     />
                 </button>
+                <button class="tool-item" id="polygon" title="">
+                    <img id="free-draw-img"
+                            src="/Media/image/triangle.svg"
+                    />
+                </button>
                 <button class="tool-item" id="square" title="">
                     <img id="free-draw-img"
                             src="/Media/image/square.svg"
                     />
                 </button>
-                <button class="tool-item" id="circle" title="" >
+                <button class="tool-item" id="elipse" title="" >
                     <img id="free-draw-img"
                             src="/Media/image/circle.svg"
-                    />
-                </button>
-                <button class="tool-item" id="triangle" title="">
-                    <img id="free-draw-img"
-                            src="/Media/image/triangle.svg"
                     />
                 </button>
                 <button class="tool-item" id="text" title="">
                     <img id="free-draw-img"
                             src="/Media/image/text.svg"
-                    />
-                </button>
-                <button class="tool-item" id="color-picker" title="" style="display:none">
-                    <img id="free-draw-img"
-                            src="/Media/image/color-picker.svg"
-                    />
-                </button>
-                <button class="tool-item" id="eraser" title="">
-                    <img id="free-draw-img"
-                            src="/Media/image/eraser.svg"
                     />
                 </button>
             </div>

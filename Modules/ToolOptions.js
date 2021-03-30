@@ -26,6 +26,20 @@ export default class ToolOptions extends HTMLElement {
         document.querySelector('canvas').style['cursor'] = newCursor;
     }
 
+    show(object) {
+        this.addToolLabel(object.label);
+        this.changeCanvasCursor(object.cursor);
+
+        let elementContainer = document.createElement('div');
+        elementContainer.classList.add('global-tool-container');
+        for (let key in object.options) {
+            elementContainer.appendChild(
+                this.createInput(object.options[key],object)
+            );
+        };
+        this.appendChild(elementContainer);
+    }
+
     addToolLabel(objectLabel) {
         let name = document.createElement("span");
         name.classList.add("tooloption-container");
@@ -33,38 +47,47 @@ export default class ToolOptions extends HTMLElement {
         this.appendChild(name);
     }
 
-    show(object) {
-        function createInput(object) {
+    createInput(option,object) {
+        let container = document.createElement("div");
+        container.classList.add("tooloption-container");
 
-            let container = document.createElement("div");
-            container.classList.add("tooloption-container");
+        let labelNode = document.createElement("label");
+        labelNode.innerText = option['label'];
+        container.appendChild(labelNode);
 
-            let labelNode = document.createElement("label");
-            labelNode.innerText = object['label'];
-            container.appendChild(labelNode);
-
-            let input = document.createElement("input");
-            input.setAttribute("type",object['type']);
-            input.classList.add("tooloption");
-            input.value = object['value'];
-            input.addEventListener('change', (event) => {
-                object['value'] = event.target.value;
-                console.log(object);
+        if (option['type'] == 'color') {
+            let colorPicker = document.createElement('button');
+            colorPicker.addEventListener('click', (buttonEvt) => {
+                object.eventsActive = false;
+                buttonEvt.target.classList.add("tool-item-active");
+                document.querySelector("canvas").onclick = (canvasEvt) => {
+                    function rgbToHex(color) {
+                        let hex = color.toString(16);
+                        return hex.length == 1 ? "0" + hex : hex;
+                    }
+                    let cvContext = canvasEvt.target.getContext('2d');
+                    let imgData = cvContext.getImageData(
+                        canvasEvt.layerX, canvasEvt.layerY, 1, 1
+                    ).data;
+                    buttonEvt.path[1].childNodes[2].value = 
+                        `#${rgbToHex(imgData[0])}${rgbToHex(imgData[1])}${rgbToHex(imgData[2])}`;
+                    buttonEvt.path[1].childNodes[2].onchange();
+                    buttonEvt.target.classList.remove("tool-item-active");
+                    canvasEvt.target.onclick = null;
+                    object.eventsActive = true;
+                }
             });
-            container.appendChild(input);
-
-            return container;
+            container.appendChild(colorPicker);
         }
-
-        this.addToolLabel(object.label);
-        this.changeCanvasCursor(object.cursor);
-
-        let elementContainer = document.createElement('div');
-        elementContainer.classList.add('global-tool-container');
-        for (let key in object.options) {
-            elementContainer.appendChild(createInput(object.options[key]));
+        let input = document.createElement("input");
+        input.setAttribute("type",option['type']);
+        input.classList.add("tooloption");
+        input.value = option['value'];
+        input.onchange = function() {
+            option['value'] = this.value;
         };
-        this.appendChild(elementContainer);
+        container.appendChild(input);
+        return container;
     }
 
     deactivateCurrentTool() {

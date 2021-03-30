@@ -22,6 +22,7 @@ export default class floatWindow extends HTMLElement {
             <div class="header">
                 <span id="window-title" class="window-title"></span>
                 <button class="window-close" id="window-close">x</button>
+                <hr size="1" />
             </div>
             <div class="content" id="content"></div>
         </section>
@@ -31,7 +32,6 @@ export default class floatWindow extends HTMLElement {
     connectedCallback() { // After Comp Load
         this.windowContent = this.querySelector("#content");
         this.enableCloseWindow();
-        this.enableDragAndDrop();
     }
 
     /* Class Methods ======================================================== */
@@ -67,39 +67,4 @@ export default class floatWindow extends HTMLElement {
             this.cleanContent();
         });
     }
-
-    enableDragAndDrop() {
-        let win = document.querySelector('#window');
-        win.addEventListener('mousedown',(event) => {
-            
-            if (event.clientY -
-                parseInt(window.getComputedStyle(win,null).top) < 30
-            ) {
-        
-                let mouseX = event.clientX;
-                let mouseY = event.clientY;
-        
-                window.addEventListener('mousemove', mouseMove);
-                window.addEventListener('mouseup', mouseUp);
-        
-                function mouseUp(event) {
-                    window.removeEventListener('mousemove',mouseMove);
-                    window.removeEventListener('mouseup',mouseUp);
-                }
-                function mouseMove(event) {
-                    setTimeout(function(){
-                        let newX = mouseX - event.clientX;
-                        let newY = mouseY - event.clientY;
-                        win.style.left = win.getBoundingClientRect().left -
-                            newX + "px";
-                        win.style.top  = win.getBoundingClientRect().top  -
-                            newY + "px";
-                        mouseX = event.clientX;
-                        mouseY = event.clientY;
-                    },17); // 1000ms
-                }
-            }
-        });
-    }
-
 }

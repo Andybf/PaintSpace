@@ -26,7 +26,6 @@ export default class Settings extends HTMLElement {
                 <button class="loadimage-button" id="loadimage-input-button">Choose File</button>
                 <label id="loadimage-label-imgname">Select an File</label>
             </div>
-            <button id="loadimage-done-button" class="loadimage-button disabled">Apply</button>
             <img id="preview-image"/>
             <ul class="loadimage-img-m-container">
                 <li class="radio-item">
@@ -43,6 +42,7 @@ export default class Settings extends HTMLElement {
                     <label for="fill">Fill Canvas with Image</label>
                 </li>
             </ul>
+            <button id="loadimage-done-button" class="loadimage-button disabled">Apply</button>
         `;
     }
 
