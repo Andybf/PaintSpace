@@ -28,6 +28,7 @@ export default class Canvas extends HTMLElement {
         super();
         this.innerHTML = `
         <section class="canvas-wrapper">
+            <div class="overlay" id="tool-preview-overlay"></div>
             <canvas class="canvas" id="canvas"></canvas>
             <comp-resize></comp-resize>
         </section>
@@ -36,6 +37,7 @@ export default class Canvas extends HTMLElement {
 
     connectedCallback() {
         this.canvasNode = this.querySelector("canvas");
+        this.overlay = this.querySelector("#tool-preview-overlay");
         this.context = this.canvasNode.getContext("2d");
         this.width = this.default.width;
         this.height = this.default.height;
@@ -66,11 +68,17 @@ export default class Canvas extends HTMLElement {
 
     createActions() {
         this.canvasNode.addEventListener('mousemove', (event) => {
-            (this.drag && this.selectedTool) ? this.drawMove(event) : false;
+            if (this.drag && this.selectedTool) {
+                this.drawMove(event);
+            }
+            // this.overlay.style.left = event.layerX + 'px';
+            // this.overlay.style.top = event.layerY + 'px';
         });
         this.canvasNode.addEventListener('mousedown', (event) => {
             this.drag = true;
-            this.selectedTool ? this.drawDown(event) : false;
+            if (this.selectedTool) {
+                this.drawDown(event);
+            }
             this.mousedown = true;
         });
         this.canvasNode.addEventListener('mouseup', (event) => {
@@ -83,7 +91,9 @@ export default class Canvas extends HTMLElement {
         this.addEventListener('mouseup', (event) => {
             this.mousedown = false;
             this.drag = false;
-            this.selectedTool ? this.drawUp(event) : false;
+            if (this.selectedTool) {
+                this.drawUp(event);
+            }
         });
     }
 

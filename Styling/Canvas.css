@@ -48,3 +48,14 @@ comp-canvascontainer {
     font-weight: 400;
     text-shadow: 0 0 10px #000;
 }
+
+#tool-preview-overlay {
+    position:relative;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
+    border: 1px solid #111;
+    border-radius: 0px;
+
+    display: none;
+}

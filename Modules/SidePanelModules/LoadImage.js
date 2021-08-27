@@ -119,6 +119,7 @@ export default class Settings extends HTMLElement {
 
     /* Class Methods ======================================================== */
 
+
     updateBackground() {
         document.querySelector('body').style.backgroundImage =
             `url(${this.canvasReference.canvasNode.toDataURL("image/png")}`

@@ -55,8 +55,16 @@ export default class ToolOptions extends HTMLElement {
         labelNode.innerText = option['label'];
         container.appendChild(labelNode);
 
+        if (option['type'] == 'number') {
+            let numberAdd = document.createElement('button');
+            numberAdd.classList.add("number-option");
+            numberAdd.innerText = '';
+            //container.appendChild(numberAdd);
+        }
+
         if (option['type'] == 'color') {
             let colorPicker = document.createElement('button');
+            colorPicker.classList.add("color-option")
             colorPicker.addEventListener('click', (buttonEvt) => {
                 object.eventsActive = false;
                 buttonEvt.target.classList.add("tool-item-active");
