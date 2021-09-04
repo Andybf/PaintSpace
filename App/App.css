@@ -72,6 +72,10 @@ button.menu-item {
     background-color: var(--program-button-item);
 }
 
+button.menu-item:active {
+    border: 1px solid #cccccc;
+}
+
 .screen-container {
     width: 100%;
     height: calc(100% - 60px);

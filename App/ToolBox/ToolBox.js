@@ -160,6 +160,7 @@ export default class ToolBox extends AVElement {
                     name     : 'line',
                     label    : this.localization['tool'][this.language]['line'],
                     cursor   : 'crosshair',
+                    eventsActive : true,
                     drawDownFunc : function(canvasNode,event) {
                         canvasNode.context.beginPath();
                         canvasNode.context.moveTo(event.layerX, event.layerY);
@@ -350,7 +351,7 @@ export default class ToolBox extends AVElement {
                         },
                         bkgColor : {
                             label : 'Bkg Color',
-                            value : '#dddddd',
+                            value : '#333',
                             type : 'color'
                         },
                         fontSize : {

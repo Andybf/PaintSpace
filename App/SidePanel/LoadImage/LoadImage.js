@@ -24,7 +24,7 @@ export default class LoadImage extends AVElement {
             ],
             'pt-BR' : [
                 { key : 'input-button',      value : 'Escolher Arquivo' },
-                { key : 'label-imgname',     value : 'Selecionar Arquivo' },
+                { key : 'label-imgname',     value : 'Selecione um arquivo' },
                 { key : 'label-orig-size',   value : 'Manter tamanho original do canvas'},
                 { key : 'label-resize',      value : 'Redimensionar canvas para tamanho da imagem'},
                 { key : 'label-fill-canvas', value : 'Preencher canvas com imagem'},
@@ -73,6 +73,7 @@ export default class LoadImage extends AVElement {
             this.imageObject = new Image();
             this.imageObject.src = base64ImgData;
             this.doneButton.classList.remove('disabled');
+            this.body.querySelector("ul").classList.remove('disabled');
         }
         fileReader.readAsDataURL(file);
     }
