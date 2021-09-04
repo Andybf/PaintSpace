@@ -1,0 +1,74 @@
+/*
+ * PaintSpace3
+ * Created By: Anderson Bucchianico
+ * Date: 30/jan/2021
+*/
+
+@font-face {
+    font-family: Lily; src: url('../Media/font/LilyScriptOne-Regular.ttf');
+}
+@font-face {
+    font-family: OpenSans; src: url('../Media/font/OpenSans-Semibold.ttf');
+}
+
+.light-theme {
+    --global-background-color : #eee;
+    --global-background-brightness : blur(30px) brightness(1.4);
+    --global-font-color: #333;
+    --header-background: #FFFFFFC0;
+    --terciary-color : #9a9a9a; 
+    --program-button-item : transparent;
+    --tool-item-background : #cccccc;
+    --tool-item-hover-background : #ababab;
+    --window-header-background : linear-gradient(#eee,#ccc);
+    --tool-option-background : #8888884a;
+    --tool-option-color : #111;
+    --window-border-color : #ccc;
+    --window-background-color : #eee;
+    --red-button-close : #f19999;
+    --global-shadow : 0 0 5px 0px #797979;
+    --global-font: OpenSans, arial, sans-serif;
+}
+
+.dark-theme {
+    --global-background-color : #333;
+    --global-background-brightness : blur(30px) brightness(0.4);
+    --global-font-color: #fff;
+    --header-background: #2d2d2deb;
+    --terciary-color : #9a9a9a; 
+    --program-button-item : transparent;
+    --tool-item-background : #0000004a;
+    --tool-item-hover-background : #ababab;
+    --window-header-background : linear-gradient(#555,#333);
+    --tool-option-background : #444;
+    --tool-option-color : #eee;
+    --window-border-color : #222;
+    --window-background-color : #222;
+    --red-button-close : #f19999;
+    --global-shadow : 0 0 5px 0px #000;
+    --global-font: OpenSans, arial, sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: OpenSans, Arial, sans-serif;
+    font-size: 10pt;
+    color: var(--global-font-color);
+    user-select: none;
+    outline: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: var(--global-background-color);
+    height: inherit;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: var(--global-background-brightness);
+}

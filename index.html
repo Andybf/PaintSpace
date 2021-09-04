@@ -4,89 +4,16 @@
           Date: 30/jan/2021
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=0.50">
-        <link rel="stylesheet" href="Styling/Core.css"/>
-        <link rel="stylesheet" href="Styling/Canvas.css"/>
-        <link rel="stylesheet" href="Styling/SidePanel.css"/>
-        <link rel="stylesheet" href="Styling/ToolSelectionMenu.css"/>
-        <link rel="stylesheet" href="Styling/SidePanelModules/About.css"/>
-        <link rel="stylesheet" href="Styling/SidePanelModules/Settings.css"/>
-        <link rel="stylesheet" href="Styling/SidePanelModules/LoadImage.css"/>
-        <link rel="stylesheet" href="Styling/SidePanelModules/ChangeResolution.css"/>
         <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+        <link rel="stylesheet" href="/index.css"/>
         <title>PaintSpace</title>
     </head>
     <body>
-        <header class="container top">
-            <h1 id="title" class="title">PaintSpace</h1>               
-            <nav class="menubar">
-                <div class="tool-options">
-                    <button class="menu-item" id="load-image" ></button>
-                    <button class="menu-item" id="save-image" ></button>
-                    <button class="menu-item" id="clear-canvas" ></button>
-                    <button class="menu-item" id="resolution" ></button>
-                    <button class="menu-item" id="zoom" style="display:none">
-                    </button>
-                    <button class="menu-item" id="settings" ></button>
-                    <button class="menu-item" id="about" ></button>
-                </div>
-                <hr size="1" class="separator"/>
-                <comp-tooloptions class="tool-options"></comp-tooloptions>
-            </nav>
-        </header>
-
-        <section class="container left">
-            <div class="subcontainer">
-                <button class="tool-item" id="pointer" title="" >
-                    <img id="free-draw-img"
-                         src="/Media/image/pointer.svg"
-                    />
-                </button>
-                <button class="tool-item" id="brush" title="">
-                    <img id="free-draw-img"
-                         src="/Media/image/brush.svg"
-                    />
-                </button>
-                <button class="tool-item" id="pencil" title="">
-                    <img id="free-draw-img"
-                            src="/Media/image/pencil.svg"
-                    />
-                </button>
-                <button class="tool-item" id="line" title="" >
-                    <img id="free-draw-img"
-                            src="/Media/image/line.svg"
-                    />
-                </button>
-                <button class="tool-item" id="polygon" title="">
-                    <img id="free-draw-img"
-                            src="/Media/image/triangle.svg"
-                    />
-                </button>
-                <button class="tool-item" id="square" title="">
-                    <img id="free-draw-img"
-                            src="/Media/image/square.svg"
-                    />
-                </button>
-                <button class="tool-item" id="elipse" title="" >
-                    <img id="free-draw-img"
-                            src="/Media/image/circle.svg"
-                    />
-                </button>
-                <button class="tool-item" id="text" title="">
-                    <img id="free-draw-img"
-                            src="/Media/image/text.svg"
-                    />
-                </button>
-            </div>
-        </section>
-
-        <comp-canvascontainer> </comp-canvascontainer>
-
-        <comp-floatwindow></comp-floatwindow>
-
+        <comp-app/>
     </body>
-    <script type="module" src="./Modules/Core.js"></script>
+    <script type="module" src="/index.js"></script>
 </html>

@@ -1,0 +1,31 @@
+.resize {
+    display: unset;
+    background-color: var(--terciary-color);
+    position: absolute;
+}
+
+#resize-width {
+    width: 5px;
+    height: 0px;
+    cursor: ew-resize;
+}
+
+#resize-height {
+    width: 0px;
+    height: 5px;
+    cursor: ns-resize;
+}
+
+#resolution-viewer {
+    display: none;
+    position: absolute;
+    left: calc(50% - 50px);
+    top: calc(50% + 40px);
+    width: 100px;
+    height: 18px;
+    text-align: center;
+    color: #fff;
+    font-size: 12pt;
+    font-weight: 400;
+    text-shadow: 0 0 10px #000;
+}

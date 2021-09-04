@@ -1,0 +1,24 @@
+<section class="comp-loadimage">
+    <input type="file" id="loadimage-input"/>
+    <div class="loadimage-input-container">
+        <button class="loadimage-button" id="loadimage-input-button">Choose File</button>
+        <label id="loadimage-label-imgname">Select an File</label>
+    </div>
+    <img id="preview-image"/>
+    <ul class="loadimage-img-m-container">
+        <li class="radio-item">
+            <input type="radio" name="position" id="orig-size" value="0"
+                checked>
+            <label for="orig-size">Original Size</label>
+        </li>
+        <li class="radio-item">
+            <input type="radio" name="position" id="rcis" value="0">
+            <label for="rcis">Resize Canvas to Image Size</label>
+        </li>
+        <li class="radio-item">
+            <input type="radio" name="position" id="fill" value="0">
+            <label for="fill">Fill Canvas with Image</label>
+        </li>
+    </ul>
+    <button id="done-button" class="loadimage-button disabled">Apply</button>
+</section>

@@ -1,0 +1,37 @@
+<header class="container top">
+    <h1 id="title" class="title">PaintSpace</h1>               
+    <nav class="menubar">
+        <div class="tool-options">
+            <button
+                class="menu-item"
+                id="load-image"
+                data-compname="comp-loadimage"
+            ></button>
+            <button class="menu-item" id="save-image" ></button>
+            <button class="menu-item" id="clear-canvas" ></button>
+            <button
+                class="menu-item"
+                id="resolution"
+                data-compname="comp-changeresolution"
+            ></button>
+            <button
+                class="menu-item"
+                id="settings"
+                data-compname="comp-settings"
+            ></button>
+            <button
+                class="menu-item"
+                id="about"
+                data-compname="comp-about"
+            ></button>
+        </div>
+        <hr size="1" class="separator"/>
+        <comp-tooloptions class="tool-options"></comp-tooloptions>
+    </nav>
+</header>
+
+<comp-toolbox></comp-toolbox>
+
+<comp-canvas> </comp-canvas>
+
+<comp-sidepanel></comp-sidepanel>

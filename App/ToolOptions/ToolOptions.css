@@ -1,0 +1,78 @@
+*{
+    outline: none;
+}
+
+.tooloption-container {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    min-width: 100px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.tooloption-container > label {
+    font-size: 9pt;
+}
+
+.tooloption-container > button.number-option {
+    width: 20px;
+    height: 10px;
+    border: none;
+    padding: 4px;
+    margin-left: 5px;
+    border-radius: 5px 0px 0px 5px;
+    transition: 100ms linear;
+    cursor: pointer;
+}
+
+.tooloption-container > button.color-option {
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: var(--tool-item-background)
+                url(../Media/image/color-picker.svg) no-repeat;
+    background-origin: content-box;
+    background-size: cover;
+    border-radius: 5px 0px 0px 5px;
+    transition: 100ms linear;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 5px;
+}
+.tooloption-container > button:hover {
+    border-color: #222;
+    background-color: #88888855;
+}
+
+.global-tool-container {
+    display: flex;
+    column-gap: 20px;
+}
+
+.tooloption {
+    width: 72px;
+    height: 20px;
+    margin: 5px;
+    color: var(--tool-option-color);
+    background-color: var(--tool-item-background);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    text-align: end;
+    padding-right: 4px;
+}
+
+.tooloption[type='color'] {
+    border-radius: 0px 5px 5px 0px;
+    margin: 5px 5px 5px 0px;
+    padding: 0 5px 0 0;
+    height: 22px;
+}
+
+.tooloption[type='text'] {
+    font-family: Arial;
+    font-size: 12px;
+    width: 100px;
+    padding: 0px 10px;
+}

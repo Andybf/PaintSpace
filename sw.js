@@ -2,7 +2,7 @@ self.addEventListener("install", (event) => {
     console.log("install");
     event.waitUntil(
         caches.open("static").then( (cache) => {
-            return cache.addAll( ["./","./Styling/Core.css"] );
+            return cache.addAll( ["./","./index.css"] );
         })
     );
 });
