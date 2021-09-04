@@ -12,6 +12,26 @@ export default class LoadImage extends AVElement {
     title;
     canvasReference;
     imageObject;
+    localization = {
+        innerText : {
+            'en-US' : [
+                { key : 'input-button',      value : 'Choose File' },
+                { key : 'label-imgname',     value : 'Select an File' },
+                { key : 'label-orig-size',   value : 'Keep canvas original size'},
+                { key : 'label-resize',      value : 'Resize canvas to image size'},
+                { key : 'label-fill-canvas', value : 'Fill canvas with image'},
+                { key : 'done-button',       value : 'Apply'},
+            ],
+            'pt-BR' : [
+                { key : 'input-button',      value : 'Escolher Arquivo' },
+                { key : 'label-imgname',     value : 'Selecionar Arquivo' },
+                { key : 'label-orig-size',   value : 'Manter tamanho original do canvas'},
+                { key : 'label-resize',      value : 'Redimensionar canvas para tamanho da imagem'},
+                { key : 'label-fill-canvas', value : 'Preencher canvas com imagem'},
+                { key : 'done-button',       value : 'Aplicar'},
+            ]
+        }
+    };
 
     constructor() {
         super();
@@ -29,7 +49,7 @@ export default class LoadImage extends AVElement {
         this.loadInput = this.body.querySelector('input[id*=loadimage-input]');
         this.previewImage = this.body.querySelector("img[id*='preview-image']");
         this.doneButton = this.body.querySelector("button[id*='done-button']");
-        this.body.querySelector("button[id*='loadimage-input-button']").addEventListener(
+        this.body.querySelector("button[id*='input-button']").addEventListener(
             'click', () => {
                 this.loadInput.click();
             }
@@ -45,7 +65,7 @@ export default class LoadImage extends AVElement {
 
     loadImageFromClient(event) {
         let file = event.target.files[0];
-        this.body.querySelector("label[id*='loadimage-label-imgname']").innerText = file.name;
+        this.body.querySelector("label[id*='label-imgname']").innerText = file.name;
         let fileReader = new FileReader();
         fileReader.onload = (subEvent) => {
             let base64ImgData = subEvent.target.result;

@@ -15,6 +15,7 @@ export default class ToolOptions extends AVElement {
     }
 
     renderedCallback(){
+        this.canvas = this.getParentComponents()[0].body.querySelector("comp-canvas");
     }
 
     show(object) {

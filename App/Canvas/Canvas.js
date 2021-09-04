@@ -108,8 +108,8 @@ export default class Canvas extends AVElement {
         let img = new Image();
         img.src = this.canvasNode.toDataURL();
         this.imageBuffer = img;
-        
     }
+    
     loadImageBuffer() {
         this.context.drawImage(
             this.imageBuffer,

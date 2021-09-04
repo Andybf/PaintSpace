@@ -79,6 +79,7 @@ export default class Resize extends AVElement {
         this.verticalResizeNode.addEventListener('mousedown', (event) => {
             let self = this;
             this.resolutionViewer.style.display = 'unset';
+            this.canvasComponent.saveImageBuffer();
 
             function calcAddedPixelsToCanvas (event) {
                 return (event.clientX -
@@ -93,7 +94,6 @@ export default class Resize extends AVElement {
                     'x' + self.canvasComponent.canvasNode.height;
             }
             function mouseUp (event) {
-                self.canvasComponent.saveImageBuffer();
                 self.canvasComponent.width =
                     self.canvasComponent.width + calcAddedPixelsToCanvas(event);
                 self.canvasComponent.constructDrawScreen();
@@ -112,6 +112,7 @@ export default class Resize extends AVElement {
         this.horizontalResizeNode.addEventListener('mousedown', (event) => {
             let self = this;
             this.resolutionViewer.style.display = 'unset';
+            this.canvasComponent.saveImageBuffer();
 
             function calcAddedPixelsToCanvas (event) {
                 return (event.clientY -
@@ -126,7 +127,6 @@ export default class Resize extends AVElement {
                     Number(self.canvasComponent.height + calcAddedPixelsToCanvas(event));
             }
             function mouseUp (event) {
-                self.canvasComponent.saveImageBuffer();
                 self.canvasComponent.height =
                     self.canvasComponent.height + calcAddedPixelsToCanvas(event);
                 self.canvasComponent.constructDrawScreen();
