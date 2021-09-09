@@ -1,8 +1,7 @@
 /*
- * PaintSpace3
+ * PaintSpace
  * Created By: Anderson Bucchianico
  * Date: 09/fev/2021
- * Type: Experimental Software
 */
 
 import AVElement from '/AVmodules/AVElement.js'

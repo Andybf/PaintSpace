@@ -73,7 +73,7 @@ button.menu-item {
 }
 
 button.menu-item:active {
-    border: 1px solid #cccccc;
+    text-decoration: underline;
 }
 
 .screen-container {

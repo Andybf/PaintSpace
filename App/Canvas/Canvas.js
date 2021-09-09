@@ -42,16 +42,20 @@ export default class Canvas extends AVElement {
     constructDrawScreen() {
         this.context.canvas.width = this.width;
         this.context.canvas.height = this.height;
-        this.context.fillStyle = this.default.background;
-        this.context.fillRect(0,0, this.width, this.height);
+        this.context.clearRect(0,0, this.width, this.height);
+        this.paintScreen();
         this.updateBackground();
     }
 
     clearScreen() {
         this.context.clearRect(0,0, this.canvasNode.width, this.canvasNode.height);
+        this.paintScreen();
+        this.updateBackground();
+    }
+
+    paintScreen() {
         this.context.fillStyle = this.default.background;
         this.context.fillRect(0,0, this.canvasNode.width, this.canvasNode.height);
-        this.updateBackground();
     }
 
     activateObject(tool) {
@@ -65,20 +69,27 @@ export default class Canvas extends AVElement {
 
     #createActions() {
         this.canvasNode.addEventListener('mousemove', (event) => {
-            if (this.drag && this.selectedTool) {
-                this.drawMove(event);
+            if (this.selectedTool){
+                this.previewMove(this.selectedTool,event);
+                if (this.drag) {
+                    this.selectedTool.drawMove(this,event);
+                }
             }
         });
         this.canvasNode.addEventListener('mousedown', (event) => {
             this.drag = true;
             if (this.selectedTool) {
-                this.drawDown(event);
+                this.selectedTool.drawDown(this,event);
             }
             this.mousedown = true;
         });
         this.canvasNode.addEventListener('mouseup', (event) => {
             this.drag = false;
             this.mousedown = false;
+            if (this.selectedTool){
+                this.previewUp(this.selectedTool,event);
+            }
+            
         });
         this.canvasNode.addEventListener('mouseout', (event) => {
             this.drag = this.mousedown ? true : false;
@@ -87,7 +98,7 @@ export default class Canvas extends AVElement {
             this.mousedown = false;
             this.drag = false;
             if (this.selectedTool) {
-                this.drawUp(event);
+                this.selectedTool.drawUp(this,event);
             }
         });
         this.addEventListener('mouseup', (event) => {
@@ -119,29 +130,10 @@ export default class Canvas extends AVElement {
         this.updateBackground();
     }
 
-    /* Draw Things Methods ================================================== */
-
-    drawDown(event) {
-        this.selectedTool.eventsActive ?
-            this.selectedTool.drawDownFunc(this,event) :
-            false
-        ;
-    }
-
-    drawMove(event) {
-        this.selectedTool.eventsActive ?
-            this.selectedTool.drawMoveFunc(this,event) :
-            false
-        ;
-        this.updateBackground();
-    }
-
-    drawUp(event) {
-        this.selectedTool.eventsActive ?
-            this.selectedTool.drawUpFunc(this,event) :
-            false
-        ;
-        this.updateBackground();
+    drawImageOnCanvas(image){
+        this.context.drawImage(
+            image, 0, 0, this.width, this.height
+        );
     }
 
     drawBorder() {
@@ -151,4 +143,18 @@ export default class Canvas extends AVElement {
             this.context.stroke();
         }
     }
+
+    /* Abstract Methods ===================================================== */
+
+    drawDown(canvas,event) {}
+
+    drawMove(canvas,event) {}
+
+    drawUp(canvas,event) {}
+
+    previewDown(selectedTool,event) {}
+
+    previewMove(selectedTool,event) {}
+
+    previewUp(selectedTool,event) {}
 }

@@ -89,7 +89,8 @@ export default class AVElement extends HTMLElement {
     }
 
     async #fetchContentWithPath(path) {
-        return await (await fetch(path)).text();
+        let response = await fetch(path);
+        return (response.statusText == 'OK') ? await response.text() : '';
     }
 
     #catalogChildrenComponents() {
@@ -107,9 +108,25 @@ export default class AVElement extends HTMLElement {
     }
 
     #getComponentClassName(componentLocalName) {
-        let className = componentLocalName.replace("comp-",'');
-        className = className[0].toUpperCase() + className.slice(1);
+        let className = '';
+        componentLocalName.replace("comp-",'').split('-').forEach( word => {
+            className += word[0].toUpperCase()+word.slice(1);
+        });
         return className;
+    }
+
+    #initializeChildrenComponent(htmlNode) {
+        let className = this.#getComponentClassName(htmlNode.localName);
+        import(`${this.#compPaths.root}/${className}/${className}.js`)
+        .then( classDefinition => {
+            this.#defineCustomComponent(htmlNode.localName,classDefinition);
+        });
+    }
+
+    #defineCustomComponent(htmlNodeLocalName,classDefinition) {
+        if (classDefinition.default) {
+            customElements.define(htmlNodeLocalName,classDefinition.default);
+        }
     }
 
     #translateComponentText() {
@@ -137,14 +154,6 @@ export default class AVElement extends HTMLElement {
                 this.constructor.name
             );
         }
-    }
-
-    #initializeChildrenComponent(node) {
-        let className = this.#getComponentClassName(node.localName);
-        import(`${this.#compPaths.root}/${className}/${className}.js`)
-        .then( componentClassDefinition => {
-            customElements.define(node.localName,componentClassDefinition.default);
-        })
     }
 
     /* public methods ======================================================= */

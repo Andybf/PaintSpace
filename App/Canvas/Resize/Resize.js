@@ -97,9 +97,9 @@ export default class Resize extends AVElement {
                 self.canvasComponent.width =
                     self.canvasComponent.width + calcAddedPixelsToCanvas(event);
                 self.canvasComponent.constructDrawScreen();
-                self.updateResizeBarDimensions();
                 self.canvasComponent.loadImageBuffer();
                 self.resolutionViewer.style.display = 'none';
+                self.updateResizeBarDimensions();
                 window.removeEventListener('mousemove', mouseMove);
                 window.removeEventListener('mouseup',   mouseUp);
             }
@@ -130,9 +130,9 @@ export default class Resize extends AVElement {
                 self.canvasComponent.height =
                     self.canvasComponent.height + calcAddedPixelsToCanvas(event);
                 self.canvasComponent.constructDrawScreen();
-                self.updateResizeBarDimensions();
                 self.canvasComponent.loadImageBuffer();
                 self.resolutionViewer.style.display = 'none';
+                self.updateResizeBarDimensions();
                 window.removeEventListener('mousemove', mouseMove);
                 window.removeEventListener('mouseup',   mouseUp);
             }

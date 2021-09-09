@@ -5,14 +5,12 @@
  * Type: Image Editor
 */
 
-import AVElement from "/AVmodules//AVElement.js";
+import AVElement from "/AVmodules/AVElement.js";
 export default class SidePanel extends AVElement {
 
     windowContent;
 
-    /* Constructors ========================================================= */
-
-    constructor() { // When Comp Is Created;
+    constructor() {
         super();
         this.style.display = 'none';
     }
@@ -24,8 +22,6 @@ export default class SidePanel extends AVElement {
         this.windowContent = this.body.querySelector("#content");
         this.enableCloseWindow();
     }
-
-    /* Class Methods ======================================================== */
 
     makeVisible() {
         this.style['display'] = 'inherit';

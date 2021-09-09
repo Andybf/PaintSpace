@@ -27,7 +27,7 @@ export default class App extends AVElement {
     }
 
     renderedCallback() {
-        let sidePanel = this.body.querySelector("comp-sidepanel");
+        let sidePanel = this.body.querySelector("comp-side-panel");
 
         this.body.querySelector("button[id*='load-image']").addEventListener('click',
             (event) => {
