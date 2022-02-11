@@ -25,7 +25,7 @@ export default class Square extends AVElement {
 
     renderedCallback(){
         this.body.addEventListener('click', (event) => {
-            this.toolOptions = this.getParentComponents()[1].body.querySelector("comp-tooloptions");
+            this.toolOptions = this.getParentComponents()[1].body.querySelector("comp-tool-options");
             this.toolOptions.deactivateCurrentTool();
             this.toolOptions.show(this);
             this.canvas = this.getParentComponents()[1].body.querySelector("comp-canvas");
