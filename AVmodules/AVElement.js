@@ -90,7 +90,11 @@ export default class AVElement extends HTMLElement {
 
     async #fetchContentWithPath(path) {
         let response = await fetch(path);
-        return (response.statusText == 'OK') ? await response.text() : '';
+        if (response.status == 200 || response.statusText == 'OK') {
+            return await response.text();
+        } else {
+            return `[ERROR] code ${response.status}: ${response.statusText}`;
+        }
     }
 
     #catalogChildrenComponents() {
