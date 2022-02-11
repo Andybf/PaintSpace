@@ -31,7 +31,7 @@
     height: 22px;
     border: none;
     background: var(--tool-item-background)
-                url(/PaintSpace/Media/image/color-picker.svg) no-repeat;
+                url(/PaintSpace/media/image/color-picker.svg) no-repeat;
     background-origin: content-box;
     background-size: cover;
     border-radius: 5px 0px 0px 5px;
