@@ -4,7 +4,7 @@
  * Date: 09/fev/2021
 */
 
-import AVElement from '/AVmodules/AVElement.js'
+import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class ToolOptions extends AVElement {
 
     selectedTool;

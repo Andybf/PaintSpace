@@ -5,7 +5,7 @@
  * Description: Resize module, designed to work higly coupled with canvas. 
 */
 
-import AVElement from "/AVmodules/AVElement.js";
+import AVElement from "/PaintSpace/AVmodules/AVElement.js";
 export default class Resize extends AVElement {
 
     /* Attributes =========================================================== */

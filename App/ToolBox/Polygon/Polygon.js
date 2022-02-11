@@ -1,4 +1,4 @@
-import AVElement from "/AVmodules/AVElement.js"
+import AVElement from "/PaintSpace/AVmodules/AVElement.js"
 export default class Polygon extends AVElement {
 
     name     = 'polygon';

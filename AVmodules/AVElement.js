@@ -59,7 +59,7 @@ export default class AVElement extends HTMLElement {
     }
 
     #mountComponentRootPath() {
-        let root = '/';
+        let root = window.location.pathname+'/';
         let copiedCompParents = this.#compParents.slice(0);
         for(let x=this.#compParents.length; x>0; x--) {
             root += `${this.#getComponentClassName(copiedCompParents.pop().localName)}/`

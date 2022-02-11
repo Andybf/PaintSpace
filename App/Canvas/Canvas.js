@@ -5,7 +5,7 @@
  * Description: Canvas module, the core of the graphics logic.
 */
 
-import AVElement from "/AVmodules//AVElement.js"
+import AVElement from "/PaintSpace/AVmodules//AVElement.js"
 export default class Canvas extends AVElement {
 
     selectedTool;

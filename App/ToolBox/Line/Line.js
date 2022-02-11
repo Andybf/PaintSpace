@@ -1,4 +1,4 @@
-import AVElement from "/AVmodules/AVElement.js"
+import AVElement from "/PaintSpace/AVmodules/AVElement.js"
 export default class Line extends AVElement {
 
     name     = 'line';

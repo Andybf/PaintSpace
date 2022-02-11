@@ -5,7 +5,7 @@
  * Type: 
 */
 
-import AVElement from '/AVmodules/AVElement.js'
+import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class Settings extends AVElement {
 
     title;

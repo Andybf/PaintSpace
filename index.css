@@ -5,10 +5,10 @@
 */
 
 @font-face {
-    font-family: Lily; src: url('../Media/font/LilyScriptOne-Regular.ttf');
+    font-family: Lily; src: url('/PaintSpace/Media/font/LilyScriptOne-Regular.ttf');
 }
 @font-face {
-    font-family: OpenSans; src: url('../Media/font/OpenSans-Semibold.ttf');
+    font-family: OpenSans; src: url('/PaintSpace/Media/font/OpenSans-Semibold.ttf');
 }
 
 .light-theme {

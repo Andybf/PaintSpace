@@ -5,7 +5,7 @@
  * Type: Image Editor
 */
 
-import AVElement from "/AVmodules/AVElement.js";
+import AVElement from "/PaintSpace/AVmodules/AVElement.js";
 export default class SidePanel extends AVElement {
 
     windowContent;
