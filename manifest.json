@@ -7,7 +7,7 @@
   "description": "Image draw application",
   "display" : "fullscreen",
   "icons": [{
-    "src": "/PaintSpace/Media/image/logo.png",
+    "src": "/PaintSpace/media/image/logo.png",
     "sizes": "192x192",
     "type": "image/png"
   }]
