@@ -1,6 +1,4 @@
-import AVElement from "/PaintSpace/AVmodules/AVElement.js";
-
-export default class Elipse extends AVElement{
+export default class Elipse extends HTMLElement {
 
     name     = 'elipse';
     label    = 'Elipse';
@@ -29,12 +27,22 @@ export default class Elipse extends AVElement{
         }
     }
 
-    renderedCallback(){
-        this.body.addEventListener('click', (event) => {
-            this.toolOptions = this.getParentComponent('app').getChildComponent("tool-options");
+    constructor() {
+        super();
+        this.innerHTML = `
+            <button class="tool-item" id="elipse" title="">
+                <img id="free-draw-img" src="/PaintSpace/media/image/circle.svg"/>
+            </button>
+        `;
+        this.initialize();
+    }
+
+    initialize(){
+        this.firstElementChild.addEventListener('click', (event) => {
+            this.toolOptions = document.querySelector('comp-app').getChildComponent("tool-options");
             this.toolOptions.deactivateCurrentTool();
             this.toolOptions.show(this);
-            this.canvas = this.getParentComponents('app').getChildComponent("canvas");
+            this.canvas = document.querySelector('comp-app').getChildComponent("canvas");
             this.canvas.activateObject(this);
         });
     }

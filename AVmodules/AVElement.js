@@ -123,11 +123,11 @@ export default class AVElement extends HTMLElement {
 
     #initializeAllPreDefinedChildrenComponents() {
         this.#childrenComponentList.forEach( componentElement => {
-            this.#importChildrenComponentDefinition(componentElement);
+            this.importComponentDefinition(componentElement);
         })
     }
 
-    #importChildrenComponentDefinition(componentElement) {
+    importComponentDefinition(componentElement) {
         let className = this.#constructComponentClassName(componentElement);
         import(`${this.#componentpath.root}/${className}/${className}.js`)
         .then( classDefinition => {
@@ -135,12 +135,12 @@ export default class AVElement extends HTMLElement {
         });
     }
 
-    #defineCustomComponent(htmlNode,classDefinition) {
-        function isComponentAlreadyDefined(name) {
-            return window.customElements.get(name);
+    #defineCustomComponent(htmlNode, classDefinition) {
+        function isComponentNotDefined(classDefinition, node) {
+            return classDefinition.default && !window.customElements.get(node.localName);
         }
-        if (classDefinition.default && !isComponentAlreadyDefined(htmlNode.localName)) {
-            customElements.define(htmlNode.localName,classDefinition.default);
+        if (isComponentNotDefined(classDefinition, htmlNode)) {
+            customElements.define(htmlNode.localName, classDefinition.default);
         }
     }
 
@@ -175,6 +175,10 @@ export default class AVElement extends HTMLElement {
             localName = `comp-${localName}`;
         }
         return this.#childrenComponentList.get(localName);
+    }
+
+    getComponentRoot() {
+        return this.#componentpath.root;
     }
 
     renderedCallback(){}

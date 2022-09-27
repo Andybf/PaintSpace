@@ -1,5 +1,4 @@
-import AVElement from "/PaintSpace/AVmodules/AVElement.js"
-export default class Polygon extends AVElement {
+export default class Polygon extends HTMLElement {
 
     name     = 'polygon';
     label    = 'Polygon';
@@ -22,13 +21,22 @@ export default class Polygon extends AVElement {
             type : 'color'
         }
     }
+    constructor() {
+        super();
+        this.innerHTML = `
+            <button class="tool-item" id="polygon" title="">
+                <img id="free-draw-img" src="/PaintSpace/media/image/triangle.svg"/>
+            </button>
+        `;
+        this.initialize();
+    }
 
-    renderedCallback(){
-        this.body.addEventListener('click', (event) => {
-            this.toolOptions = this.getParentComponent('app').getChildComponent("tool-options");
+    initialize(){
+        this.firstElementChild.addEventListener('click', (event) => {
+            this.toolOptions = document.querySelector('comp-app').getChildComponent("tool-options");
             this.toolOptions.deactivateCurrentTool();
             this.toolOptions.show(this);
-            this.canvas = this.getParentComponents('app').getChildComponent("canvas");
+            this.canvas = document.querySelector('comp-app').getChildComponent("canvas");
             this.canvas.activateObject(this);
         });
     }

@@ -1,5 +1,4 @@
-import AVElement from "/PaintSpace/AVmodules/AVElement.js"
-export default class Pencil extends AVElement {
+export default class Pencil extends HTMLElement {
 
     name     = 'pencil';
     label    = 'Pencil';
@@ -17,13 +16,23 @@ export default class Pencil extends AVElement {
             type : 'color'
         }
     }
+
+    constructor() {
+        super();
+        this.innerHTML = `
+            <button class="tool-item" id="pencil" title="">
+                <img id="free-draw-img" src="/PaintSpace/media/image/pencil.svg"/>
+            </button>
+        `;
+        this.initialize();
+    }
     
-    renderedCallback(){
-        this.body.addEventListener('click', (event) => {
-            this.toolOptions = this.getParentComponent('app').getChildComponent("tool-options");
+    initialize(){
+        this.firstElementChild.addEventListener('click', (event) => {
+            this.toolOptions = document.querySelector('comp-app').getChildComponent("tool-options");
             this.toolOptions.deactivateCurrentTool();
             this.toolOptions.show(this);
-            this.canvas = this.getParentComponent('app').getChildComponent("canvas");
+            this.canvas = document.querySelector('comp-app').getChildComponent("canvas");
             this.canvas.activateObject(this);
         });
     }

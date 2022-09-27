@@ -1,6 +1,4 @@
-import AVElement from "/PaintSpace/AVmodules/AVElement.js";
-
-export default class Brush extends AVElement {
+export default class Brush extends HTMLElement {
 
     name = 'brush';
     label = 'Brush';
@@ -18,12 +16,22 @@ export default class Brush extends AVElement {
         }
     }
 
-    renderedCallback(){
-        this.body.addEventListener('click', (event) => {
-            this.toolOptions = this.getParentComponent('app').getChildComponent("tool-options");
+    constructor() {
+        super();
+        this.innerHTML = `
+            <button class="tool-item" id="brush" title="">
+                <img id="free-draw-img" src="/PaintSpace/media/image/brush.svg"/>
+            </button>
+        `;
+        this.initialize();
+    }
+
+    initialize(){
+        this.firstElementChild.addEventListener('click', (event) => {
+            this.toolOptions = document.querySelector('comp-app').getChildComponent("tool-options");
             this.toolOptions.deactivateCurrentTool();
             this.toolOptions.show(this);
-            this.canvas = this.getParentComponent('app').getChildComponent("canvas");
+            this.canvas = document.querySelector('comp-app').getChildComponent("canvas");
             this.canvas.activateObject(this);
         });
     }
