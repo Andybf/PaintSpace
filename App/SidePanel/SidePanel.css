@@ -16,9 +16,9 @@
 section.float-window {
     position: fixed;
     top: 33%;
-    left: calc(66% - 50%);
+    left: calc(50% - 256px);
     z-index: 100;
-    width: 66%;
+    min-width: 512px;
     min-height: 33%;
     border-radius: 1rem;
     background-color: var(--header-background);

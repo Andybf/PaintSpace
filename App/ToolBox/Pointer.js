@@ -24,6 +24,7 @@ export default class Pointer extends HTMLElement {
             this.canvas = document.querySelector('comp-app').getChildComponent("canvas");
             this.canvas.activateObject(this);
         });
+        this.firstElementChild.dispatchEvent(new Event('click'));
     }
 
     drawDown() {}

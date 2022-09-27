@@ -30,8 +30,9 @@ export default class LoadImage extends AVElement {
         this.id = 'comp-load-image';
     }
 
-    renderedCallback(){
+    renderedCallback() {
         this.canvasReference = this.getParentComponent('app').getChildComponent("canvas");
+        this.previewCanvasReference = this.canvasReference.getChildComponent('preview');
         this.resizeReference = this.canvasReference.body.querySelector("comp-resize");
         this.loadInput = this.body.querySelector('input[id*=loadimage-input]');
         this.previewImage = this.body.querySelector("img[id*='preview-image']");
@@ -78,6 +79,8 @@ export default class LoadImage extends AVElement {
                 );
             break;
             case 'resize-canvas':
+                this.previewCanvasReference.height = this.imageObject.height;
+                this.previewCanvasReference.width = this.imageObject.width;
                 this.canvasReference.height = this.imageObject.height;
                 this.canvasReference.width = this.imageObject.width;
                 this.canvasReference.constructDrawScreen();
