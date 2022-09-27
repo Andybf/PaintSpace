@@ -1,33 +1,34 @@
 import AVElement from "/PaintSpace/AVmodules/AVElement.js";
 export default class SidePanel extends AVElement {
 
-    windowContent;
+    panelContent;
 
     connectedCallback() {
         this.style.display = 'none';    
     }
 
     renderedCallback() {
-        this.windowContent = this.body.querySelector("#content");
+        this.panelContent = this.body.querySelector("#content");
         this.enableCloseWindow();
+        this.body.querySelector('.background').addEventListener('click', event => {
+            this.makePanelInvisible();
+        })
     }
 
-    makeVisible() {
+    makePanelVisible() {
         this.style['display'] = 'inherit';
     }
-    makeInvisible() {
+    makePanelInvisible() {
         this.style['display'] = 'none';
     }
 
-    loadMenu(target){
+    loadMenu(target) {
         this.cleanContent();
-        Array.from(this.windowContent.children).forEach( node => {
-            if (node.localName === target.dataset.compname) {
-                node.style.display = 'unset'
-            }
-        });
+        this.loadNewChildrenComponent(target.dataset.compname);
+        let newMenu = document.createElement(target.dataset.compname);
+        this.panelContent.appendChild(newMenu);
+        this.makePanelVisible();
         this.changeTitle(target.innerText);
-        this.makeVisible();
     }
 
     changeTitle(newTitle) {
@@ -35,14 +36,14 @@ export default class SidePanel extends AVElement {
     }
 
     cleanContent() {
-        Array.from(this.windowContent.children).forEach( node => {
-            node.style.display = 'none';
-        });
+        if (this.panelContent.firstElementChild) {
+            this.panelContent.removeChild(this.panelContent.firstElementChild);
+        }
     }
 
     enableCloseWindow() {
         this.body.querySelector('#window-close').addEventListener('click',() => {
-            this.makeInvisible();
+            this.makePanelInvisible();
             this.cleanContent();
         });
     }

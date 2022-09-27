@@ -6,6 +6,7 @@
 section {
     display: grid;
     row-gap: 1rem;
+    justify-content: space-around;
 }
 
 ul {

@@ -4,10 +4,10 @@
 }
 
 section.resolution-container {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
-    justify-content: left;
-    row-gap: 20px;
+    justify-content: center;
+    row-gap: 1.5rem;
 }
 
 li.line {

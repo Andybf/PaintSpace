@@ -153,14 +153,16 @@ export default class AVElement extends HTMLElement {
     }
 
     loadNewChildrenComponent(childTagName) {
-        let newComp = document.createElement(childTagName)
-        let className = this.#constructComponentClassName(newComp);
-        import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
-            let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
-            AVutils.concatMaps(parentMap, this._parentComponentsMap);
-            classDefinition.default.prototype._parentComponentsMap = parentMap;
-            this.#defineCustomComponent(newComp,classDefinition);
-        });
+        if(window.customElements.get(childTagName) == undefined) {
+            let newComp = document.createElement(childTagName)
+            let className = this.#constructComponentClassName(newComp);
+            import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
+                let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
+                AVutils.concatMaps(parentMap, this._parentComponentsMap);
+                classDefinition.default.prototype._parentComponentsMap = parentMap;
+                this.#defineCustomComponent(newComp,classDefinition);
+            });
+        }
     }
 
     getParentComponent(localName) {

@@ -46,7 +46,6 @@ export default class LoadImage extends AVElement {
         });
         this.doneButton.addEventListener('click', (event) => {
             this.setImagePosition();
-            this.canvasReference.updateBackground();
         });
     }
 

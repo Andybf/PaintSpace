@@ -4,10 +4,11 @@
 }
 
 section.comp-loadimage {
-    display : flex;
-    flex-wrap : wrap;
-    row-gap  : 15px;
-    padding : 5px;
+    display: grid;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    padding: 5px;
+    justify-content: center;
 }
 
 .loadimage-input-container {
