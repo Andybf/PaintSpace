@@ -22,6 +22,4 @@
 comp-preview {
     position: absolute;
     pointer-events: none;
-    height: 480px;
-    width: 600px;
 }

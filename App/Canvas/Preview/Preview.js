@@ -44,6 +44,8 @@ export default class Preview extends AVElement {
     }
 
     cleanPreviewDrawnings() {
+        this.context.canvas.width = this.width;
+        this.context.canvas.height = this.height;
         this.context.clearRect(0,0, this.width, this.height);
     }
-}
+} 
