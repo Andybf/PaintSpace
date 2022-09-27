@@ -3,18 +3,29 @@
     outline: none;
 }
 
-li.option-container {
+section {
+    display: grid;
+    row-gap: 1rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0;
+}
+
+li {
     display: flex;
     margin: 10px 0;
     height: 20px;
     align-items: center;
 }
 
-label.setting-item-label {
+label {
     width: 200px;
 }
 
-input.setting-item-input {
+input[type='checkbox'] {
     background-color: var(--tool-option-background);
     border: none;
     padding: 0px 10px;
@@ -22,10 +33,18 @@ input.setting-item-input {
     border-radius: 3px;
 }
 
-select.setting-item-picklist {
-    background-color: var(--tool-option-background);
-    border: 1px solid #bbb;
-    padding: 0px 10px;
-    height: 20px;
+select {
+    background-color: var(--tool-item-background);
+    border: none;
+    padding: 4px 10px;
     border-radius: 3px;
+    width: 45%;
+}
+
+button {
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--tool-item-background);
 }

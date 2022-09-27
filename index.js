@@ -1,10 +1,4 @@
-/*
- * PaintSpace ver. 3.0
- * Created By: Anderson Bucchianico
- *       Date: 30/jan/2021
-*/
-
-let isServiceWorkerEnabled = false;
+let isServiceWorkerEnabled = true;
 
 function initializeServiceWorker() {
     if ("serviceWorker" in navigator && isServiceWorkerEnabled) {
@@ -23,3 +17,4 @@ function initializeAVframework() {
 }
 
 initializeAVframework();
+initializeServiceWorker();

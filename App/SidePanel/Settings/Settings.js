@@ -6,11 +6,14 @@ export default class Settings extends AVElement {
     Objects = new Object();
 
     renderedCallback() {
-        this.body.querySelector("input[id='dark-mode']").addEventListener('change', (event) => {
+        this.body.querySelector("input[id='dark-mode']").addEventListener('change', () => {
             this.toogleDarkMode();
         });
-        this.body.querySelector("input[id='dynamic-logo']").addEventListener('change', (event) => {
+        this.body.querySelector("input[id='dynamic-logo']").addEventListener('change', () => {
             this.toggleDynamicColorTitle();
+        });
+        this.body.querySelector('button').addEventListener('click', () => {
+            this.deleteBrowserCache();
         });
     }
 
@@ -32,5 +35,14 @@ export default class Settings extends AVElement {
         } else {
             app.dynamicLogo();
         }
+    }
+
+    deleteBrowserCache() {
+        window.caches.keys().then( cacheKeys => {
+            cacheKeys.map( key => {
+                window.caches.delete(key);
+            });
+        })
+        window.location = window.location;
     }
 }
