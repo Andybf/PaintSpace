@@ -1,20 +1,10 @@
-/*
- * PaintSpace
- * Created By: Anderson Bucchianico
- * Date: 09/fev/2021
-*/
-
 import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class ToolOptions extends AVElement {
 
     selectedTool;
 
-    constructor() {
-        super();
-    }
-
     renderedCallback(){
-        this.canvas = this.getParentComponents()[0].body.querySelector("comp-canvas");
+        this.canvas = this.getParentComponent('app').getChildComponent("canvas");
     }
 
     show(object) {

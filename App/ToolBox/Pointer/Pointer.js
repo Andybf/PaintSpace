@@ -1,18 +1,18 @@
 import AVElement from "/PaintSpace/AVmodules/AVElement.js"
 export default class Pointer extends AVElement {
     
-    name     = 'pointer';
-    label    = 'Pointer';
-    cursor   = 'default';
+    name = 'pointer';
+    label = 'Pointer';
+    cursor = 'default';
     eventsActive = true;
-    options  = {}
+    options = new Object();
 
     renderedCallback(){
         this.body.addEventListener('click', (event) => {
-            this.toolOptions = this.getParentComponents()[1].body.querySelector("comp-tool-options");
+            this.toolOptions = this.getParentComponent('app').getChildComponent("tool-options");
             this.toolOptions.deactivateCurrentTool();
             this.toolOptions.show(this);
-            this.canvas = this.getParentComponents()[1].body.querySelector("comp-canvas");
+            this.canvas = this.getParentComponent('app').getChildComponent("canvas");
             this.canvas.activateObject(this);
         });
     }

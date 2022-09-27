@@ -1,17 +1,10 @@
-/*
- * PaintSpace3
- *  Created By: Anderson Bucchianico
- *        Date: 30/jan/2021
- * Description: Canvas module, the core of the graphics logic.
-*/
-
 import AVElement from "/PaintSpace/AVmodules//AVElement.js"
 export default class Canvas extends AVElement {
 
-    selectedTool;
-    canvasNode;
+    selectedTool = new Object();
+    canvasNode = new Object();
     positionBuffer = {  x : 0 , y : 0 };
-    imageBuffer;
+    imageBuffer = new Image();
     drag = false;
     mousedown = false;
     dynamicBgdActive = false;
@@ -19,12 +12,6 @@ export default class Canvas extends AVElement {
         width : 600,
         height: 480,
         background: '#ccc'
-    }
-
-    /* Constructors ========================================================= */
-    
-    constructor() {
-        super();
     }
 
     renderedCallback() {
@@ -37,20 +24,16 @@ export default class Canvas extends AVElement {
         this.#createActions();
     }
 
-    /* Class Methods ======================================================== */
-
     constructDrawScreen() {
         this.context.canvas.width = this.width;
         this.context.canvas.height = this.height;
         this.context.clearRect(0,0, this.width, this.height);
         this.paintScreen();
-        this.updateBackground();
     }
 
     clearScreen() {
         this.context.clearRect(0,0, this.canvasNode.width, this.canvasNode.height);
         this.paintScreen();
-        this.updateBackground();
     }
 
     paintScreen() {
@@ -89,7 +72,6 @@ export default class Canvas extends AVElement {
             if (this.selectedTool){
                 this.previewUp(this.selectedTool,event);
             }
-            
         });
         this.canvasNode.addEventListener('mouseout', (event) => {
             this.drag = this.mousedown ? true : false;
@@ -107,14 +89,6 @@ export default class Canvas extends AVElement {
         });
     }
 
-    updateBackground() {
-        this.dynamicBgdActive ?
-            document.querySelector('body').style.backgroundImage =
-                `url(${this.canvasNode.toDataURL("image/png")}`:
-            document.querySelector('body').style.backgroundImage =
-                "linear-gradient(transparent, transparent)";
-    }
-
     saveImageBuffer() {
         let img = new Image();
         img.src = this.canvasNode.toDataURL();
@@ -122,18 +96,11 @@ export default class Canvas extends AVElement {
     }
     
     loadImageBuffer() {
-        this.context.drawImage(
-            this.imageBuffer,
-            0, 0,
-            this.imageBuffer.width, this.imageBuffer.height
-        );
-        this.updateBackground();
+        this.context.drawImage(this.imageBuffer, 0, 0, this.imageBuffer.width, this.imageBuffer.height);
     }
 
     drawImageOnCanvas(image){
-        this.context.drawImage(
-            image, 0, 0, this.width, this.height
-        );
+        this.context.drawImage( image, 0, 0, this.width, this.height );
     }
 
     drawBorder() {
@@ -143,8 +110,6 @@ export default class Canvas extends AVElement {
             this.context.stroke();
         }
     }
-
-    /* Abstract Methods ===================================================== */
 
     drawDown(canvas,event) {}
 

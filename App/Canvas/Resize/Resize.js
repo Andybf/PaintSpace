@@ -1,29 +1,11 @@
-/*
- * PaintSpace3
- *  Created By: Anderson Bucchianico
- *        Date: 20/fev/2021
- * Description: Resize module, designed to work higly coupled with canvas. 
-*/
-
 import AVElement from "/PaintSpace/AVmodules/AVElement.js";
 export default class Resize extends AVElement {
-
-    /* Attributes =========================================================== */
 
     canvasComponent;
     verticalResizeNode;
     horizontalResizeNode;
     resolutionViewer;
     confirmMessage;
-
-    /* Constructors ========================================================= */
-
-    constructor() {
-        super();
-    }
-
-    connectedCallback() {
-    }
 
     renderedCallback() {
         window.addEventListener('resize', (event) => {
@@ -33,7 +15,7 @@ export default class Resize extends AVElement {
     }
 
     init () {
-        this.canvasComponent = this.getParentComponents()[0];
+        this.canvasComponent = this.getParentComponent('canvas');
         this.confirmMessage =
             `Confirm screen resizing? 
             All the drawnings will be erased after performing the action.`
@@ -45,8 +27,6 @@ export default class Resize extends AVElement {
         this.addVerticalBarEventListener();
         this.addHorizontalBarEventListener();
     }
-
-    /* Class Methods ======================================================== */
 
     updateResizeBarDimensions() {
         this.verticalResizeNode.style['height'] =

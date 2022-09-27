@@ -1,10 +1,3 @@
-/*
- * PaintSpace3
- * Created By: Anderson Bucchianico
- * Date: 29/mar/2021
- * Type: 
-*/
-
 import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class ChangeResolution extends AVElement{
 
@@ -12,26 +5,18 @@ export default class ChangeResolution extends AVElement{
     canvasRef;
     resizeRef;
 
-    /* Constructors ========================================================= */
-        
-    constructor() {
-        super();
+    connectedCallback() {
         this.title = 'Change Resolution';
     }
 
-    connectedCallback() { // After Comp Load
-    }
-
     renderedCallback() {
-        this.canvasRef = this.getParentComponents()[1].body.querySelector("comp-canvas");
+        this.canvasRef = this.getParentComponent('app').getChildComponent("canvas");
         this.resizeRef = this.canvasRef.body.querySelector("comp-resize");
         this.body.querySelector("button[id='cr-change-resolution']").onclick = () => {
             this.resizeCanvas();
         }
         this.showCanvasDimensions();
     }
-
-    /* Class Methods ======================================================== */
 
     showCanvasDimensions() {
         this.body.querySelector("input[id=input-width]").value = this.canvasRef.context.canvas.width;

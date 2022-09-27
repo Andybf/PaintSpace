@@ -8,12 +8,8 @@ export default class Preview extends AVElement {
     height = 480;
     background = '#fff';
 
-    constructor() {
-        super();
-    }
-
     renderedCallback() {
-        this.canvas = this.getParentComponents()[0];
+        this.canvas = this.getParentComponent('canvas');
         this.previewCanvas = this.body.querySelector("canvas");
         this.context = this.previewCanvas.getContext("2d");
         this.context.canvas.width = this.width;

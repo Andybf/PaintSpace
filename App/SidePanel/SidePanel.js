@@ -1,21 +1,10 @@
-/*
- * PaintSpace3
- * Created By: Anderson Bucchianico
- * Date: 10/feb/2021
- * Type: Image Editor
-*/
-
 import AVElement from "/PaintSpace/AVmodules/AVElement.js";
 export default class SidePanel extends AVElement {
 
     windowContent;
 
-    constructor() {
-        super();
-        this.style.display = 'none';
-    }
-
-    connectedCallback() {       
+    connectedCallback() {
+        this.style.display = 'none';    
     }
 
     renderedCallback() {
@@ -52,8 +41,7 @@ export default class SidePanel extends AVElement {
     }
 
     enableCloseWindow() {
-        this.body.querySelector('#window-close').addEventListener('click',
-        () => {
+        this.body.querySelector('#window-close').addEventListener('click',() => {
             this.makeInvisible();
             this.cleanContent();
         });

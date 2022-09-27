@@ -1,45 +1,46 @@
 /* 
  * AndView Framework
- * Copyright © 2021 Anderson Bucchianico. All rights reserved.
+ * Copyright © 2022 Anderson Bucchianico. All rights reserved.
+ * 
 */
+
+import AVutils from './AVutils.js'
 
 export default class AVElement extends HTMLElement {
 
-    #compPaths;
-    #compChildrens = [];
-    #compParents = [];
-    localization;
-    
+    #childrenComponentList = new Map();
+    #componentpath = '';
+
     constructor() {
         super();
         this.#initializeComponent();
     }
 
-    /* private methods ====================================================== */
-
     async #initializeComponent() {
         this.#doPreLoadContentActions();
-        await this.#appendHTMLtoComponentBody();
+        await this.#appendHTMLtoComponent();
         await this.#appendCSStoComponentBody();
         this.#doPostLoadContentActions();
+        this.#reconstructComponentParentsMap();
+        this.renderedCallback();
     }
 
     #doPreLoadContentActions() {
-        this.#catalogParentComponents(this.parentNode);
-        this.#catalogComponentPaths();
-    }
-
-    #doPostLoadContentActions() {
-        this.#catalogChildrenComponents();
-        this.#initializeAllChildrenComponents();
-        this.localization && this.#translateComponentText();
-        this.renderedCallback();
+        if (!this._parentComponentsMap) {
+            this._parentComponentsMap = new Map();
+        }
+        if (this.parentNode) {
+            this.#catalogParentComponents(this.parentNode);
+        }
+        this.#constructComponentPath();
     }
 
     #catalogParentComponents(parentNode) {
         let nextParentNode = parentNode;
-        if (nextParentNode.host) {
-            this.#compParents.push(nextParentNode.host);
+        if (!nextParentNode) {
+            return false;
+        } else if (nextParentNode.host) {
+            this._parentComponentsMap.set(nextParentNode.host.localName, nextParentNode.host);
             this.#catalogParentComponents(nextParentNode.host);
         } else if (nextParentNode.localName.includes("html")) {
             return false;
@@ -48,9 +49,9 @@ export default class AVElement extends HTMLElement {
         }
     }
 
-    #catalogComponentPaths() {
-        let root = this.#mountComponentRootPath();
-        this.#compPaths = {
+    #constructComponentPath() {
+        let root = this.#constructComponentRootPath();
+        this.#componentpath = {
             root : `${root}${this.constructor.name}`,
             html : `${root}${this.constructor.name}/${this.constructor.name}.html`,
             css  : `${root}${this.constructor.name}/${this.constructor.name}.css`,
@@ -58,22 +59,31 @@ export default class AVElement extends HTMLElement {
         }
     }
 
-    #mountComponentRootPath() {
+    #constructComponentRootPath() {
         let root = window.location.pathname;
-        let copiedCompParents = this.#compParents.slice(0);
-        for(let x=this.#compParents.length; x>0; x--) {
-            root += `${this.#getComponentClassName(copiedCompParents.pop().localName)}/`
+        let parentCompCopy = new Map(this._parentComponentsMap);
+        for(let x=this._parentComponentsMap.size; x>0; x--) {
+            root += `${this.#constructComponentClassName(AVutils.mapPopValue(parentCompCopy))}/`;
         }
         return root;
     }
 
-    async #appendHTMLtoComponentBody() {
-        await this.#fetchContentWithPath(this.#compPaths.html).then( (responseText) => {
+    #constructComponentClassName(componentLocalName) {
+        let className = '';
+        componentLocalName.localName.replace("comp-",'').split('-').forEach( word => {
+            className += word[0].toUpperCase() + word.slice(1);
+        });
+        return className;
+    }
+
+    async #appendHTMLtoComponent() {
+        await this.#fetchContentWithPath(this.#componentpath.html).then( (responseText) => {
             let componentHTML = new DOMParser().parseFromString(responseText,"text/html");
             this.body = this.attachShadow({mode:'closed'});
             Array.from(componentHTML.querySelector("body").childNodes).forEach( node => {
                 this.body.appendChild(node);
             })
+            this.template = componentHTML.querySelector("head");
         });
     }
 
@@ -81,7 +91,7 @@ export default class AVElement extends HTMLElement {
         function removeCommentsAndBreakLines(cssText){
             return cssText.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g,'').replaceAll('\n','');
         }
-        await this.#fetchContentWithPath(this.#compPaths.css).then( cssText => {
+        await this.#fetchContentWithPath(this.#componentpath.css).then( cssText => {
             let styleNode = document.createElement("style");
             styleNode.innerText = removeCommentsAndBreakLines(cssText);
             this.body.appendChild(styleNode);
@@ -97,80 +107,75 @@ export default class AVElement extends HTMLElement {
         }
     }
 
+    #doPostLoadContentActions() {
+        this.#catalogChildrenComponents();
+        this.#initializeAllPreDefinedChildrenComponents();
+        this.localization && AVutils.translateComponentText(this.localization, this);
+    }
+
     #catalogChildrenComponents() {
         this.body.querySelectorAll("*").forEach( componentNode => {
             if (componentNode.tagName.includes("COMP-")){
-                this.#compChildrens.push(componentNode);
+                this.#childrenComponentList.set(componentNode.localName, componentNode);
             }
         })
     }
 
-    #initializeAllChildrenComponents() {
-        this.#compChildrens.forEach( componentNode => {
-            this.#initializeChildrenComponent(componentNode);
+    #initializeAllPreDefinedChildrenComponents() {
+        this.#childrenComponentList.forEach( componentElement => {
+            this.#importChildrenComponentDefinition(componentElement);
         })
     }
 
-    #getComponentClassName(componentLocalName) {
-        let className = '';
-        componentLocalName.replace("comp-",'').split('-').forEach( word => {
-            className += word[0].toUpperCase()+word.slice(1);
-        });
-        return className;
-    }
-
-    #initializeChildrenComponent(htmlNode) {
-        let className = this.#getComponentClassName(htmlNode.localName);
-        import(`${this.#compPaths.root}/${className}/${className}.js`)
+    #importChildrenComponentDefinition(componentElement) {
+        let className = this.#constructComponentClassName(componentElement);
+        import(`${this.#componentpath.root}/${className}/${className}.js`)
         .then( classDefinition => {
-            this.#defineCustomComponent(htmlNode.localName,classDefinition);
+            this.#defineCustomComponent(componentElement,classDefinition);
         });
     }
 
-    #defineCustomComponent(htmlNodeLocalName,classDefinition) {
-        if (classDefinition.default) {
-            customElements.define(htmlNodeLocalName,classDefinition.default);
+    #defineCustomComponent(htmlNode,classDefinition) {
+        function isComponentAlreadyDefined(name) {
+            return window.customElements.get(name);
+        }
+        if (classDefinition.default && !isComponentAlreadyDefined(htmlNode.localName)) {
+            customElements.define(htmlNode.localName,classDefinition.default);
         }
     }
 
-    #translateComponentText() {
-        try {
-            if (this.localization) {
-                if (this.localization['innerText']) {
-                    this.localization['innerText'][navigator.language].forEach( (item,index) => {
-                        this.body.querySelector("#"+item['key']).innerText = item['value'];
-                    });
-                }
-                if (this.localization['title']) {
-                    this.localization['title'][navigator.language].forEach( (item,index) => {
-                        this.body.querySelector("#"+item['key']).title = item['value'];
-                    });
-                }
-            } else {
-                console.warn(
-                    "[AV] no translation found for browser language. Component:",
-                    this.constructor.name
-                );
+    #reconstructComponentParentsMap() {
+        if (this._parentComponentsMap.size > 0) {
+            if (!this._parentComponentsMap.get('comp-app').namespaceURI) {
+                this.#catalogParentComponents(this.parentNode);
             }
-        } catch(e) {
-            console.warn(
-                "[AV] error when translating component:",
-                this.constructor.name
-            );
         }
     }
 
-    /* public methods ======================================================= */
-
-    getParentComponents() {
-        return this.#compParents;
+    loadNewChildrenComponent(childTagName) {
+        let newComp = document.createElement(childTagName)
+        let className = this.#constructComponentClassName(newComp);
+        import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
+            let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
+            AVutils.concatMaps(parentMap, this._parentComponentsMap);
+            classDefinition.default.prototype._parentComponentsMap = parentMap;
+            this.#defineCustomComponent(newComp,classDefinition);
+        });
     }
 
-    getChildenComponents() {
-        return this.#compChildrens;
+    getParentComponent(localName) {
+        if(!localName.includes('comp-')) {
+            localName = `comp-${localName}`;
+        }
+        return this._parentComponentsMap.get(localName);
     }
 
-    /* abstract methods ===================================================== */
+    getChildComponent(localName) {
+        if(!localName.includes('comp-')) {
+            localName = `comp-${localName}`;
+        }
+        return this.#childrenComponentList.get(localName);
+    }
 
     renderedCallback(){}
 }

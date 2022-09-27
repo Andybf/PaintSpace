@@ -1,17 +1,9 @@
-/*
- * PaintSpace3
- * Created By: Anderson Bucchianico
- * Prototype Date: 13/jul/2020
- * Date: 23/mar/2021
- * Type: 
-*/
-
 import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class LoadImage extends AVElement {
 
-    title;
-    canvasReference;
-    imageObject;
+    title = new String();
+    canvasReference = new Object();
+    imageObject = new Image();
     localization = {
         innerText : {
             'en-US' : [
@@ -33,18 +25,13 @@ export default class LoadImage extends AVElement {
         }
     };
 
-    constructor() {
-        super();
-        this.title = 'Load Image';
-        this.id = 'comp-loadimage';
-    }
-
     connectedCallback() {
-
+        this.title = 'Load Image';
+        this.id = 'comp-load-image';
     }
 
     renderedCallback(){
-        this.canvasReference = this.getParentComponents()[1].body.querySelector("comp-canvas");
+        this.canvasReference = this.getParentComponent('app').getChildComponent("canvas");
         this.resizeReference = this.canvasReference.body.querySelector("comp-resize");
         this.loadInput = this.body.querySelector('input[id*=loadimage-input]');
         this.previewImage = this.body.querySelector("img[id*='preview-image']");
@@ -70,7 +57,6 @@ export default class LoadImage extends AVElement {
         fileReader.onload = (subEvent) => {
             let base64ImgData = subEvent.target.result;
             this.previewImage.setAttribute('src',base64ImgData);
-            this.imageObject = new Image();
             this.imageObject.src = base64ImgData;
             this.doneButton.classList.remove('disabled');
             this.body.querySelector("ul").classList.remove('disabled');
@@ -92,7 +78,7 @@ export default class LoadImage extends AVElement {
                     this.imageObject.height
                 );
             break;
-            case 'rcis':
+            case 'resize-canvas':
                 this.canvasReference.height = this.imageObject.height;
                 this.canvasReference.width = this.imageObject.width;
                 this.canvasReference.constructDrawScreen();

@@ -22,10 +22,6 @@ export default class App extends AVElement {
         }
     };
 
-    constructor() {
-        super();
-    }
-
     renderedCallback() {
         let sidePanel = this.body.querySelector("comp-side-panel");
 
@@ -38,14 +34,14 @@ export default class App extends AVElement {
         this.body.querySelector("button[id*='save-image']").addEventListener('click',
             (event) => {
                 window.location.href =
-                    sidePanel.getParentComponents()[0].body.querySelector("comp-canvas").canvasNode
+                    sidePanel.getParentComponent('app').getChildComponent("canvas").canvasNode
                     .toDataURL().replace("image/png", "image/octet-stream");
             }
         );
 
         this.body.querySelector("button[id*='clear-canvas']").addEventListener('click',
             (event) => {
-                sidePanel.getParentComponents()[0].body.querySelector("comp-canvas").clearScreen();
+                sidePanel.getParentComponent('app').getChildComponent("canvas").clearScreen();
             }
         );
 
@@ -66,10 +62,10 @@ export default class App extends AVElement {
                 sidePanel.loadMenu(event.currentTarget);
             }
         );
-        this.dynamicLogo();
+        this.initializeDynamicLogo();
     }
 
-    dynamicLogo() {
+    initializeDynamicLogo() {
         let hue = 160;
         let title = this.body.querySelector('.title').style;
         this.titleAnimationId = setInterval( () => {
