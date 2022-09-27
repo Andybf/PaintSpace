@@ -16,7 +16,6 @@ export default class Canvas extends AVElement {
 
     renderedCallback() {
         this.canvasNode = this.body.querySelector("canvas");
-        this.overlay = this.body.querySelector("#tool-preview-overlay");
         this.context = this.canvasNode.getContext("2d");
         this.width = this.default.width;
         this.height = this.default.height;
