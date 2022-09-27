@@ -60,7 +60,7 @@ export default class Canvas extends AVElement {
         });
         this.canvasNode.addEventListener('mousedown', (event) => {
             this.drag = true;
-            if (this.selectedTool) {
+            if (Object.entries(this.selectedTool).length > 0) {
                 this.selectedTool.drawDown(this,event);
             }
             this.mousedown = true;
