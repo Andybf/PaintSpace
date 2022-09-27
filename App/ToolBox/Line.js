@@ -39,13 +39,13 @@ export default class Line extends HTMLElement {
 
     drawDown(canvasNode,event) {
         canvasNode.context.beginPath();
-        canvasNode.context.moveTo(event.layerX, event.layerY);
+        canvasNode.context.moveTo(event.offsetX, event.offsetY);
     }
 
     drawMove() {}
 
     drawUp(canvasNode,event) {
-        canvasNode.context.lineTo(event.layerX, event.layerY);
+        canvasNode.context.lineTo(event.offsetX, event.offsetY);
         canvasNode.context.closePath();
         canvasNode.drawBorder();
     }

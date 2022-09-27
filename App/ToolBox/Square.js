@@ -44,8 +44,8 @@ export default class Square extends HTMLElement {
 
     drawDown(canvasNode,event) {
         canvasNode.context.beginPath();
-        canvasNode.positionBuffer.x = event.layerX;
-        canvasNode.positionBuffer.y = event.layerY;
+        canvasNode.positionBuffer.x = event.offsetX;
+        canvasNode.positionBuffer.y = event.offsetY;
     }
 
     drawMove() {}
@@ -54,8 +54,8 @@ export default class Square extends HTMLElement {
         canvasNode.context.rect(
             canvasNode.positionBuffer.x,
             canvasNode.positionBuffer.y,
-            event.layerX-canvasNode.positionBuffer.x,
-            event.layerY-canvasNode.positionBuffer.y,
+            event.offsetX-canvasNode.positionBuffer.x,
+            event.offsetY-canvasNode.positionBuffer.y,
         );
         canvasNode.drawBorder();
         canvasNode.context.fillStyle = this.options['bkgColor'].value;

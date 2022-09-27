@@ -41,7 +41,7 @@ export default class Pencil extends HTMLElement {
         canvasNode.context.beginPath();
     }
     drawMove(canvasNode,event) {
-        canvasNode.context.lineTo(event.layerX, event.layerY);
+        canvasNode.context.lineTo(event.offsetX, event.offsetY);
         canvasNode.drawBorder();
     }
     drawUp() {}

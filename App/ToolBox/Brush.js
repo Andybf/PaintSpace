@@ -39,7 +39,7 @@ export default class Brush extends HTMLElement {
     drawDown(compCanvas,event) {
         compCanvas.context.beginPath();
         compCanvas.context.arc(
-            event.layerX, event.layerY,
+            event.offsetX, event.offsetY,
             this.options['border'].value/2, 0, 2 * Math.PI
         );
         compCanvas.context.fillStyle = this.options['brdColor'].value;
@@ -49,7 +49,7 @@ export default class Brush extends HTMLElement {
     }
     
     drawMove(compCanvas,event) {
-        compCanvas.context.lineTo(event.layerX, event.layerY);
+        compCanvas.context.lineTo(event.offsetX, event.offsetY);
         compCanvas.drawBorder();
     }
 
@@ -57,14 +57,14 @@ export default class Brush extends HTMLElement {
         compCanvas.context.closePath();
         compCanvas.context.beginPath();
         compCanvas.context.arc(
-            event.layerX, event.layerY,
+            event.offsetX, event.offsetY,
             this.options['border'].value/2, 0, 2 * Math.PI
         );
         compCanvas.context.fillStyle = this.options['brdColor'].value;
         compCanvas.context.fill();
         compCanvas.context.closePath();
         compCanvas.context.beginPath();
-        compCanvas.context.lineTo(event.layerX, event.layerY);
+        compCanvas.context.lineTo(event.offsetX, event.offsetY);
     }
 
     previewMove(preview,event){

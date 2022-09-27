@@ -55,8 +55,8 @@ export default class Text extends HTMLElement {
         canvasComp.context.textAlign = 'center';
         canvasComp.context.fillText(
             this.options['contentText'].value,
-            event.layerX,
-            event.layerY + 10
+            event.offsetX,
+            event.offsetY + 10
         );
         canvasComp.context.fillStyle = this.options['bkgColor'].value;
         canvasComp.context.fill();

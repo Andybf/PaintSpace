@@ -49,8 +49,8 @@ export default class Elipse extends HTMLElement {
 
     drawDown(canvasNode,event) {
         canvasNode.context.beginPath();
-        canvasNode.positionBuffer.x = event.layerX;
-        canvasNode.positionBuffer.y = event.layerY;
+        canvasNode.positionBuffer.x = event.offsetX;
+        canvasNode.positionBuffer.y = event.offsetY;
     }
 
     drawMove(){}
@@ -59,8 +59,8 @@ export default class Elipse extends HTMLElement {
         canvasNode.context.ellipse(
             canvasNode.positionBuffer.x,
             canvasNode.positionBuffer.y,
-            event.layerX-canvasNode.positionBuffer.x,
-            event.layerY-canvasNode.positionBuffer.y,
+            event.offsetX-canvasNode.positionBuffer.x,
+            event.offsetY-canvasNode.positionBuffer.y,
             Math.PI, 0, 2*Math.PI
         );
         canvasNode.drawBorder();
