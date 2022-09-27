@@ -59,11 +59,11 @@ export default class Canvas extends AVElement {
             }
         });
         this.canvasNode.addEventListener('mousedown', (event) => {
-            this.drag = true;
             if (Object.entries(this.selectedTool).length > 0) {
+                this.drag = true;
                 this.selectedTool.drawDown(this,event);
+                this.mousedown = true;
             }
-            this.mousedown = true;
         });
         this.canvasNode.addEventListener('mouseup', (event) => {
             this.drag = false;
@@ -76,9 +76,9 @@ export default class Canvas extends AVElement {
             this.drag = this.mousedown ? true : false;
         });
         this.canvasNode.addEventListener('mouseup', (event) => {
-            this.mousedown = false;
-            this.drag = false;
-            if (this.selectedTool) {
+            if (Object.entries(this.selectedTool).length > 0) {
+                this.mousedown = false;
+                this.drag = false;
                 this.selectedTool.drawUp(this,event);
             }
         });
