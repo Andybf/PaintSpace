@@ -110,7 +110,10 @@ export default class AVElement extends HTMLElement {
     #doPostLoadContentActions() {
         this.#catalogChildrenComponents();
         this.#initializeAllPreDefinedChildrenComponents();
-        this.localization && AVutils.translateComponentText(this.localization, this);
+        if (this.localization) {
+            let language = document.querySelector('html').lang;
+            AVutils.translateComponentText(this.localization, this, language);
+        }
     }
 
     #catalogChildrenComponents() {
@@ -177,6 +180,10 @@ export default class AVElement extends HTMLElement {
             localName = `comp-${localName}`;
         }
         return this.#childrenComponentList.get(localName);
+    }
+
+    getAllChildrenComponents() {
+        return this.#childrenComponentList.values();
     }
 
     getComponentRoot() {

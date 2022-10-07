@@ -19,16 +19,16 @@ export default class AVutils {
         }
     }
 
-    static translateComponentText(localization, component) {
+    static translateComponentText(localization, component, selectedLang) {
         try {
             if (localization) {
                 if (localization['innerText']) {
-                    localization['innerText'][navigator.language].forEach( (item,index) => {
+                    localization['innerText'][selectedLang].forEach( (item,index) => {
                         component.body.querySelector("#"+item['key']).innerText = item['value'];
                     });
                 }
                 if (localization['title']) {
-                    localization['title'][navigator.language].forEach( (item,index) => {
+                    localization['title'][selectedLang].forEach( (item,index) => {
                         component.body.querySelector("#"+item['key']).title = item['value'];
                     });
                 }

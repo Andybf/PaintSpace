@@ -1,3 +1,4 @@
+import AVutils from '/PaintSpace/AVmodules/AVutils.js';
 import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class Settings extends AVElement {
 
@@ -12,6 +13,10 @@ export default class Settings extends AVElement {
         this.body.querySelector("input[id='dynamic-logo']").addEventListener('change', () => {
             this.toggleDynamicColorTitle();
         });
+        this.body.querySelector("select").addEventListener('change', (event) => {
+            this.selectAppLanguage(event);
+        });
+        this.body.querySelector("select").value = document.querySelector('html').lang;
         this.body.querySelector('button').addEventListener('click', () => {
             this.deleteBrowserCache();
         });
@@ -29,12 +34,35 @@ export default class Settings extends AVElement {
     }
 
     toggleDynamicColorTitle(){
-        let app = this.getParentComponents()[1];
+        let app = this.getParentComponent('app');
         if (app.titleAnimationId != 0) {
             app.titleAnimationId = 0;
         } else {
-            app.dynamicLogo();
+            app.initializeDynamicLogo();
         }
+    }
+
+    selectAppLanguage(event) {
+        function getChildrensFromParent(parent) {
+            Array.from(parent.body.querySelectorAll('*')).forEach(comp => {
+                if (comp.tagName.includes("COMP-")){
+                    allCompList.push(comp);
+                    parent = comp;
+                    getChildrensFromParent(parent);
+                }
+            });
+        }
+        let allCompList = new Array();
+        allCompList.push(this.getParentComponent('app'));
+        getChildrensFromParent(this.getParentComponent('app'));
+
+        document.querySelector('html').lang = event.target.value;
+        allCompList.forEach(comp => {
+            if(comp.localization != null) {
+                AVutils.translateComponentText(comp.localization, comp, event.target.value);
+            }
+        });
+        
     }
 
     deleteBrowserCache() {

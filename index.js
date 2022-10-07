@@ -1,5 +1,9 @@
 let isServiceWorkerEnabled = true;
 
+function setPageLanguage() {
+    document.querySelector('html').lang = navigator.language;
+}
+
 function initializeServiceWorker() {
     if ("serviceWorker" in navigator && isServiceWorkerEnabled) {
         navigator.serviceWorker.register("./sw.js").then( (registration) => {
@@ -16,5 +20,6 @@ function initializeAVframework() {
     });
 }
 
+setPageLanguage();
 initializeAVframework();
 initializeServiceWorker();
