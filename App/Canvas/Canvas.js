@@ -11,7 +11,7 @@ export default class Canvas extends AVElement {
     default = {
         width : 600,
         height: 480,
-        background: '#ccc'
+        background: '#ddd'
     }
 
     renderedCallback() {
@@ -51,36 +51,36 @@ export default class Canvas extends AVElement {
 
     #createActions() {
         this.canvasNode.addEventListener('mousemove', (event) => {
-            if (this.selectedTool){
-                this.previewMove(this.selectedTool,event);
-                if (this.drag) {
-                    this.selectedTool.drawMove(this,event);
+            if (this.selectedTool) {
+                if (this.selectedTool.eventsActive) {
+                    this.previewMove(this.selectedTool,event);
+                    if (this.drag) {
+                        this.selectedTool.drawMove(this,event);
+                    }
                 }
             }
         });
         this.canvasNode.addEventListener('mousedown', (event) => {
             if (Object.entries(this.selectedTool).length > 0) {
-                this.drag = true;
-                this.selectedTool.drawDown(this,event);
-                this.mousedown = true;
+                if (this.selectedTool.eventsActive) {
+                    this.drag = true;
+                    this.selectedTool.drawDown(this,event);
+                    this.mousedown = true;
+                }
             }
         });
         this.canvasNode.addEventListener('mouseup', (event) => {
-            this.drag = false;
-            this.mousedown = false;
-            if (this.selectedTool){
-                this.previewUp(this.selectedTool,event);
+            if (Object.entries(this.selectedTool).length > 0) {
+                if (this.selectedTool.eventsActive) {
+                    this.previewUp(this.selectedTool,event);
+                    this.mousedown = false;
+                    this.drag = false;
+                    this.selectedTool.drawUp(this,event);
+                }
             }
         });
         this.canvasNode.addEventListener('mouseout', (event) => {
             this.drag = this.mousedown ? true : false;
-        });
-        this.canvasNode.addEventListener('mouseup', (event) => {
-            if (Object.entries(this.selectedTool).length > 0) {
-                this.mousedown = false;
-                this.drag = false;
-                this.selectedTool.drawUp(this,event);
-            }
         });
         this.addEventListener('mouseup', (event) => {
             this.mousedown = false;

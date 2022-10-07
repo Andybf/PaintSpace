@@ -3,6 +3,7 @@ export default class Brush extends HTMLElement {
     name = 'brush';
     label = 'Brush';
     cursor = 'crosshair';
+    eventsActive = true;
     options = {
         border : {
             label : 'Size',

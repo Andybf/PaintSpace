@@ -3,7 +3,7 @@
     color: var(--global-font-color);
 }
 
-section.comp-loadimage {
+section {
     display: grid;
     flex-wrap: wrap;
     row-gap: 15px;
@@ -11,7 +11,7 @@ section.comp-loadimage {
     justify-content: center;
 }
 
-.loadimage-input-container {
+div {
     height: auto;
     width: 100%;
     display: flex;
@@ -43,7 +43,7 @@ section.comp-loadimage {
     background-color: transparent;
 }
 
-.loadimage-button {
+button {
     border-radius: 5px;
     min-width: 95px;
     padding: 10px;
@@ -52,16 +52,17 @@ section.comp-loadimage {
     background-color: var(--tool-item-background);
     transition: all 100ms linear 0s;
 }
-.loadimage-button:hover {
+button:hover {
     background-color: rgba(136, 136, 136, 0.333);
 }
+
 .disabled {
     color: #848484;
     opacity: 0.5;
     pointer-events: none;
 }
 
-.loadimage-img-m-container {
+ul {
     width: 100%;
     height: auto;
     padding: 0;
@@ -71,7 +72,7 @@ input#loadimage-input > * {
     background-color: red;
 }
 
-li.radio-item {
+li {
     display: flex;
     column-gap: 10px;
     margin: 5px 0px;

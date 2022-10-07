@@ -80,6 +80,7 @@ export default class AVElement extends HTMLElement {
         await this.#fetchContentWithPath(this.#componentpath.html).then( (responseText) => {
             let componentHTML = new DOMParser().parseFromString(responseText,"text/html");
             this.body = this.attachShadow({mode:'closed'});
+            this.style.visibility = 'hidden';
             Array.from(componentHTML.querySelector("body").childNodes).forEach( node => {
                 this.body.appendChild(node);
             })
@@ -114,6 +115,7 @@ export default class AVElement extends HTMLElement {
             let language = document.querySelector('html').lang;
             AVutils.translateComponentText(this.localization, this, language);
         }
+        this.style.visibility = null;
     }
 
     #catalogChildrenComponents() {

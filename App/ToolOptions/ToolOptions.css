@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-.tooloption-container > button.color-option {
+button {
     width: 22px;
     height: 22px;
     border: none;
@@ -40,9 +40,15 @@
     padding: 4px;
     margin-left: 5px;
 }
-.tooloption-container > button:hover {
+button:hover {
     border-color: #222;
     background-color: #88888855;
+}
+button.tool-item-active {
+    background: var(--tool-item-hover-background)
+                url(/PaintSpace/media/image/color-picker.svg) no-repeat;
+    background-origin: content-box;
+    background-size: cover;
 }
 
 .global-tool-container {

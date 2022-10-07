@@ -27,7 +27,7 @@ export default class ToolOptions extends AVElement {
         this.body.appendChild(name);
     }
 
-    createInput(option,object) {
+    createInput(option, selectedTool) {
         let container = document.createElement("div");
         container.classList.add("tooloption-container");
 
@@ -39,31 +39,27 @@ export default class ToolOptions extends AVElement {
             let numberAdd = document.createElement('button');
             numberAdd.classList.add("number-option");
             numberAdd.innerText = '';
-            //container.appendChild(numberAdd);
         }
 
         if (option['type'] == 'color') {
             let colorPicker = document.createElement('button');
             colorPicker.classList.add("color-option")
             colorPicker.addEventListener('click', (buttonEvt) => {
-                object.eventsActive = false;
+                selectedTool.eventsActive = false;
                 let colorPickerButton = buttonEvt.currentTarget;
                 colorPickerButton.classList.add("tool-item-active");
-                this.canvas.canvasNode.onclick = (canvasEvt) => {
+                this.canvas.canvasNode.onmousedown = (event) => {
                     function rgbToHex(color) {
                         let hex = color.toString(16);
                         return hex.length == 1 ? "0" + hex : hex;
                     }
-                    let cvContext = canvasEvt.target.getContext('2d');
-                    let imgData = cvContext.getImageData(
-                        canvasEvt.layerX, canvasEvt.layerY, 1, 1
-                    ).data;
-                    colorPickerButton.nextSibling.value = 
-                        `#${rgbToHex(imgData[0])}${rgbToHex(imgData[1])}${rgbToHex(imgData[2])}`;
+                    let cvContext = this.canvas.canvasNode.getContext('2d');
+                    let imgData = cvContext.getImageData(event.offsetX, event.offsetY, 1, 1).data;
+                    colorPickerButton.nextSibling.value = `#${rgbToHex(imgData[0])}${rgbToHex(imgData[1])}${rgbToHex(imgData[2])}`;
                     colorPickerButton.nextSibling.onchange();
                     colorPickerButton.classList.remove("tool-item-active");
-                    canvasEvt.target.onclick = null;
-                    object.eventsActive = true;
+                    this.canvas.canvasNode.onmousedown = null;
+                    selectedTool.eventsActive = true;
                 }
             });
             container.appendChild(colorPicker);

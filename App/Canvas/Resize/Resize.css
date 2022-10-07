@@ -1,6 +1,5 @@
 .resize {
     display: unset;
-    background-color: var(--terciary-color);
     position: absolute;
 }
 

@@ -53,6 +53,7 @@ export default class Resize extends AVElement {
     addVerticalBarEventListener(resizeBar, dimension, moveDirection, client) {
         resizeBar.addEventListener('mousedown', (event) => {
             this.resolutionViewer.style.display = 'unset';
+            resizeBar.style.background = 'grey';
             this.canvasComponent.saveImageBuffer();
 
             window.onmousemove = (event) => {
@@ -63,6 +64,7 @@ export default class Resize extends AVElement {
                            this.canvasComponent.canvasNode.height;
             };
             window.onmouseup = (event) => {
+                resizeBar.style.background = null;
                 let newSize = this.canvasComponent[dimension] +
                               this.calcAddedPixelsToCanvas(event[client],moveDirection,dimension);
                 this.canvasComponent[dimension] = newSize;
