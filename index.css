@@ -31,14 +31,14 @@
 }
 
 .dark-theme {
-    --global-background-color : #333;
+    --global-background-color : #444;
     --global-background-brightness : blur(30px) brightness(0.4);
     --global-font-color: #fff;
     --header-background: #2d2d2deb;
     --terciary-color : #9a9a9a; 
     --program-button-item : transparent;
     --tool-item-background : #0000004a;
-    --tool-item-hover-background : #ababab;
+    --tool-item-hover-background : #3F3F3F;
     --window-header-background : linear-gradient(#555,#333);
     --tool-option-background : #444;
     --tool-option-color : #eee;

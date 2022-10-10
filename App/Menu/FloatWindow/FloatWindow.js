@@ -11,9 +11,6 @@ export default class FloatWindow extends AVElement {
     renderedCallback() {
         this.panelContent = this.body.querySelector("#content");
         this.enableCloseWindow();
-        this.body.querySelector('.background').addEventListener('click', event => {
-            this.makePanelInvisible();
-        })
     }
 
     makePanelVisible() {
@@ -46,6 +43,7 @@ export default class FloatWindow extends AVElement {
         this.body.querySelector('#window-close').addEventListener('click',() => {
             this.makePanelInvisible();
             this.cleanContent();
+            this.getParentComponent('menu').toggleListContainer();
         });
     }
 }

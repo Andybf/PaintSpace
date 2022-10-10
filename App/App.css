@@ -1,24 +1,20 @@
-* {
-    font-family: var(--global-font);
-    outline: none;
-}
-
 header {
     display: flex;
-    height: 80px;
+    height: 50px;
     background-color: var(--header-background);
     box-shadow: var(--global-shadow);
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    column-gap: 2rem;
 }
 
 h1 {
-    width: fit-content;
     font-size: 20px;
     font-family: Lily;
     display: flex;
     align-items: center;
-    padding: 0px 20px;
-    font-weight: normal;
+    margin: 0;
     background-clip: unset;
     -moz-background-clip: unset;
     -webkit-background-clip: text;
@@ -29,53 +25,50 @@ h1 {
 
 nav {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 0px 20px;
-    height: inherit;
-    width: calc(100% - 200px);
-    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 2rem;
+    overflow: auto;
 }
 
-hr.separator {
-    width: 100%;
-    margin: 0;
-}
+nav::-webkit-scrollbar {
+    display: none;
+  }
+
 .tool-options {
     width: 100%;
-    height: 40px;
+    height: 35px;
+    padding: 0 1rem;
+    border-radius: 1rem;
     display: flex;
     justify-content: left;
     align-items: center;
     column-gap: 16px;
-}
-.tool-options:first-child {
-    justify-content: center;
+    overflow: auto;
+    background: var(--tool-item-background);
 }
 
-button.menu-item {
-    height: 15px;
-    width: max-content;
-    cursor: pointer;
+comp-menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    float: right;
-    padding: 0px 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 800;
-    min-width: 100px;
-    color: var(--global-font-color);
-    background-color: var(--program-button-item);
 }
 
-button.menu-item:active {
-    text-decoration: underline;
+comp-tool-options::-webkit-scrollbar {
+    display: none;
 }
 
-.screen-container {
-    width: 100%;
-    height: calc(100% - 60px);
+@media(max-width : 480px) {
+
+    header {
+        padding: 0 1rem;
+        column-gap: 1rem;
+        height: 60px;
+    }
+
+    nav {
+        column-gap: 1rem;
+    }
+
+    .tool-options {
+        height: 45px;
+    }
 }

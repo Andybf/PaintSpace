@@ -9,8 +9,8 @@ export default class Canvas extends AVElement {
     mousedown = false;
     dynamicBgdActive = false;
     default = {
-        width : 600,
-        height: 480,
+        width : window.innerWidth/1.25,
+        height: window.innerHeight/1.50,
         background: '#ddd'
     }
 

@@ -1,37 +1,11 @@
 <header>
     <h1>PaintSpace</h1>               
     <nav>
-        <div class="tool-options">
-            <button
-                class="menu-item"
-                id="load-image"
-                data-compname="comp-load-image"
-            ></button>
-            <button class="menu-item" id="save-image" ></button>
-            <button class="menu-item" id="clear-canvas" ></button>
-            <button
-                class="menu-item"
-                id="resolution"
-                data-compname="comp-change-resolution"
-            ></button>
-            <button
-                class="menu-item"
-                id="settings"
-                data-compname="comp-settings"
-            ></button>
-            <button
-                class="menu-item"
-                id="about"
-                data-compname="comp-about"
-            ></button>
-        </div>
-        <hr size="1" class="separator"/>
         <comp-tool-options class="tool-options"></comp-tool-options>
+        <comp-menu></comp-menu>
     </nav>
 </header>
 
 <comp-tool-box></comp-tool-box>
 
 <comp-canvas> </comp-canvas>
-
-<comp-float-window></comp-float-window>
