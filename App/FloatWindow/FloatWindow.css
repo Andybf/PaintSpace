@@ -66,11 +66,6 @@ button.window-close:hover {
     border-radius: 5px;
 }
 
-.content {
-    padding: 15px;
-    color: #ddd;
-}
-
 /* Float window dynamic content === */
 
 .config-container {

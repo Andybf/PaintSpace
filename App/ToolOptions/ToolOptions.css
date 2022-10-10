@@ -1,7 +1,3 @@
-*{
-    outline: none;
-}
-
 .tooloption-container {
     display: flex;
     align-items: center;
@@ -9,6 +5,7 @@
     min-width: 100px;
     font-family: Arial;
     font-weight: bold;
+    padding-left: 10px;
 }
 
 .tooloption-container > label {

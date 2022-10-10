@@ -47,6 +47,7 @@ export default class Brush extends HTMLElement {
         compCanvas.context.fill();
         compCanvas.context.closePath();
         compCanvas.context.beginPath();
+        compCanvas.context.lineTo(event.offsetX, event.offsetY);
     }
     
     drawMove(compCanvas,event) {

@@ -49,7 +49,18 @@ export default class Canvas extends AVElement {
         this.canvasNode.style['cursor'] = newCursor;
     }
 
+    calculateTouchCoordsFor(newEvent, oldEvent) {
+        const canvasRect = this.canvasNode.getBoundingClientRect();
+        newEvent.offsetX = oldEvent.changedTouches[0].pageX - canvasRect.x;
+        newEvent.offsetY =  oldEvent.changedTouches[0].pageY - canvasRect.y;
+        return newEvent;
+    }
+
     #createActions() {
+        this.canvasNode.addEventListener('touchmove', (event) => {
+            event.preventDefault();
+            this.canvasNode.dispatchEvent(this.calculateTouchCoordsFor(new Event('mousemove'),event));
+        });
         this.canvasNode.addEventListener('mousemove', (event) => {
             if (this.selectedTool) {
                 if (this.selectedTool.eventsActive) {
@@ -60,6 +71,9 @@ export default class Canvas extends AVElement {
                 }
             }
         });
+        this.canvasNode.addEventListener('touchstart', (event) => {
+            this.canvasNode.dispatchEvent(this.calculateTouchCoordsFor(new Event('mousedown'),event));
+        });
         this.canvasNode.addEventListener('mousedown', (event) => {
             if (Object.entries(this.selectedTool).length > 0) {
                 if (this.selectedTool.eventsActive) {
@@ -68,6 +82,9 @@ export default class Canvas extends AVElement {
                     this.mousedown = true;
                 }
             }
+        });
+        this.canvasNode.addEventListener('touchend', (event) => {
+            this.canvasNode.dispatchEvent(this.calculateTouchCoordsFor(new Event('mouseup'),event));
         });
         this.canvasNode.addEventListener('mouseup', (event) => {
             if (Object.entries(this.selectedTool).length > 0) {

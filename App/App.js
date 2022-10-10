@@ -23,43 +23,43 @@ export default class App extends AVElement {
     };
 
     renderedCallback() {
-        let sidePanel = this.body.querySelector("comp-side-panel");
+        let floatWindow = this.body.querySelector("comp-float-window");
 
         this.body.querySelector("button[id*='load-image']").addEventListener('click',
             (event) => {
-                sidePanel.loadMenu(event.currentTarget);
+                floatWindow.loadMenu(event.currentTarget);
             }
         );
 
         this.body.querySelector("button[id*='save-image']").addEventListener('click',
             (event) => {
                 window.location.href =
-                    sidePanel.getParentComponent('app').getChildComponent("canvas").canvasNode
+                    floatWindow.getParentComponent('app').getChildComponent("canvas").canvasNode
                     .toDataURL().replace("image/png", "image/octet-stream");
             }
         );
 
         this.body.querySelector("button[id*='clear-canvas']").addEventListener('click',
             (event) => {
-                sidePanel.getParentComponent('app').getChildComponent("canvas").clearScreen();
+                floatWindow.getParentComponent('app').getChildComponent("canvas").clearScreen();
             }
         );
 
         this.body.querySelector("button[id*='resolution']").addEventListener('click',
             (event) => {
-                sidePanel.loadMenu(event.currentTarget);
+                floatWindow.loadMenu(event.currentTarget);
             }
         );
 
         this.body.querySelector("button[id*='settings']").addEventListener('click',
             (event) => {
-                sidePanel.loadMenu(event.currentTarget);
+                floatWindow.loadMenu(event.currentTarget);
             }
         );
 
         this.body.querySelector("button[id*='about']").addEventListener('click',
             (event) => {
-                sidePanel.loadMenu(event.currentTarget);
+                floatWindow.loadMenu(event.currentTarget);
             }
         );
         this.initializeDynamicLogo();
@@ -67,7 +67,7 @@ export default class App extends AVElement {
 
     initializeDynamicLogo() {
         let hue = 160;
-        let title = this.body.querySelector('.title').style;
+        let title = this.body.querySelector('h1').style;
         this.titleAnimationId = setInterval( () => {
             hue = hue<360 ? hue+4 : 0;
             title.backgroundImage =

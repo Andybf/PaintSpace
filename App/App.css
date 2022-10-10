@@ -3,7 +3,7 @@
     outline: none;
 }
 
-header.container {
+header {
     display: flex;
     height: 80px;
     background-color: var(--header-background);
@@ -11,7 +11,7 @@ header.container {
     flex-wrap: wrap;
 }
 
-h1.title {
+h1 {
     width: fit-content;
     font-size: 20px;
     font-family: Lily;
@@ -27,7 +27,7 @@ h1.title {
     transition: 100ms linear; 
 }
 
-nav.menubar {
+nav {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,6 @@ hr.separator {
     justify-content: left;
     align-items: center;
     column-gap: 16px;
-    padding: 0px 10px;
 }
 .tool-options:first-child {
     justify-content: center;
