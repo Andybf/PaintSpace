@@ -45,10 +45,7 @@ button:hover {
     background-color: #88888855;
 }
 button.tool-item-active {
-    background: var(--tool-item-hover-background)
-                url(/PaintSpace/media/image/color-picker.svg) no-repeat;
-    background-origin: content-box;
-    background-size: cover;
+    background-color: var(--tool-item-hover-background);
 }
 
 .global-tool-container {
