@@ -3,7 +3,7 @@ export default class App extends AVElement {
 
 
     renderedCallback() {
-        //this.initializeDynamicLogo();
+        this.initializeDynamicLogo();
     }
 
     initializeDynamicLogo() {
