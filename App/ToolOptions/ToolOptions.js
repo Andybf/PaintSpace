@@ -21,7 +21,11 @@ export default class ToolOptions extends AVElement {
         content.querySelector('label').innerText = toolOption['label'];
         content.querySelector('input').value = toolOption['value'];
         content.querySelector('input').onchange = function() {
-            toolOption['value'] = this.value;
+            if (this.type == 'checkbox') {
+                toolOption['value'] = this.checked;
+            } else {
+                toolOption['value'] = this.value;
+            }
         }
         if (toolOption['type'] == 'color') {
             content.querySelector('button').onclick = event => {
