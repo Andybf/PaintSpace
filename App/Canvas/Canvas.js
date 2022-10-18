@@ -2,6 +2,7 @@ import AVElement from "/PaintSpace/AVmodules//AVElement.js"
 export default class Canvas extends AVElement {
 
     selectedTool = new Object();
+    context = new Object();
     canvasNode = new Object();
     positionBuffer = {  x : 0 , y : 0 };
     imageBuffer = new Image();
@@ -10,7 +11,7 @@ export default class Canvas extends AVElement {
     dynamicBgdActive = false;
     default = {
         width : window.innerWidth/1.25,
-        height: window.innerHeight/1.50,
+        height: window.innerHeight/1.33,
         background: '#ddd'
     }
 

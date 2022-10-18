@@ -5,7 +5,7 @@ export default class Preview extends AVElement {
     canvas;
     context;
     width = window.innerWidth/1.25;
-    height = window.innerHeight/1.50;
+    height = window.innerHeight/1.33;
     background = '#fff';
 
     renderedCallback() {
