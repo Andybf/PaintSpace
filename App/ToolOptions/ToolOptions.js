@@ -9,8 +9,7 @@ export default class ToolOptions extends AVElement {
     }
 
     show(object) {
-        let elementContainer = document.createElement('div');
-        elementContainer.classList.add('global-tool-container');
+        let elementContainer = document.createElement('section');
         for (let key in object.options) {
             elementContainer.appendChild(this.createInput(object.options[key]));
         };
@@ -18,36 +17,19 @@ export default class ToolOptions extends AVElement {
     }
 
     createInput(toolOption) {
-        let container = document.createElement("div");
-        container.classList.add("tooloption-container");
-
-        let labelNode = document.createElement("label");
-        labelNode.innerText = toolOption['label'];
-        container.appendChild(labelNode);
-
-        if (toolOption['type'] == 'number') {
-            let numberAdd = document.createElement('button');
-            numberAdd.classList.add("number-option");
-            numberAdd.innerText = '';
+        let content = document.importNode(this.template.querySelector('#'+toolOption['type']).content,true);
+        content.querySelector('label').innerText = toolOption['label'];
+        content.querySelector('input').value = toolOption['value'];
+        content.querySelector('input').onchange = function() {
+            toolOption['value'] = this.value;
         }
         if (toolOption['type'] == 'color') {
-            let colorPicker = document.createElement('button');
-            colorPicker.classList.add("color-option");
-            colorPicker.addEventListener('click', event => {
+            content.querySelector('button').onclick = event => {
                 this.canvas.selectedTool.eventsActive = false;
                 this.colorPickerOnClick(event);
-            });
-            container.appendChild(colorPicker);
+            };
         }
-        let input = document.createElement("input");
-        input.setAttribute("type", toolOption['type']);
-        input.classList.add("tooloption");
-        input.value = toolOption['value'];
-        input.onchange = function() {
-            toolOption['value'] = this.value;
-        };
-        container.appendChild(input);
-        return container;
+        return content;
     }
 
     colorPickerOnClick(buttonEvt) {
@@ -59,8 +41,8 @@ export default class ToolOptions extends AVElement {
                 return hex.length == 1 ? "0" + hex : hex;
             }
             let imgData = this.canvas.context.getImageData(event.offsetX, event.offsetY, 1, 1).data;
-            colorPickerButton.nextSibling.value = `#${rgbToHex(imgData[0])}${rgbToHex(imgData[1])}${rgbToHex(imgData[2])}`;
-            colorPickerButton.nextSibling.onchange();
+            colorPickerButton.nextElementSibling.value = `#${rgbToHex(imgData[0])}${rgbToHex(imgData[1])}${rgbToHex(imgData[2])}`;
+            colorPickerButton.nextElementSibling.onchange();
             colorPickerButton.classList.remove("tool-item-active");
             this.canvas.canvasNode.onmousedown = null;
             this.canvas.selectedTool.eventsActive = true;
