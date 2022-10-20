@@ -7,6 +7,7 @@ export default class Preview extends AVElement {
     width = window.innerWidth/1.25;
     height = window.innerHeight/1.33;
     background = '#fff';
+    selectedTool = new Object();
 
     renderedCallback() {
         this.canvas = this.getParentComponent('canvas');
@@ -47,5 +48,13 @@ export default class Preview extends AVElement {
         this.context.canvas.width = this.width;
         this.context.canvas.height = this.height;
         this.context.clearRect(0,0, this.width, this.height);
+    }
+
+    drawBorder() {
+        if (this.selectedTool.options['border'].value > 0) {
+            this.context.lineWidth = this.selectedTool.options['border'].value;
+            this.context.strokeStyle = this.selectedTool.options['brdColor'].value;
+            this.context.stroke();
+        }
     }
 } 

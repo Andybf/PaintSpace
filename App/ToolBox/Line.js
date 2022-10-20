@@ -20,7 +20,7 @@ export default class Line extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="line" title="">
+            <button class="tool-item" id="line" title="Line">
                 <img id="free-draw-img" src="/PaintSpace/media/image/line.svg"/>
             </button>
         `;
@@ -39,6 +39,8 @@ export default class Line extends HTMLElement {
 
     drawDown(canvasNode,event) {
         canvasNode.context.beginPath();
+        this.canvas.positionBuffer.x = event.offsetX;
+        this.canvas.positionBuffer.y = event.offsetY;
         canvasNode.context.moveTo(event.offsetX, event.offsetY);
     }
 
@@ -48,5 +50,25 @@ export default class Line extends HTMLElement {
         canvasNode.context.lineTo(event.offsetX, event.offsetY);
         canvasNode.context.closePath();
         canvasNode.drawBorder();
+    }
+
+    previewDown(preview, event) {
+        preview.selectedTool = this;
+    }
+
+    previewMove(preview,event){
+        if (this.canvas.drag) {
+            preview.cleanPreviewDrawnings();
+            preview.context.beginPath();
+            preview.context.moveTo(
+                this.canvas.positionBuffer.x,
+                this.canvas.positionBuffer.y
+            );
+            this.drawUp(preview, event);
+        }
+    }
+
+    previewUp(self,event) {
+        self.cleanPreviewDrawnings();
     }
 }

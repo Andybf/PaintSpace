@@ -20,7 +20,7 @@ export default class Pencil extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="pencil" title="">
+            <button class="tool-item" id="pencil" title="Pencil">
                 <img id="free-draw-img" src="/PaintSpace/media/image/pencil.svg"/>
             </button>
         `;
@@ -40,10 +40,12 @@ export default class Pencil extends HTMLElement {
     drawDown(canvasNode,event) {
         canvasNode.context.beginPath();
     }
+
     drawMove(canvasNode,event) {
         canvasNode.context.lineTo(event.offsetX, event.offsetY);
         canvasNode.drawBorder();
     }
+    
     drawUp() {}
 }
 

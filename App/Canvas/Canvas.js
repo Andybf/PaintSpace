@@ -78,6 +78,7 @@ export default class Canvas extends AVElement {
         this.canvasNode.addEventListener('mousedown', (event) => {
             if (Object.entries(this.selectedTool).length > 0) {
                 if (this.selectedTool.eventsActive) {
+                    this.previewDown(this.selectedTool, event);
                     this.drag = true;
                     this.selectedTool.drawDown(this,event);
                     this.mousedown = true;

@@ -44,20 +44,14 @@ section {
 
 .tooloption {
     width: 72px;
-    height: 20px;
-    margin: 5px;
-    color: var(--tool-option-color);
-    background-color: var(--header-background);
-    border: none;
+    height: 22px;
+    padding: 0 0.5rem;
     border-radius: 0.5rem;
+    border: none;
     display: flex;
     text-align: end;
-    padding-right: 4px;
-}
-
-.tooloption[type='color'] {
-    margin: 5px 5px 5px 0px;
-    height: 22px;
+    color: var(--tool-option-color);
+    background-color: var(--header-background);
 }
 
 .tooloption[type='number']::-webkit-outer-spin-button,
@@ -69,5 +63,4 @@ section {
     font-family: Arial;
     font-size: 12px;
     width: 100px;
-    padding: 0px 10px;
 }

@@ -30,7 +30,7 @@ export default class Elipse extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="elipse" title="">
+            <button class="tool-item" id="elipse" title="Elipse">
                 <img id="free-draw-img" src="/PaintSpace/media/image/circle.svg"/>
             </button>
         `;
@@ -56,16 +56,38 @@ export default class Elipse extends HTMLElement {
     drawMove(){}
 
     drawUp(canvasNode,event) {
+        let x = event.offsetX-this.canvas.positionBuffer.x;
+        let y = event.offsetY-this.canvas.positionBuffer.y;
+        x = (x < 0) ? -x : x;
+        y = (y < 0) ? -y : y;
+        y = (this.options['ratio'].value == true) ? x : y;
         canvasNode.context.ellipse(
-            canvasNode.positionBuffer.x,
-            canvasNode.positionBuffer.y,
-            event.offsetX-canvasNode.positionBuffer.x,
-            event.offsetY-canvasNode.positionBuffer.y,
-            Math.PI, 0, 2*Math.PI
+            this.canvas.positionBuffer.x,
+            this.canvas.positionBuffer.y,
+            x,
+            y,
+            Math.PI,
+            0,
+            2*Math.PI
         );
         canvasNode.drawBorder();
         canvasNode.context.fillStyle = this.options['bkgColor'].value;
         canvasNode.context.fill();
         canvasNode.context.closePath();
+    }
+
+    previewDown(preview, event) {
+        preview.selectedTool = this;
+    }
+
+    previewMove(preview, event) {
+        if (this.canvas.drag) {
+            preview.cleanPreviewDrawnings();
+            this.drawUp(preview,event);
+        }
+    }
+
+    previewUp(self, event) {
+        self.cleanPreviewDrawnings();
     }
 }

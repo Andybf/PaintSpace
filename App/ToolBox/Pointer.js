@@ -9,7 +9,7 @@ export default class Pointer extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="pointer" title="">
+            <button class="tool-item" id="pointer" title="Pointer">
                 <img id="free-draw-img" src="/PaintSpace/media/image/pointer.svg"/>
             </button>
         `;
@@ -25,8 +25,4 @@ export default class Pointer extends HTMLElement {
             this.canvas.activateObject(this);
         });
     }
-
-    drawDown() {}
-    drawMove() {}
-    drawUp() {}
 }

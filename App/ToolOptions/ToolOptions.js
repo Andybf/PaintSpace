@@ -1,7 +1,6 @@
 import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class ToolOptions extends AVElement {
 
-    selectedTool;
     canvas = new Object();
 
     renderedCallback(){
@@ -20,13 +19,8 @@ export default class ToolOptions extends AVElement {
         let content = document.importNode(this.template.querySelector('#'+toolOption['type']).content,true);
         content.querySelector('label').innerText = toolOption['label'];
         content.querySelector('input').value = toolOption['value'];
-        content.querySelector('input').onchange = function() {
-            if (this.type == 'checkbox') {
-                toolOption['value'] = this.checked;
-            } else {
-                toolOption['value'] = this.value;
-            }
-        }
+        content.querySelector('input').onchange = event => {this.inputChangeValue(event, toolOption)};
+        content.querySelector('input').onkeyup = event => {this.inputChangeValue(event, toolOption)};
         if (toolOption['type'] == 'color') {
             content.querySelector('button').onclick = event => {
                 this.canvas.selectedTool.eventsActive = false;
@@ -34,6 +28,14 @@ export default class ToolOptions extends AVElement {
             };
         }
         return content;
+    }
+
+    inputChangeValue(event, tool) {
+        if (event.target.type == 'checkbox') {
+            tool['value'] = event.target.checked;
+        } else {
+            tool['value'] = event.target.value;
+        }
     }
 
     colorPickerOnClick(buttonEvt) {

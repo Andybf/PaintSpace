@@ -25,14 +25,14 @@ export default class Square extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="square" title="">
+            <button class="tool-item" id="square" title="Square">
                 <img id="free-draw-img" src="/PaintSpace/media/image/square.svg"/>
             </button>
         `;
         this.initialize();
     }
 
-    initialize(){
+    initialize() {
         this.firstElementChild.addEventListener('click', (event) => {
             this.toolOptions = document.querySelector('comp-app').getChildComponent("tool-options");
             this.toolOptions.deactivateCurrentTool();
@@ -52,14 +52,29 @@ export default class Square extends HTMLElement {
 
     drawUp(canvasNode,event) {
         canvasNode.context.rect(
-            canvasNode.positionBuffer.x,
-            canvasNode.positionBuffer.y,
-            event.offsetX-canvasNode.positionBuffer.x,
-            event.offsetY-canvasNode.positionBuffer.y,
+            this.canvas.positionBuffer.x,
+            this.canvas.positionBuffer.y,
+            event.offsetX-this.canvas.positionBuffer.x,
+            event.offsetY-this.canvas.positionBuffer.y,
         );
         canvasNode.drawBorder();
         canvasNode.context.fillStyle = this.options['bkgColor'].value;
         canvasNode.context.fill();
         canvasNode.context.closePath();
+    }
+
+    previewDown(preview, event) {
+        preview.selectedTool = this;
+    }
+
+    previewMove(preview,event){
+        if (this.canvas.drag) {
+            preview.cleanPreviewDrawnings();
+            this.drawUp(preview, event);
+        }
+    }
+
+    previewUp(self,event) {
+        self.cleanPreviewDrawnings();
     }
 }

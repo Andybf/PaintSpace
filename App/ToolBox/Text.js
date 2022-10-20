@@ -30,7 +30,7 @@ export default class Text extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="text" title="">
+            <button class="tool-item" id="text" title="Text">
                 <img id="free-draw-img" src="/PaintSpace/media/image/text.svg"/>
             </button>
         `;
@@ -48,6 +48,8 @@ export default class Text extends HTMLElement {
     }
 
     drawDown(canvasComp,event){
+        canvasComp.context.beginPath();
+        canvasComp.context.fillStyle = this.options['bkgColor'].value;
         canvasComp.context.font = `
             ${this.options['fontSize'].value}px 
             ${this.options['fontFamily'].value}
@@ -58,7 +60,6 @@ export default class Text extends HTMLElement {
             event.offsetX,
             event.offsetY + 10
         );
-        canvasComp.context.fillStyle = this.options['bkgColor'].value;
         canvasComp.context.fill();
         canvasComp.context.closePath();
     }

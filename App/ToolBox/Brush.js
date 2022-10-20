@@ -7,7 +7,7 @@ export default class Brush extends HTMLElement {
     options = {
         border : {
             label : 'Size',
-            value : 10,
+            value : 15,
             type : 'number'
         },
         brdColor : {
@@ -20,7 +20,7 @@ export default class Brush extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button class="tool-item" id="brush" title="">
+            <button class="tool-item" id="brush" title="Brush">
                 <img id="free-draw-img" src="/PaintSpace/media/image/brush.svg"/>
             </button>
         `;
