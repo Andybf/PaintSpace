@@ -31,10 +31,12 @@ export default class ToolOptions extends AVElement {
     }
 
     inputChangeValue(event, tool) {
-        if (event.target.type == 'checkbox') {
-            tool['value'] = event.target.checked;
-        } else {
-            tool['value'] = event.target.value;
+        if (event) {
+            if (event.target.type == 'checkbox') {
+                tool['value'] = event.target.checked;
+            } else {
+                tool['value'] = event.target.value;
+            }
         }
     }
 
@@ -48,7 +50,7 @@ export default class ToolOptions extends AVElement {
             }
             let imgData = this.canvas.context.getImageData(event.offsetX, event.offsetY, 1, 1).data;
             colorPickerButton.nextElementSibling.value = `#${rgbToHex(imgData[0])}${rgbToHex(imgData[1])}${rgbToHex(imgData[2])}`;
-            colorPickerButton.nextElementSibling.onchange();
+            colorPickerButton.nextElementSibling.dispatchEvent(new Event('change'));
             colorPickerButton.classList.remove("tool-item-active");
             this.canvas.canvasNode.onmousedown = null;
             this.canvas.selectedTool.eventsActive = true;
