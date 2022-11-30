@@ -1,7 +1,7 @@
-export default class Square extends HTMLElement {
+export default class Rectangle extends HTMLElement {
 
-    name     = 'square';
-    label    = 'Square';
+    name     = 'rectangle';
+    label    = 'Rectangle';
     cursor   = 'crosshair';
     eventsActive = true;
     options  = {
@@ -19,6 +19,11 @@ export default class Square extends HTMLElement {
             label : 'Bkg Color',
             value : '#dddddd',
             type : 'color'
+        },
+        ratio : {
+            label : '1:1 ratio',
+            value : false,
+            type : 'checkbox'
         }
     }
 
@@ -51,11 +56,18 @@ export default class Square extends HTMLElement {
     drawMove() {}
 
     drawUp(canvasNode,event) {
+        let finalCoordX = event.offsetX-this.canvas.positionBuffer.x;
+        let finalCoordY = event.offsetY-this.canvas.positionBuffer.y;
+
+        if (this.options['ratio'].value == true) {
+            if (Math.abs(finalCoordX) > Math.abs(finalCoordY)) {
+                finalCoordX = Math.sign(finalCoordX) * Math.abs(finalCoordY);
+            } else {
+                finalCoordY = Math.sign(finalCoordY) * Math.abs(finalCoordX);
+            }
+        }
         canvasNode.context.rect(
-            this.canvas.positionBuffer.x,
-            this.canvas.positionBuffer.y,
-            event.offsetX-this.canvas.positionBuffer.x,
-            event.offsetY-this.canvas.positionBuffer.y,
+            this.canvas.positionBuffer.x, this.canvas.positionBuffer.y, finalCoordX, finalCoordY,
         );
         canvasNode.drawBorder();
         canvasNode.context.fillStyle = this.options['bkgColor'].value;

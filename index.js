@@ -1,4 +1,4 @@
-let isServiceWorkerEnabled = true;
+let isServiceWorkerEnabled = false;
 
 function setPageLanguage() {
     document.querySelector('html').lang = navigator.language;
