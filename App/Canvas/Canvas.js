@@ -28,6 +28,8 @@ export default class Canvas extends AVElement {
         this.context.canvas.width = this.width;
         this.context.canvas.height = this.height;
         this.context.clearRect(0,0, this.width, this.height);
+        this.body.firstElementChild.style.transform =
+            `translate(${((window.innerWidth-this.width)/2).toFixed(0)}px, ${((window.innerHeight-this.height)/2).toFixed(0)}px)`;
         this.paintScreen();
     }
 

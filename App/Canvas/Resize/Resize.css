@@ -4,12 +4,15 @@
 }
 
 #resize-width {
+    top: 0;
     width: 5px;
     height: 0px;
     cursor: ew-resize;
 }
 
 #resize-height {
+    bottom: -5px;
+    left: 0;
     width: 0px;
     height: 5px;
     cursor: ns-resize;

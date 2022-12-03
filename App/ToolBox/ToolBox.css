@@ -19,6 +19,7 @@ ul.tool-list {
     width: 40px;
     display: grid;
     row-gap: 0.5rem;
+    z-index: 1;
 }
 
 h1.panel-title {

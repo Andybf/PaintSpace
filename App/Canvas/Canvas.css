@@ -1,11 +1,11 @@
 .canvas-wrapper {
-    height: calc(100% - 60px);
-    width: inherit;
+    width: fit-content;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    margin: 0
+    margin: 0;
+    z-index: -1;
 }
 
 comp-preview {

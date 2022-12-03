@@ -9,9 +9,6 @@ export default class Resize extends AVElement {
     confirmMessage;
 
     renderedCallback() {
-        window.addEventListener('resize', (event) => {
-            this.updateResizeBarPositions();
-        })
         this.initialize();
     }
 
@@ -21,7 +18,6 @@ export default class Resize extends AVElement {
         this.verticalResizeNode = this.body.querySelector('#resize-width');
         this.horizontalResizeNode = this.body.querySelector('#resize-height');
         this.resolutionViewer = this.body.querySelector('#resolution-viewer');
-        this.updateResizeBarPositions();
         this.updateResizeBarDimensions();
         this.addVerticalBarEventListener(this.verticalResizeNode, 'width', 'left', 'clientX');
         this.addVerticalBarEventListener(this.horizontalResizeNode, 'height', 'top', 'clientY');
@@ -30,24 +26,6 @@ export default class Resize extends AVElement {
     updateResizeBarDimensions() {
         this.verticalResizeNode.style['height'] = this.canvasComponent.canvasNode.height +'px';
         this.horizontalResizeNode.style['width'] = this.canvasComponent.canvasNode.width +'px';
-        this.updateResizeBarPositions();
-    }
-
-    updateResizeBarPositions() {
-        this.verticalResizeNode.style['left'] =
-            this.canvasComponent.canvasNode.getBoundingClientRect().left +
-            this.canvasComponent.width +'px'
-        ;
-        this.verticalResizeNode.style['top'] =
-            this.canvasComponent.canvasNode.getBoundingClientRect().top + 'px'
-        ;
-        this.horizontalResizeNode.style['top'] =
-            this.canvasComponent.canvasNode.getBoundingClientRect().top +
-            this.canvasComponent.height +'px'
-        ;
-        this.horizontalResizeNode.style['left'] = 
-            this.canvasComponent.canvasNode.getBoundingClientRect().left + 'px'
-        ;
     }
 
     addVerticalBarEventListener(resizeBar, dimension, moveDirection, client) {
@@ -57,14 +35,14 @@ export default class Resize extends AVElement {
             this.canvasComponent.saveImageBuffer();
 
             window.onmousemove = (event) => {
-                resizeBar.style[moveDirection] = event[client] + 'px';
+                resizeBar.style[moveDirection] = this.canvasComponent[dimension] + (this.calcAddedPixelsToCanvas(event[client],moveDirection,dimension)/2) + 'px';
                 this.resolutionViewer.innerHTML =
-                    Number(this.canvasComponent.width +
-                           this.calcAddedPixelsToCanvas(event[client],moveDirection,dimension)) + 'x' +
-                           this.canvasComponent.canvasNode.height;
+                    (this.canvasComponent.width + this.calcAddedPixelsToCanvas(event[client],moveDirection,dimension)).toFixed(0) + 'x' +
+                    this.canvasComponent.canvasNode.height;
             };
             window.onmouseup = (event) => {
                 resizeBar.style.background = null;
+                resizeBar.style[moveDirection] = null;
                 let newSize = this.canvasComponent[dimension] +
                               this.calcAddedPixelsToCanvas(event[client],moveDirection,dimension);
                 this.canvasComponent[dimension] = newSize;

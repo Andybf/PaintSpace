@@ -84,7 +84,6 @@ export default class LoadImage extends AVElement {
                 this.canvasReference.height = this.imageObject.height;
                 this.canvasReference.width = this.imageObject.width;
                 this.canvasReference.constructDrawScreen();
-                this.resizeReference.updateResizeBarPositions();
                 this.resizeReference.updateResizeBarDimensions();
                 this.canvasReference.context.drawImage(
                     this.imageObject, 0, 0,
