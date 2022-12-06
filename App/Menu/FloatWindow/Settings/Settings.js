@@ -17,8 +17,12 @@ export default class Settings extends AVElement {
             this.selectAppLanguage(event);
         });
         this.body.querySelector("select").value = document.querySelector('html').lang;
-        this.body.querySelector('button').addEventListener('click', () => {
+
+        this.body.querySelector('button[id="clear-cache"]').addEventListener('click', () => {
             this.deleteBrowserCache();
+        });
+        this.body.querySelector('button[id="reset-position"]').addEventListener('click', () => {
+            this.resetCanvasPositions();
         });
     }
 
@@ -72,5 +76,12 @@ export default class Settings extends AVElement {
             });
         })
         window.location = window.location;
+    }
+
+    resetCanvasPositions() {
+        let navigation = document.querySelector('comp-app').getChildComponent('tool-box').body.querySelector('mdl-navigation');
+        navigation.zoom.value = 1;
+        navigation.calcCanvasCenterPosition();
+        navigation.makeCanvasTransform(document.querySelector('comp-app').getChildComponent('canvas'));
     }
 }

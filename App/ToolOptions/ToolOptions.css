@@ -64,3 +64,8 @@ section {
     font-size: 12px;
     width: 100px;
 }
+
+span {
+    display: flex;
+    align-items: center;
+}

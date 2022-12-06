@@ -4,6 +4,7 @@ export default class App extends AVElement {
 
     renderedCallback() {
         this.initializeDynamicLogo();
+        this.body.querySelector('h1').onclick = event => {this.toggleColoredBackground()};
     }
 
     initializeDynamicLogo() {
@@ -15,5 +16,9 @@ export default class App extends AVElement {
                 `linear-gradient(45deg, hsl(${hue},80%,70%), hsl(${hue+100},80%,70%))`;
             this.titleAnimationId == 0 ? clearInterval(1) : false;
         },999);
+    }
+
+    toggleColoredBackground() {
+        
     }
 }

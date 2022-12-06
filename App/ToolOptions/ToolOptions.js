@@ -9,6 +9,11 @@ export default class ToolOptions extends AVElement {
 
     show(object) {
         let elementContainer = document.createElement('section');
+
+        let toolLabel = document.createElement('span');
+        toolLabel.innerText = object.label;
+        elementContainer.appendChild(toolLabel);
+
         for (let key in object.options) {
             elementContainer.appendChild(this.createInput(object.options[key]));
         };
@@ -58,6 +63,9 @@ export default class ToolOptions extends AVElement {
     }
 
     deactivateCurrentTool() {
+        if (this.canvas.drag) {
+            this.canvas.drag = false;
+        }
         while (this.body.childNodes.length > 1) {
             this.body.removeChild(this.body.lastChild);
         };

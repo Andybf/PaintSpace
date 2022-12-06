@@ -1,10 +1,14 @@
-export default class Pointer extends HTMLElement {
+export default class Navigation extends HTMLElement {
     
-    name = 'pointer';
-    label = 'Pointer';
+    name = 'navigation';
+    label = 'Navigation Tool';
     cursor = 'grab';
     eventsActive = true;
-    options = new Object();
+    
+    zoom = {
+        value : 1.0,
+        sensitivity : 0.005
+    }
 
     canvasTranslatePoint = {
         x : 0,
@@ -29,10 +33,8 @@ export default class Pointer extends HTMLElement {
             this.toolOptions.show(this);
             this.canvas = document.querySelector('comp-app').getChildComponent("canvas");
             this.canvas.activateObject(this);
-            this.canvasTranslatePoint = {
-                x : ((window.innerWidth-this.canvas.width)/2).toFixed(0),
-                y : ((window.innerHeight-this.canvas.height)/2).toFixed(0)
-            }
+            this.calcCanvasCenterPosition();
+            window.onwheel = (event) => {this.handleZoom(event)};
         });
     }
 
@@ -47,32 +49,51 @@ export default class Pointer extends HTMLElement {
             const rect = this.canvas.canvasNode.getBoundingClientRect();
 
             if ((rect.x+rect.width) < window.innerWidth * this.grabLimitPercent) {
-                this.canvasTranslatePoint.x = (window.innerWidth * this.grabLimitPercent)+1 - rect.width;
+                this.canvasTranslatePoint.x = window.innerWidth * this.grabLimitPercent +1 - rect.width;
                 canvasNode.drag = false;
             }
             else if ((rect.y+rect.height) < window.innerHeight * this.grabLimitPercent) {
-                this.canvasTranslatePoint.y = (window.innerHeight * this.grabLimitPercent)+1 - rect.height;
+                this.canvasTranslatePoint.y = window.innerHeight * this.grabLimitPercent +1 - rect.height;
                 canvasNode.drag = false;
             }
-            else if (rect.x > window.innerWidth * (1.0 - this.grabLimitPercent)) {
-                this.canvasTranslatePoint.x = (window.innerWidth*(1.0-this.grabLimitPercent))-1;
+            else if (rect.x > window.innerWidth * (1.0-this.grabLimitPercent)) {
+                this.canvasTranslatePoint.x = window.innerWidth * (1.0-this.grabLimitPercent) -1;
                 canvasNode.drag = false;
             }
             else if (rect.y > window.innerHeight * (1.0 - this.grabLimitPercent)) {
-                this.canvasTranslatePoint.y = (window.innerHeight*(1.0-this.grabLimitPercent))-1;
+                this.canvasTranslatePoint.y = window.innerHeight * (1.0-this.grabLimitPercent) -1;
                 canvasNode.drag = false;
             } else {
                 this.canvasTranslatePoint.x = (event.screenX - this.canvas.positionBuffer.x);
                 this.canvasTranslatePoint.y = (event.screenY - this.canvas.positionBuffer.y);
             }
-
-            canvasNode.body.firstElementChild.style.transform =
-                `translate(${this.canvasTranslatePoint.x}px, ${this.canvasTranslatePoint.y}px)`;
+            this.makeCanvasTransform(canvasNode);
         }
-        
     }
     
     drawUp() {
         this.canvas.canvasNode.style.cursor = 'grab';
+    }
+
+    calcCanvasCenterPosition() {
+        this.canvasTranslatePoint = {
+            x : ((window.innerWidth-this.canvas.width)/2).toFixed(0),
+            y : ((window.innerHeight-this.canvas.height)/2).toFixed(0)
+        }
+    }
+
+    handleZoom(event) {
+        let zoomDelta = (Math.sign(event.wheelDeltaY) * this.zoom.sensitivity);
+        if ( this.zoom.value - zoomDelta >= 0.1 ) {
+            this.zoom.value += zoomDelta;
+            this.makeCanvasTransform(this.canvas)
+        } else {
+            this.zoom.value = 0.11;
+        }
+    }
+
+    makeCanvasTransform(canvasNode) {
+        canvasNode.body.firstElementChild.style.transform = 
+        `translate(${this.canvasTranslatePoint.x}px, ${this.canvasTranslatePoint.y}px) scale(${this.zoom.value})`;
     }
 }
