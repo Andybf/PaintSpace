@@ -18,7 +18,7 @@
     --header-background: #FFFFFFC0;
     --terciary-color : #9a9a9a; 
     --program-button-item : transparent;
-    --tool-item-background : #cccccc;
+    --tool-item-background : #DFDFDF;
     --tool-item-hover-background : #ababab;
     --window-header-background : linear-gradient(#eee,#ccc);
     --tool-option-background : #8888884a;
@@ -28,6 +28,7 @@
     --red-button-close : #f19999;
     --global-shadow : 0 0 5px 0px #797979;
     --global-font: OpenSans, arial, sans-serif;
+    --global-invert : invert(0.75)
 }
 
 .dark-theme {
@@ -45,8 +46,9 @@
     --window-border-color : #222;
     --window-background-color : #222;
     --red-button-close : #f19999;
-    --global-shadow : 0 0 5px 0px #000;
+    --global-shadow : 0 0 8px 0px #111;
     --global-font: OpenSans, arial, sans-serif;
+    --global-invert : invert(0)
 }
 
 * {

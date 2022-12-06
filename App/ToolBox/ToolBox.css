@@ -54,9 +54,10 @@ button.tool-item:active {
     background-image: linear-gradient(-45deg,#393939,#1e1e1e);
     border-color: #333;
 }
-button.tool-item > * {
+button.tool-item > img {
     width: 20px;
     height: 20px;
+    filter: var(--global-invert);
 }
 
 @media(max-width : 480px) {

@@ -1,24 +1,25 @@
 import AVElement from '/PaintSpace/AVmodules/AVElement.js'
 export default class App extends AVElement {
 
+    isBackgroundColored = false;
+    hue = Math.random() * 360;
 
     renderedCallback() {
+        this.updateColors();
         this.initializeDynamicLogo();
-        this.body.querySelector('h1').onclick = event => {this.toggleColoredBackground()};
     }
 
     initializeDynamicLogo() {
-        let hue = 160;
-        let title = this.body.querySelector('h1').style;
         this.titleAnimationId = setInterval( () => {
-            hue = hue<360 ? hue+4 : 0;
-            title.backgroundImage =
-                `linear-gradient(45deg, hsl(${hue},80%,70%), hsl(${hue+100},80%,70%))`;
+            this.updateColors();
             this.titleAnimationId == 0 ? clearInterval(1) : false;
-        },999);
+        },1500);
     }
 
-    toggleColoredBackground() {
-        
+    updateColors() {
+        this.hue = (this.hue < 360) ? this.hue + 4 : 0;
+        let gradientColor = `linear-gradient(45deg, hsl(${this.hue},80%,70%), hsl(${this.hue+100},80%,70%))`;
+        this.body.querySelector('h1').style.backgroundImage = gradientColor;
+        document.querySelector('body').style.backgroundImage = gradientColor;
     }
 }

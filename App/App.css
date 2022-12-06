@@ -19,7 +19,6 @@ h1 {
     -moz-background-clip: unset;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(45deg, hsl(160,80%,70%), hsl(260,80%,70%));
     transition: 100ms linear; 
 }
 h1::after {
